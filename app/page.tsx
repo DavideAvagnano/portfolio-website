@@ -1,10 +1,11 @@
-import { Button } from "@/components/ui/button";
+import { Home } from "@/components/home/home";
+import { About } from "@/components/about/about";
 
-export default function Home() {
+export default function WebSite() {
   return (
-    <div>
-      <h1>Hello</h1>
-      <Button>Click me</Button>
+    <div className="flex flex-col justify-center items-center">
+      <Home />
+      <About />
     </div>
   );
 }

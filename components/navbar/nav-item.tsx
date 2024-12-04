@@ -5,9 +5,10 @@ import Link from "next/link";
 interface NavItemProps {
   name: string;
   hash: string;
+  isActive: boolean;
 }
 
-export const NavItem = ({ name, hash }: NavItemProps) => {
+export const NavItem = ({ name, hash, isActive }: NavItemProps) => {
   // cosi non cambio url
   const onClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
@@ -22,7 +23,9 @@ export const NavItem = ({ name, hash }: NavItemProps) => {
       <Link
         href={hash}
         onClick={onClick}
-        className="hover:text-accent transition-all"
+        className={`transition-all ${
+          isActive ? "text-accent" : "hover:text-accent"
+        }`}
       >
         {name}
       </Link>

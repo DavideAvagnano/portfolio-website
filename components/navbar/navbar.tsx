@@ -11,7 +11,7 @@ import { SocialIcon } from "@/components/social-icon";
 import { ResumeDialog } from "@/components/resume-dialog";
 
 import { FaGithub, FaLinkedin } from "react-icons/fa";
-import { BiMenuAltRight, BiX } from "react-icons/bi";
+import { BiMenuAltRight } from "react-icons/bi";
 
 export const Navbar = () => {
   const [activeSection, setActiveSection] = useState<string>("home");
@@ -40,7 +40,7 @@ export const Navbar = () => {
   return (
     <>
       <header className="fixed top-0 w-full bg-background">
-        <nav className="flex items-center justify-between max-w-screen-xl mx-auto p-6">
+        <nav className="flex items-center justify-between max-w-screen-xl mx-auto px-6 py-4">
           {/* Logo */}
           <Logo />
 

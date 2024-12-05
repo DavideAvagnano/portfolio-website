@@ -1,10 +1,10 @@
-import { Home } from "@/components/home/home";
+import { Intro } from "@/components/intro/intro";
 import { About } from "@/components/about/about";
 
 export default function WebSite() {
   return (
     <main className="flex flex-col justify-center items-center">
-      <Home />
+      <Intro />
       <About />
     </main>
   );

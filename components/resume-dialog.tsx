@@ -29,7 +29,8 @@ export const ResumeDialog = () => {
         </DialogHeader>
         <div className="flex flex-col items-center justify-center">
           <a
-            href="/"
+            href="/cv_ita_test.pdf"
+            download
             aria-label="download CV english version"
             className="group flex items-center justify-center gap-3"
           >
@@ -38,11 +39,12 @@ export const ResumeDialog = () => {
             </Button>
             <HiDownload
               size={18}
-              className="group-hover:text-accent group-hover:scale-110"
+              className="group-hover:text-accent group-hover:scale-125"
             />
           </a>
           <a
-            href="/"
+            href="/cv_ita_test.pdf"
+            download
             aria-label="download CV english version"
             className="group flex items-center justify-center gap-3"
           >
@@ -51,7 +53,7 @@ export const ResumeDialog = () => {
             </Button>
             <HiDownload
               size={18}
-              className="group-hover:text-accent group-hover:scale-110"
+              className="group-hover:text-accent group-hover:scale-125"
             />
           </a>
         </div>

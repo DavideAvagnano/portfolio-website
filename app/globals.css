@@ -5,7 +5,8 @@
 @layer base {
   :root {
     --background: 216 65% 11%;
-    --foreground: 0 0% 98%;
+    --foreground: 226 70% 88%;
+    --foreground-light: 225 20% 61%;
     --bg-light: 218 58% 16%;
     --bg-lightest: 218 41% 23%;
 
@@ -46,6 +47,6 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground text-sm sm:text-base;
   }
 }

@@ -3,9 +3,9 @@ import { About } from "@/components/about/about";
 
 export default function WebSite() {
   return (
-    <div className="flex flex-col justify-center items-center">
+    <main className="flex flex-col justify-center items-center">
       <Home />
       <About />
-    </div>
+    </main>
   );
 }

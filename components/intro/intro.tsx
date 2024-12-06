@@ -6,7 +6,7 @@ export const Intro = () => {
   return (
     <section
       id="intro"
-      className="max-w-screen-sm min-h-screen flex flex-col items-center justify-center gap-5 text-center px-8 md:p-0 md:pt-40"
+      className="max-w-screen-sm min-h-screen flex flex-col items-center justify-center gap-5 text-center md:pt-40"
     >
       <h1 className="text-4xl sm:text-6xl md:text-7xl flex items-center justify-center gap-2">
         <span className="font-semibold">

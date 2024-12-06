@@ -3,7 +3,7 @@ import { About } from "@/components/about/about";
 
 export default function WebSite() {
   return (
-    <main className="flex flex-col justify-center items-center">
+    <main className="flex flex-col justify-center items-center px-8">
       <Intro />
       <About />
     </main>

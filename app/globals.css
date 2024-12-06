@@ -42,6 +42,7 @@
     --radius: 0.5rem;
   }
 }
+
 @layer base {
   * {
     @apply border-border;
@@ -49,4 +50,8 @@
   body {
     @apply bg-background text-foreground text-sm sm:text-base;
   }
+}
+
+.section {
+  @apply max-w-screen-lg mx-auto py-28 leading-loose;
 }

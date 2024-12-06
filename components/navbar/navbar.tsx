@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-import { navLinks } from "@/data/data-navbar";
+import { navLinks } from "@/data/navbar-data";
 
 import { Logo } from "@/components/navbar/logo";
 import { NavItem } from "@/components/navbar/nav-item";
@@ -39,7 +39,7 @@ export const Navbar = () => {
 
   return (
     <>
-      <header className="fixed top-0 w-full bg-background">
+      <header className="z-50 fixed top-0 w-full bg-background">
         <nav className="flex items-center justify-between max-w-screen-xl mx-auto px-6 py-4">
           {/* Logo */}
           <Logo />

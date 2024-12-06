@@ -1,4 +1,4 @@
-import { navLinks } from "@/data/data-navbar";
+import { navLinks } from "@/data/navbar-data";
 import { NavItem } from "@/components/navbar/nav-item";
 import { BiX } from "react-icons/bi";
 

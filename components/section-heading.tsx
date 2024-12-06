@@ -13,12 +13,12 @@ export const SectionHeading = ({ label, hasImg }: SectionHeadingProps) => {
       <span className="bg-bg-lightest h-[1px] block ml-5 w-full max-w-80"></span>
 
       {hasImg && (
-        <div className="md:hidden absolute z-10 right-0 size-20 sm:size-28 rounded-full">
+        <div className="md:hidden absolute right-0 size-20 sm:size-28 rounded-full">
           <Image
             src={image}
             alt="Davide's Image, s software engineer with a background in aerospace engineering"
             fill
-            className="rounded-full bg-background"
+            className="rounded-full bg-background hover:scale-105 transition-all"
           />
         </div>
       )}

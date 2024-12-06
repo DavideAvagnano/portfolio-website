@@ -4,11 +4,11 @@ import { SectionHeading } from "@/components/section-heading";
 
 export const About = () => {
   return (
-    <section id="about" className="max-w-screen-lg mx-auto py-24">
+    <section id="about" className="section">
       <SectionHeading label="/about me" hasImg />
 
       <div className="md:flex md:justify-between md:gap-10">
-        <div className="md:basis-2/3 flex flex-col gap-5 text-foreground-light leading-loose">
+        <div className="md:basis-2/3 flex flex-col gap-5 text-foreground-light">
           <p>
             Hi! I&apos;m Davide, a{" "}
             <span className="font-semibold">software engineer</span> with a
@@ -43,7 +43,7 @@ export const About = () => {
             src={image}
             alt="Davide's Image, s software engineer with a background in aerospace engineering"
             fill
-            className="object-cover object-top"
+            className="object-cover object-top hover:-translate-y-4 transition-all"
           />
         </div>
       </div>

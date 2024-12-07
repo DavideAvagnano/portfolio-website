@@ -1,15 +1,44 @@
+"use client";
+
+import { useState } from "react";
+import { skillsData } from "@/data/skills-data";
+
+import { SkillCategoryType } from "@/data/types";
+
 import { SectionHeading } from "@/components/section-heading";
+import { SkillCategory } from "@/components/skills/skill-category";
+import { SingleSkill } from "@/components/skills/single-skill";
 
 export const Skills = () => {
+  const [selectedCategory, setSelectedCategory] =
+    useState<SkillCategoryType>("frontend");
+
   return (
     <section id="skills" className="section">
       <SectionHeading label="/skills" />
-      <p className="text-foreground-light">
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Recusandae ea,
-        necessitatibus doloribus perspiciatis illo cupiditate similique eos
-        animi nihil consequatur quisquam quis adipisci eum voluptas ut earum
-        voluptatem tempora ducimus.
-      </p>
+
+      <div className="flex gap-10 md:gap-20 text-foreground-light">
+        <ul className="flex flex-col flex-none">
+          {Object.keys(skillsData).map((category) => (
+            <SkillCategory
+              key={category}
+              category={category as SkillCategoryType}
+              isActive={selectedCategory === category}
+              setActive={() =>
+                setSelectedCategory(category as SkillCategoryType)
+              }
+            />
+          ))}
+        </ul>
+
+        <div className="">
+          <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-5 lg:gap-y-10 gap-x-20 place-content-center">
+            {skillsData[selectedCategory].map((skill, index) => (
+              <SingleSkill key={skill} index={index} skill={skill} />
+            ))}
+          </ul>
+        </div>
+      </div>
     </section>
   );
 };

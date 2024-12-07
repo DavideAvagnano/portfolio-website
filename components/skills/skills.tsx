@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { skillsData } from "@/data/skills-data";
 
-import { SkillCategoryType } from "@/data/types";
+import { SkillCategoryType, SkillType } from "@/data/types";
 
 import { SectionHeading } from "@/components/section-heading";
 import { SkillCategory } from "@/components/skills/skill-category";
@@ -33,8 +33,8 @@ export const Skills = () => {
 
         <div className="">
           <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-5 lg:gap-y-10 gap-x-20 place-content-center">
-            {skillsData[selectedCategory].map((skill, index) => (
-              <SingleSkill key={skill} index={index} skill={skill} />
+            {skillsData[selectedCategory].map((skill: SkillType, index) => (
+              <SingleSkill key={skill.name} index={index} skill={skill} />
             ))}
           </ul>
         </div>

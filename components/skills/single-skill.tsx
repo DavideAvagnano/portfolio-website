@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { RiArrowDropRightLine } from "react-icons/ri";
+import { SkillType } from "@/data/types";
 
 const fadeInAnimationVariants = {
   initial: {
@@ -16,7 +16,7 @@ const fadeInAnimationVariants = {
 };
 
 interface SingleSkillProps {
-  skill: string;
+  skill: SkillType;
   index: number;
 }
 
@@ -28,10 +28,10 @@ export const SingleSkill = ({ skill, index }: SingleSkillProps) => {
       whileInView="animate"
       viewport={{ once: true }}
       custom={index}
-      className="flex items-center 2xl:text-lg"
+      className="flex gap-2 items-center 2xl:text-lg"
     >
-      <RiArrowDropRightLine size={25} className="text-accent" />
-      {skill}
+      <span className="text-accent">{skill.icon}</span>
+      {skill.name}
     </motion.li>
   );
 };

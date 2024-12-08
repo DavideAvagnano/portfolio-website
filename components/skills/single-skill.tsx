@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { SkillType } from "@/data/types";
+import { SkillType } from "@/types/types";
 
 const fadeInAnimationVariants = {
   initial: {

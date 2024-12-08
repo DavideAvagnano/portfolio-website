@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { SkillCategoryType } from "@/data/types";
+import { SkillCategoryType } from "@/types/types";
 
 interface SkillCategoryProps {
   category: SkillCategoryType;
@@ -24,7 +24,7 @@ export const SkillCategory = ({
 
         {isActive && (
           <motion.span
-            layoutId="activeCategory"
+            layoutId="activeCategorySkills"
             transition={{
               type: "spring",
               stiffness: 500,
@@ -38,4 +38,4 @@ export const SkillCategory = ({
   );
 };
 
-// TODO: animazione sullo sfondo quando clicco sulla categoria
+// TODO: animazione sullo sfondo quando clicco sulla categoria (anche per projects)

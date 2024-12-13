@@ -12,7 +12,7 @@ export const ContactSchema = z.object({
     .min(20, {
       message: "Il messaggio deve contenere almeno 20 caratteri.",
     })
-    .max(300, {
-      message: "Il messaggio può contenere al massimo 300 caratteri.",
+    .max(400, {
+      message: "Il messaggio può contenere al massimo 400 caratteri.",
     }),
 });

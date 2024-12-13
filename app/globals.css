@@ -9,8 +9,9 @@
     --foreground-light: 225 20% 65%;
     --bg-light: 218 58% 16%;
     --bg-lightest: 218 41% 23%;
-
     --accent: 166 100% 70%;
+    --destructive: 0 70% 45%;
+
     --accent-foreground: 216 65% 11%;
 
     --card: 0 0% 3.9%;
@@ -28,7 +29,6 @@
     --muted: 0 0% 14.9%;
     --muted-foreground: 0 0% 63.9%;
 
-    --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
 
     --border: 0 0% 89.8%;

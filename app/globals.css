@@ -53,5 +53,5 @@
 }
 
 .section {
-  @apply w-full max-w-screen-lg mx-auto py-36 leading-loose;
+  @apply w-full max-w-screen-lg mx-auto pt-36 leading-loose;
 }

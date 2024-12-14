@@ -8,7 +8,7 @@ export const Contact = () => {
 
       <p className="pb-10 max-w-xl mx-auto text-center text-foreground-light">
         Whether you have a question, or just want to say hi, feel free to drop
-        me a message. I'll get back to you as soon as possible.
+        me a message. I&apos;ll get back to you as soon as possible.
       </p>
 
       <ContactForm />

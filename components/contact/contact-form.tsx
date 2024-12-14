@@ -1,9 +1,11 @@
 "use client";
 
 import * as z from "zod";
+import { useEffect, useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ContactSchema } from "@/schemas";
+import { sendContactForm } from "@/actions/send-email";
 import {
   Form,
   FormControl,
@@ -15,8 +17,14 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
+import { FormError } from "@/components/contact/form-error";
+import { FormSuccess } from "@/components/contact/form-success";
 
 export const ContactForm = () => {
+  const [error, setError] = useState<string | undefined>("");
+  const [success, setSucces] = useState<string | undefined>("");
+  const [isPending, startTransition] = useTransition();
+
   const form = useForm<z.infer<typeof ContactSchema>>({
     resolver: zodResolver(ContactSchema),
     defaultValues: {
@@ -27,8 +35,38 @@ export const ContactForm = () => {
   });
 
   const onSubmit = (formData: z.infer<typeof ContactSchema>) => {
-    console.log(formData);
-    form.reset();
+    setError("");
+    setSucces("");
+
+    startTransition(() => {
+      sendContactForm(formData)
+        .then((data) => {
+          if (data.error) {
+            setError(data.error);
+
+            setTimeout(() => {
+              setError("");
+            }, 3000);
+          }
+
+          if (data.success) {
+            setSucces(data.success);
+
+            setTimeout(() => {
+              setSucces("");
+            }, 3000);
+
+            form.reset();
+          }
+        })
+        .catch(() => {
+          setError("Something went wrong!");
+
+          setTimeout(() => {
+            setError("");
+          }, 3000);
+        });
+    });
   };
 
   return (
@@ -44,7 +82,7 @@ export const ContactForm = () => {
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <Input {...field} placeholder=" " />
+                  <Input {...field} placeholder=" " disabled={isPending} />
                 </FormControl>
                 <FormLabel>Name</FormLabel>
                 <FormMessage />
@@ -58,7 +96,12 @@ export const ContactForm = () => {
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <Input {...field} placeholder=" " type="email" />
+                  <Input
+                    {...field}
+                    placeholder=" "
+                    type="email"
+                    disabled={isPending}
+                  />
                 </FormControl>
                 <FormLabel>Email</FormLabel>
                 <FormMessage />
@@ -72,7 +115,7 @@ export const ContactForm = () => {
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <Textarea {...field} placeholder=" " />
+                  <Textarea {...field} placeholder=" " disabled={isPending} />
                 </FormControl>
                 <FormLabel>Message</FormLabel>
                 <FormMessage />
@@ -80,8 +123,16 @@ export const ContactForm = () => {
             )}
           />
         </div>
+
+        <FormError message={error} />
+        <FormSuccess message={success} />
+
         <div className=" flex justify-center items-center">
-          <Button variant="outline" className="w-1/2 font-medium text-base">
+          <Button
+            variant="outline"
+            className="w-1/2 font-medium text-base"
+            disabled={isPending}
+          >
             Send
           </Button>
         </div>
@@ -89,3 +140,5 @@ export const ContactForm = () => {
     </Form>
   );
 };
+
+// TODO: invece che mostrare i messaggi in questo modo potrei usare un toast (shadcn)

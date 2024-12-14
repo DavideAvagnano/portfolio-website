@@ -2,6 +2,7 @@
 
 import * as z from "zod";
 import { ContactSchema } from "@/schemas";
+import { sendEmail } from "@/lib/mail";
 
 export const sendContactForm = async (
   formData: z.infer<typeof ContactSchema>
@@ -12,7 +13,15 @@ export const sendContactForm = async (
     return { error: "Invalid fields!" };
   }
 
-  //TODO: send Email with Resend
+  const { name, email, message } = validatedFields.data;
 
-  return { success: "Email sent!" };
+  try {
+    await sendEmail(name, email, message);
+    return { success: "Email sent!" };
+  } catch (err) {
+    console.error("Error sending email:", err);
+    return {
+      error: "Error sending email. Please try again later.",
+    };
+  }
 };

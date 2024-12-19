@@ -59,7 +59,8 @@ export const ContactForm = () => {
             form.reset();
           }
         })
-        .catch(() => {
+        .catch((err) => {
+          console.error("Error", err);
           setError("Something went wrong!");
 
           setTimeout(() => {

@@ -17,7 +17,6 @@ export const NavItem = ({ name, hash, isActive, onClose }: NavItemProps) => {
     if (section) {
       section.scrollIntoView({ behavior: "smooth" });
     }
-
     // Chiude il menu mobile, se onClose è definita
     if (onClose) {
       onClose();

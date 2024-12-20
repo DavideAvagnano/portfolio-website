@@ -1,7 +1,15 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 
 export const Intro = () => {
-  // TODO: aggiungi link alla sezione progetti nel button
+  const scrollToProjects = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    const projectsSection = document.querySelector("#projects");
+    if (projectsSection) {
+      projectsSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   return (
     <section
@@ -28,6 +36,7 @@ export const Intro = () => {
         variant="outline"
         size="lg"
         className="sm:text-base h-14 mt-6 font-normal"
+        onClick={scrollToProjects}
       >
         View my projects!
       </Button>

@@ -46,18 +46,23 @@ export const ProjectCard = ({
           <div className="flex justify-between items-center">
             <LuFolderCode size={30} className="text-accent" />
             <div className="flex items-center justify-center gap-3">
-              <Link href={gitHubUrl} target="_blank">
-                <SiGithub
-                  size={20}
-                  className="hover:text-accent transition-all"
-                />
-              </Link>
-              <Link href={demoUrl} target="_blank">
-                <RxOpenInNewWindow
-                  size={25}
-                  className="hover:text-accent transition-all"
-                />
-              </Link>
+              {gitHubUrl && (
+                <Link href={gitHubUrl} target="_blank">
+                  <SiGithub
+                    size={20}
+                    className="hover:text-accent transition-all"
+                  />
+                </Link>
+              )}
+              {/* TODO: Auth app incompleta - problemi di build */}
+              {demoUrl && (
+                <Link href={demoUrl} target="_blank">
+                  <RxOpenInNewWindow
+                    size={25}
+                    className="hover:text-accent transition-all"
+                  />
+                </Link>
+              )}
             </div>
           </div>
 

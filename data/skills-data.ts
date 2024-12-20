@@ -15,6 +15,7 @@ import {
   SiPostgresql,
   SiGit,
   SiGithub,
+  SiRedux,
 } from "react-icons/si";
 
 export const skillsData = {
@@ -23,9 +24,10 @@ export const skillsData = {
     { name: "Python", icon: React.createElement(SiPython) },
   ],
   frontend: [
-    { name: "Tailwind", icon: React.createElement(SiTailwindcss) },
     { name: "React", icon: React.createElement(SiReact) },
+    { name: "Redux", icon: React.createElement(SiRedux) },
     { name: "Next.js", icon: React.createElement(SiNextdotjs) },
+    { name: "Tailwind", icon: React.createElement(SiTailwindcss) },
     { name: "Shadcn/ui", icon: React.createElement(SiShadcnui) },
     { name: "Framer Motion", icon: React.createElement(SiFramer) },
   ],

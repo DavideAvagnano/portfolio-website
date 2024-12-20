@@ -10,8 +10,6 @@ import {
 } from "@/components/ui/dialog";
 
 export const ResumeDialog = () => {
-  // TODO: inserire /cv.pdf i file da public e attributo download
-
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -29,7 +27,7 @@ export const ResumeDialog = () => {
         </DialogHeader>
         <div className="flex flex-col items-center justify-center">
           <a
-            href="/cv_ita_test.pdf"
+            href="/davide_avagnano_resume.pdf"
             download
             aria-label="download CV english version"
             className="group flex items-center justify-center gap-3"
@@ -43,9 +41,9 @@ export const ResumeDialog = () => {
             />
           </a>
           <a
-            href="/cv_ita_test.pdf"
+            href="/davide_avagnano_cv.pdf"
             download
-            aria-label="download CV english version"
+            aria-label="download CV Italian version"
             className="group flex items-center justify-center gap-3"
           >
             <Button variant="link" className="p-0 group-hover:text-accent">

@@ -11,10 +11,14 @@ export const About = () => {
         <div className="md:basis-2/3 flex flex-col gap-5 text-foreground-light">
           <p>
             Hi! I&apos;m Davide, a{" "}
-            <span className="font-semibold">software engineer</span> with a
-            background in{" "}
-            <span className="font-semibold">aerospace engineering</span>. My
-            passion for programming started during my studies, where I
+            <span className="font-semibold italic text-foreground">
+              software engineer
+            </span>{" "}
+            with a background in{" "}
+            <span className="font-semibold italic text-foreground">
+              aerospace engineering
+            </span>
+            . My passion for programming started during my studies, where I
             discovered my love for problem-solving and building impactful
             solutions. After transitioning into tech, I dove into full-stack
             development, focusing on creating fast, scalable, and efficient web
@@ -27,9 +31,9 @@ export const About = () => {
             <span className="text-accent">TypeScript</span>, and{" "}
             <span className="text-accent">TailwindCSS</span>, and I&apos;ve
             recently been expanding my backend skills with technologies like{" "}
-            <span className="font-semibold">Node.js</span>,{" "}
-            <span className="font-semibold">Prisma</span>, and{" "}
-            <span className="font-semibold">MongoDB</span>. I&apos;m currently
+            <span className="text-accent">Node.js</span>,{" "}
+            <span className="text-accent">Prisma</span>, and{" "}
+            <span className="text-accent">MongoDB</span>. I&apos;m currently
             seeking a full-time role as a software developer, where I can
             contribute to creating large-scale, high-impact products.
           </p>

@@ -27,8 +27,8 @@ export const ResumeDialog = () => {
         </DialogHeader>
         <div className="flex flex-col items-center justify-center">
           <a
-            href="/davide_avagnano_resume.pdf"
-            download
+            href="https://drive.google.com/file/d/1WAZWKknwi6YVVarqwIGDDTqjZ5VbQhAY/view?usp=sharing"
+            target="_blank"
             aria-label="download CV english version"
             className="group flex items-center justify-center gap-3"
           >
@@ -41,8 +41,8 @@ export const ResumeDialog = () => {
             />
           </a>
           <a
-            href="/davide_avagnano_cv.pdf"
-            download
+            href="https://drive.google.com/file/d/1j589kxU4iPoAGMDFwhzHvhF5N8OHSI-b/view?usp=sharing"
+            target="_blank"
             aria-label="download CV Italian version"
             className="group flex items-center justify-center gap-3"
           >

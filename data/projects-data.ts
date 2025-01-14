@@ -1,5 +1,41 @@
 export const projectsData = [
   {
+    title: "Nasa API Manager",
+    description:
+      "API service for managing space launches: integrates SpaceX data, supports advanced CRUD operations, and organizes historical data. Structured with MVC protocol for scalability and maintainability.",
+    tags: [
+      "React",
+      "Node.js",
+      "Express",
+      "Typescript",
+      "MongoDB",
+      "Mongoose",
+      "Postman",
+    ],
+    demoUrl: "",
+    gitHubUrl: "https://github.com/DavideAvagnano/nasa-project",
+    category: "full-stack",
+  },
+  {
+    title: "Dashboad Managment",
+    description:
+      "Dashboard for inventory management, with dynamic charts and optimized CRUD operations. Designed for scalability and performance, fully deployed on AWS with high reliability.",
+    tags: [
+      "Next.js",
+      "Redux Toolkit",
+      "Node.js",
+      "Express",
+      "Typescript",
+      "PostgreSQL",
+      "Prisma",
+      "AWS",
+    ],
+    demoUrl: "",
+    gitHubUrl:
+      "https://github.com/DavideAvagnano/inventory-managment-dashboard",
+    category: "full-stack",
+  },
+  {
     title: "Portfolio Website",
     description:
       "A personal portfolio website showcasing projects, skills, and experience. Focused on aesthetics, performance, and animations with integrated contact form.",

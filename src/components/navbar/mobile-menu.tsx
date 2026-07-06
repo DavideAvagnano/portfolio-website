@@ -16,11 +16,14 @@ export const MobileMenu = ({ isOpen, onClose }: MobileMenuProps) => {
       }`}
     >
       <div className="flex justify-end p-6">
-        <BiX
-          size={35}
-          className="cursor-pointer text-accent"
+        <button
+          type="button"
           onClick={onClose}
-        />
+          className="cursor-pointer text-accent"
+          aria-label="Close menu"
+        >
+          <BiX size={35} />
+        </button>
       </div>
       <ul className="flex h-[calc(100%-80px)] flex-col items-center justify-center gap-8 text-lg">
         {navLinks.map((item) => (

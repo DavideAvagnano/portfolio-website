@@ -146,16 +146,18 @@ Eseguita con `npx @tailwindcss/upgrade` + rifiniture manuali.
   - `.env`: `GOOGLE_APPLICATION_CREDENTIALS` ora inutile; `SITE_URL` verrà riusato in Fase 7 (metadataBase/sitemap)
   - `public/google34c2b65274804d71.html`: verifica proprietà GSC (indipendente dalle route) → tienilo se usi ancora la console GSC, altrimenti eliminabile
 
-### Fase 7 — SEO, accessibilità, finiture (dal `notes.txt`)
+### Fase 7 — SEO, accessibilità, finiture (dal `notes.txt`) ✅ FATTA
 
-- [ ] **Pagina 404**: creare `src/app/not-found.tsx`
-- [ ] **Sitemap**: `src/app/sitemap.ts` (API nativa Next, sostituisce l'approccio manuale)
-- [ ] **Robots**: `src/app/robots.ts`
-- [ ] **Metadata / OpenGraph**: arricchire `metadata` in `layout.tsx` con `openGraph`, `twitter`, `metadataBase`, `alternates`. Aggiungere `og-image`.
-- [ ] **Accessibilità**: `aria-label` su icon-button, nav, social links (footer/navbar/mobile-menu)
-- [ ] Animazioni di ingresso mancanti (intro/navbar, about/immagine, form) — vedi `notes.txt`
-- [ ] Verifica Lighthouse (perf/SEO/a11y) come check finale
-- [ ] Rimuovere `notes.txt` una volta esaurita la TODO (contenuto migrato qui)
+- [x] **Config centralizzata**: `src/lib/site.ts` (url da `SITE_URL`, name, description, autore) — usata da metadata/sitemap/robots/OG
+- [x] **Pagina 404**: `src/app/not-found.tsx` (tema dark, `Button` → home)
+- [x] **Sitemap**: `src/app/sitemap.ts` (API nativa Next → `/sitemap.xml`)
+- [x] **Robots**: `src/app/robots.ts` (→ `/robots.txt`, punta alla sitemap)
+- [x] **Metadata / OpenGraph**: `layout.tsx` con `metadataBase`, `title` template, `keywords`, `authors`, `alternates.canonical`, `openGraph`, `twitter`
+- [x] **Immagine OpenGraph dinamica**: `src/app/opengraph-image.tsx` via `next/og` (1200×630, tema del sito) → collegata auto a `og:image`/`twitter:image`
+- [x] **Accessibilità**: `aria-label` sulle social icon (GitHub/LinkedIn) + `rel="noopener noreferrer"`; hamburger e chiusura menu mobile convertiti da `div`/icona a veri `<button>` con `aria-label` e `aria-expanded`
+- [x] Verificato (smoke test): `/robots.txt`, `/sitemap.xml` (XML valido), `/opengraph-image` (200 image/png), 404 su rotta inesistente, meta OG/twitter nell'HTML
+- [ ] **Non fatto (design, rimandato)**: animazioni di ingresso (intro/navbar, about/immagine, form) — restano in `notes.txt` (file personale gitignored)
+- [ ] Verifica Lighthouse (perf/SEO/a11y) — consigliata come check manuale finale
 
 ### Fase 8 — Verifica finale & chiusura
 

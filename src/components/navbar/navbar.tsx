@@ -61,21 +61,26 @@ export const Navbar = () => {
             <SocialIcon
               link="https://github.com/DavideAvagnano"
               icon={<FaGithub size={22} />}
+              label="GitHub profile"
             />
             <SocialIcon
               link="https://www.linkedin.com/in/davide-avagnano/"
               icon={<FaLinkedin size={22} />}
+              label="LinkedIn profile"
             />
             <ResumeDialog />
           </div>
 
           {/* Mobile Menu */}
-          <div
+          <button
+            type="button"
             onClick={() => setToggleMobileMenu((state) => !state)}
-            className="md:hidden"
+            className="cursor-pointer text-accent md:hidden"
+            aria-label="Open menu"
+            aria-expanded={toggleMobileMenu}
           >
-            <BiMenuAltRight size={35} className="cursor-pointer text-accent" />
-          </div>
+            <BiMenuAltRight size={35} />
+          </button>
         </nav>
       </header>
 

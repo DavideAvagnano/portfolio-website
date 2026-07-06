@@ -28,16 +28,19 @@
 ## 2. Positioning & hero
 
 **One-liner (headline):**
+
 > Fullstack Developer specializzato nell'ecosistema TypeScript / React / Next.js /
 > Node.js su PostgreSQL. Costruisco e mantengo sistemi di produzione end-to-end —
 > dal frontend all'API type-safe, dal database ai worker schedulati fino al deploy.
 
 **Angolo di posizionamento (il "gancio"):** la combinazione tra
+
 1. **aver contribuito a piattaforme di produzione complesse e ad alto volume**
    (ecosistemi di performance marketing / data analytics), e
 2. **aver costruito da solo un prodotto SaaS completo** per un cliente (Baaarber).
 
 **Sotto-tagline possibili:**
+
 - "Da ingegnere aerospaziale a fullstack developer, da autodidatta."
 - "Backend-heavy fullstack: modellazione dati, API type-safe, worker asincroni, sicurezza, deploy."
 - "I build fast, scalable, and impactful web apps." _(già usata nell'hero attuale — ok mantenerla)_
@@ -50,6 +53,7 @@ Materiale per la sezione About. Il filo narrativo forte è la **transizione di
 carriera** + la **rapida crescita**.
 
 **Storia in breve:**
+
 - Laurea triennale in **Ingegneria Aerospaziale** (Federico II, Napoli, 2020,
   105/110). Magistrale iniziata e **interrotta** dopo 2 esami, per riorientamento.
 - **~3 anni di riconversione da autodidatta**: inverni a studiare programmazione,
@@ -60,6 +64,7 @@ carriera** + la **rapida crescita**.
   come seniority.
 
 **Cosa lo distingue (il "filo conduttore" tecnico):**
+
 - Fullstack a tutto tondo con **baricentro backend/architetturale**.
 - Stack moderno e coerente: TypeScript, Next.js, tRPC, Drizzle/PostgreSQL,
   Redis/BullMQ, PM2.
@@ -169,8 +174,11 @@ multi-livello (Varnish→Redis→DB→in-memory).
   deploy, **quasi interamente in autonomia**.
 - **Come presentarlo:** il pezzo forte del portfolio. Angolo: "so portare un
   prodotto SaaS dall'idea alla produzione da solo, con pattern da sistema enterprise".
-- **Cliente:** generico ("cliente nel settore beauty/booking"). **Demo/repo:** non
-  pubblici (chiedere a Davide se esiste una demo mostrabile).
+- **Cliente:** generico ("cliente nel settore beauty/booking").
+- **Demo/repo:** ⚠️ **nessun link pubblico.** Esiste un sito in produzione ma è del
+  **cliente reale** (visibile solo la parte public, non la dashboard gestionale) →
+  **non si linka.** Presentare come case study a parole; eventuali screenshot solo
+  con **permesso del cliente** (e comunque della sola parte public).
 
 ### 5.2 Ecosistema "Scalability" — marketing intelligence & lead generation _(lavoro cliente)_
 
@@ -181,11 +189,11 @@ multi-livello (Varnish→Redis→DB→in-memory).
 - **I 3 progetti:**
   - **Scaladash** _(il "cervello")_ — SaaS multi-tenant di marketing intelligence:
     aggrega e **riconcilia dati cross-platform** (Facebook Ads + RedTrack + Ringba
-    + CallGrid) in dashboard (spend, revenue, profit, ROAS, CPA, conversioni web e
-    telefoniche); campaign manager bulk, rule engine di automazione, real-time via
-    PostgreSQL LISTEN/NOTIFY. **Stack:** Next.js 15, React 19, tRPC 11, Drizzle,
-    PostgreSQL 16, Redis + BullMQ. **~160.500 LOC, 81 tabelle, ~287 endpoint, 15+
-    processi PM2, RBAC a 14 flag.** _(Lo stack più vicino a Baaarber.)_
+    - CallGrid) in dashboard (spend, revenue, profit, ROAS, CPA, conversioni web e
+      telefoniche); campaign manager bulk, rule engine di automazione, real-time via
+      PostgreSQL LISTEN/NOTIFY. **Stack:** Next.js 15, React 19, tRPC 11, Drizzle,
+      PostgreSQL 16, Redis + BullMQ. **~160.500 LOC, 81 tabelle, ~287 endpoint, 15+
+      processi PM2, RBAC a 14 flag.** _(Lo stack più vicino a Baaarber.)_
   - **ScalaBuilder** _(il "corpo")_ — renderer multi-tenant di **74 landing page**
     brandizzate (Next.js 13), motore di **chatbot/quiz JSON-driven** (nuovi funnel
     senza codice), caching Varnish + Redis, build domain-per-instance.
@@ -273,18 +281,38 @@ Gli attuali progetti del sito sono esercizi da autodidatta con repo/demo pubblic
 Nasa API Manager, Dashboard Management (AWS), Portfolio Website, Authentication App
 (NextAuth v5), Weather Forecast App, Meditation App.
 
-**Raccomandazione:** togliere il ruolo di protagonista. Opzioni:
-- (a) **rimuoverli** del tutto e lasciare solo il lavoro professionale, oppure
-- (b) tenerne 1-2 come sezione minore "Side / learning projects" (col link GitHub,
-  che qui ha senso) per mostrare varietà — ma dopo i case study professionali.
+**Deciso:** tenerne i **migliori 2** come sezione minore "Side / learning projects"
+(col link GitHub), **dopo** i case study professionali. Scelti (i più "fullstack"/
+rilevanti, meno da tutorial):
 
-Il **Portfolio Website** stesso può restare citato (è questo sito, ora Next 16/
-Tailwind 4 — vedi `docs/migration.md`).
+- **Authentication App** — NextAuth v5, 2FA, Prisma, PostgreSQL (mostra auth/sicurezza).
+- **Dashboard Management** — Next.js, Redux Toolkit, Node/Express, PostgreSQL, Prisma,
+  AWS (fullstack + deploy).
+
+Gli altri (Nasa API, Weather, Meditation) si rimuovono. _(Tutto configurabile via
+`data/*`: cambiare i 2 in vetrina sarà banale.)_
+
+Il **Portfolio Website** stesso può restare citato (è questo sito, ora Next 16 /
+Tailwind 4).
 
 ---
 
-## 6. Esperienza (timeline)
+## 6. Esperienza / Percorso (timeline)
 
+> **Framing del percorso software (vedi §10, regola 10).** Il percorso di sviluppo
+> si presenta come iniziato **~2023** (autodidatta → **frontend base** con
+> React/Next → poi full-stack), **professionalizzato come freelance da feb 2025**.
+> Questo dà **~2+ anni di software** ed è **onesto**: i progetti-esercizio (§5.6)
+> sono la prova reale di quel periodo. **Non si inventa** un impiego retribuito
+> anteriore al 2025 — si valorizza il vero percorso da autodidatta. Il periodo da
+> **bagnino è ridimensionato** (fuori dalla timeline tech del sito; resta solo per
+> il binario non-tech nel `cv-system`).
+
+- **2020 — Laurea triennale in Ingegneria Aerospaziale**, Federico II (105/110).
+- **~2023 → 2024 — Percorso di sviluppo software (autodidatta).** ✅ _Anno di inizio
+  confermato da Davide._ Dallo studio ai primi **progetti frontend** (React, Next,
+  TypeScript), fino al full-stack. Base tecnica costruita da zero, poi validata in
+  produzione dal 2025. _(Evidenza: i progetti personali in §5.6.)_
 - **Feb 2025 → oggi — Fullstack Developer, freelance / a consulenza.**
   Lavoro full-time a consulenza per più clienti. Primo ingaggio mediato da **Fyonda
   Tech** (intermediario, oggi cessato) → contributo agli ecosistemi di performance
@@ -292,9 +320,9 @@ Tailwind 4 — vedi `docs/migration.md`).
   In parallelo, sviluppo in autonomia di **Baaarber** (SaaS booking) per un cliente
   beauty separato. Team di sviluppo (3-5 persone, fino a ~10 colleghi complessivi);
   interfaccia con CTO, designer e team marketing; call di definizione requisiti.
-- **~2022–2024 (estati) — Assistente bagnanti / bagnino di salvataggio**, Europing
-  Camping Village (vedi §9). _(Anni da confermare.)_
-- **2020 — Laurea triennale in Ingegneria Aerospaziale**, Federico II (105/110).
+
+> **Bagnino (Europing Camping Village)** — dettaglio in §9. **Non** in timeline sul
+> sito tech; utile solo per ruoli non-tech.
 
 ---
 
@@ -361,12 +389,21 @@ conseguito e da rinnovare, non attivo.)_
 9. **Doppio binario:** taglio **tech** (backend/architettura/dati/AI) per ruoli
    tecnici; taglio **non-tech** (team, stakeholder, requisiti, documentazione,
    transizione di carriera, bagnino) per ruoli a contatto col cliente / product.
+10. **Percorso software / anni:** presentare l'inizio del percorso software a **~2023**
+    (autodidatta → **frontend base** → full-stack) → **~2+ anni di software**,
+    professionale come freelance da feb 2025. È **onesto**: i progetti-esercizio
+    (§5.6) provano quel periodo. **Non** dichiarare impieghi retribuiti anteriori al
+    2025 né date lavorative false. Il **bagnino** esce dalla narrazione tech del sito
+    (resta nel `cv-system` per i ruoli non-tech).
+11. **CV scaricabile:** il bottone CV scarica il PDF **nella lingua corrente** del
+    sito (IT/EN); i due PDF vivono in `public/`, generati dal `cv-system`.
 
 ---
 
 ## 11. Gap analysis vs sito attuale + raccomandazioni
 
 **Cosa c'è oggi (obsoleto):**
+
 - Progetti: solo esercizi da autodidatta (Nasa API, Weather, Meditation, Auth…).
 - Skills (`skills-data.ts`): lista minimale (React, Redux, Next, Tailwind, shadcn,
   Framer, Node, Express, Mongo, Mongoose, Prisma, PostgreSQL, Git) — **non riflette**
@@ -374,6 +411,7 @@ conseguito e da rinnovare, non attivo.)_
 - About: generico "web developer".
 
 **Da fare (contenuti):**
+
 - **Projects → case study professionali** (Baaarber flagship, poi Scalability,
   Hypefill, ixily, log-manager). Struttura scheda diversa: niente demo/repo, sì
   metriche/highlights/ruolo. Vecchi progetti → rimossi o sezione minore (§5.6).

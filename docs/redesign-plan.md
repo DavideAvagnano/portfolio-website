@@ -71,20 +71,58 @@ più Radix. Colto al volo (siamo a Fase 1, costo minimo):
 
 ---
 
-## Fase 2 — Internazionalizzazione (next-intl) — strutturale
+## Fase 2 — Internazionalizzazione (next-intl) — strutturale ✅ FATTA
 
 Obiettivo: routing multilingua + messaggi, **prima** di costruire le sezioni (così
 tutto il copy nasce già i18n).
 
-- [ ] Installare `next-intl`; config (`i18n/routing.ts`, `request.ts`), **locales
-      `["it","en"]`, default `it`**.
-- [ ] **Ristrutturare** le route sotto `src/app/[locale]/…` (layout, page, not-found).
-      Middleware next-intl. Aggiornare `tsconfig`/import se serve.
-- [ ] `messages/it.json` + `messages/en.json` (scheletro chiavi per sezioni).
-- [ ] **SEO per-locale**: `generateMetadata` per lingua, `alternates`/`hreflang`,
-      `sitemap.ts` e `robots.ts` per-locale, OG per-locale.
-- [ ] **Language switcher** (IT · EN) che preserva la sezione corrente.
-- [ ] Verifica: `/it` e `/en` rispondono, switch funziona, metadata per-locale ok.
+**Decisioni prese con Davide** (ispezionati baaarber + hypefill-dashboard):
+
+- Pattern **con locale nell'URL** (modello baaarber), non session-based (modello
+  hypefill, adatto solo a dashboard autenticate).
+- **`localePrefix: "as-needed"`**: IT (default) sulla **root** senza prefisso
+  (`/`), EN su `/en`. URL puliti per il pubblico primario (italiano).
+- **Detection del browser ATTIVA** (default next-intl): alla prima visita reindirizza
+  alla lingua preferita (`/` → `/en` se browser EN), poi ricorda con cookie `NEXT_LOCALE`.
+- **Un file messaggi per lingua** (`messages/{locale}.json`), non namespace-per-file
+  (overkill per un sito piccolo).
+
+**Fatto:**
+
+- [x] `next-intl` (`^4.13`) installato; `next.config.ts` wrappato con
+      `createNextIntlPlugin()`. Config in `src/i18n/`: `routing.ts` (locales
+      `["it","en"]`, default `it`, `localePrefix: "as-needed"`, `localeMeta`, helper
+      `resolveLocale`), `request.ts` (carica `messages/{locale}.json`), `navigation.ts`.
+- [x] Route ristrutturate sotto `src/app/[locale]/` (`layout.tsx` con `<html lang>` +
+      font + tema + `NextIntlClientProvider`, `page.tsx`, `not-found.tsx`, catch-all
+      `[...rest]/page.tsx` → `notFound()`). Root `app/layout.tsx` → solo `children`
+      (+ `metadataBase` globale). Fallback `app/not-found.tsx` con proprio `<html>`.
+      **Middleware in `src/proxy.ts`** (Next 16 ha rinominato `middleware`→`proxy`) =
+      `createMiddleware(routing)`.
+- [x] **`NextIntlClientProvider` con `messages` ESPLICITI** (`getMessages()`), non
+      l'inherit v4 via promise. ⚠️ **Non tornare all'inherit senza messages:**
+      quella variante rimonta il sottoalbero al cambio lingua → ricrea lo script
+      anti-FOUC di next-themes sul client → warning React 19 "script tag while
+      rendering". Coi messaggi risolti il warning sparisce (verificato).
+- [x] `messages/it.json` + `messages/en.json` (scheletro: `metadata`, `hero`,
+      `localeSwitcher`, `theme`, `notFound`). Type-safety via `src/global.d.ts`
+      (augment `AppConfig.Messages`/`Locale`).
+- [x] **SEO per-locale**: `generateMetadata` per lingua (title/description da
+      `getTranslations`), `alternates.languages` (hreflang `it`/`en` + `x-default`),
+      `canonical` per-locale, OG `locale`+`url` per-locale; `sitemap.ts` con entry
+      `/` e `/en` + alternates hreflang; `robots.ts` invariato.
+- [x] **Language switcher** minimale editoriale (`components/locale-switcher.tsx`,
+      IT · EN testuale) con `router.replace(pathname, { locale })` → preserva la pagina.
+- [x] Verifica (smoke test `next start`): root con `Accept-Language: en` → 307 `/en`;
+      root IT → 200; `/it` → 307 `/`; `<html lang>` corretto; hreflang + canonical +
+      sitemap con alternates ok; 404 localizzato (IT/EN). `/[locale]` prerenderata
+      **SSG** (`/it`, `/en`). `typecheck` + `lint` + `format` verdi; smoke visivo di
+      Davide su dev: cambio lingua IT↔EN ok, tema ok, **nessun warning** in console.
+
+**Nota (limite noto, non bloccante):** i **404** renderizzano il guscio HTML iniziale
+globale (`__next_error__`) col contenuto localizzato idratato client-side —
+comportamento standard di Next col pattern root/`[locale]` split. Irrilevante per SEO
+(i 404 sono noindex).
 
 ---
 
@@ -200,7 +238,13 @@ Obiettivo: il pezzo forte, senza svendere i case study.
 - ✅ **Fase 1 FATTA e committata** (`fbbac5d`): design system Base UI (base-nova,
   zinc), suite shadcn completa, tema light/dark, font A, shell minimale, pulizia
   vecchie sezioni.
-- 🔜 **Prossima: Fase 2 — i18n (next-intl)** (IT default + EN, route `[locale]`).
+- ✅ **Fase 2 FATTA e committata**: i18n next-intl, route `[locale]`,
+  `localePrefix: "as-needed"` (IT su root, EN su `/en`), detection browser attiva,
+  middleware in `src/proxy.ts`, SEO per-locale (hreflang/canonical/sitemap), language
+  switcher canonico (`router.replace`), messaggi it/en con `messages` espliciti nel
+  provider (no warning next-themes).
+- 🔜 **Prossima: Fase 3 — Shell di layout** (header con nav/lang/theme/CV, footer,
+  componente "sezione").
 - Le decisioni e i contenuti sono in questo file + `redesign-goals.md` +
   `site-content.md`; le regole di lavoro in `CLAUDE.md`. Reference visiva in
   `private/` (gitignored).

@@ -1,0 +1,26 @@
+{
+  "metadata": {
+    "title": "Davide Avagnano — Software Engineer",
+    "description": "Davide Avagnano, software engineer freelance. Costruisco applicazioni web accessibili, scalabili e performanti con React e l'ecosistema Next.js."
+  },
+  "hero": {
+    "eyebrow": "Work in progress",
+    "greeting": "Ciao, sono Davide.",
+    "role": "Fullstack Developer — React, Next.js, Node.js, PostgreSQL.",
+    "intro": "Nuovo sito in costruzione. Sto ripartendo da una base pulita: tipografia, tema chiaro/scuro e una struttura editoriale minimale."
+  },
+  "localeSwitcher": {
+    "label": "Lingua",
+    "it": "Italiano",
+    "en": "Inglese"
+  },
+  "theme": {
+    "toggle": "Cambia tema"
+  },
+  "notFound": {
+    "code": "404",
+    "title": "Pagina non trovata",
+    "description": "La pagina che cerchi non esiste o è stata spostata.",
+    "back": "Torna alla home"
+  }
+}

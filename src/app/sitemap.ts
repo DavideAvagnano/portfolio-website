@@ -1,15 +1,27 @@
 import type { MetadataRoute } from "next"
 import { siteConfig } from "@/lib/site"
 
-// Portfolio single-page: la home con le sue sezioni ancorate. Se in futuro si
-// aggiungono pagine reali (es. /blog), vanno elencate qui.
+// Sitemap multilingua. Con `localePrefix: "as-needed"` l'italiano vive sulla root,
+// l'inglese su `/en`. Ogni entry dichiara gli alternates hreflang per l'altra lingua.
 export default function sitemap(): MetadataRoute.Sitemap {
+  const base = siteConfig.url
+  const languages = { it: base, en: `${base}/en` }
+  const lastModified = new Date()
+
   return [
     {
-      url: siteConfig.url,
-      lastModified: new Date(),
+      url: base,
+      lastModified,
       changeFrequency: "monthly",
       priority: 1,
+      alternates: { languages },
+    },
+    {
+      url: `${base}/en`,
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 1,
+      alternates: { languages },
     },
   ]
 }

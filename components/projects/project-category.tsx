@@ -1,10 +1,10 @@
-import { motion } from "framer-motion";
-import { ProjectCategoryType } from "@/types/types";
+import { motion } from "framer-motion"
+import { ProjectCategoryType } from "@/types/types"
 
 interface ProjectCategoryProps {
-  category: ProjectCategoryType;
-  isActive: boolean;
-  setActive: () => void;
+  category: ProjectCategoryType
+  isActive: boolean
+  setActive: () => void
 }
 
 export const ProjectCategory = ({
@@ -15,8 +15,8 @@ export const ProjectCategory = ({
   return (
     <li className="relative">
       <button
-        className={`py-3 px-5 sm:px-10 lg:px-14 text-xs sm:text-sm 2xl:text-base font-light tracking-widest ${
-          isActive && "text-accent bg-accent/[0.03]"
+        className={`px-5 py-3 text-xs font-light tracking-widest sm:px-10 sm:text-sm lg:px-14 2xl:text-base ${
+          isActive && "bg-accent/[0.03] text-accent"
         }`}
         onClick={setActive}
       >
@@ -30,10 +30,10 @@ export const ProjectCategory = ({
               stiffness: 400,
               damping: 30,
             }}
-            className="absolute h-[2px] bg-accent inset-x-0 bottom-0"
+            className="absolute inset-x-0 bottom-0 h-[2px] bg-accent"
           />
         )}
       </button>
     </li>
-  );
-};
+  )
+}

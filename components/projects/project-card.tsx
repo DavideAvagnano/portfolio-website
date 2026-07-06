@@ -1,10 +1,10 @@
-import Link from "next/link";
-import { motion } from "framer-motion";
-import { projectsData } from "@/data/projects-data";
+import Link from "next/link"
+import { motion } from "framer-motion"
+import { projectsData } from "@/data/projects-data"
 
-import { LuFolderCode } from "react-icons/lu";
-import { SiGithub } from "react-icons/si";
-import { RxOpenInNewWindow } from "react-icons/rx";
+import { LuFolderCode } from "react-icons/lu"
+import { SiGithub } from "react-icons/si"
+import { RxOpenInNewWindow } from "react-icons/rx"
 
 const fadeInAnimationVariants = {
   initial: {
@@ -19,9 +19,9 @@ const fadeInAnimationVariants = {
       delay: 0.25 * index,
     },
   }),
-};
+}
 
-type ProjectCardProps = (typeof projectsData)[number] & { index: number };
+type ProjectCardProps = (typeof projectsData)[number] & { index: number }
 
 export const ProjectCard = ({
   title,
@@ -40,17 +40,17 @@ export const ProjectCard = ({
       custom={index}
       key={index}
     >
-      <div className="group p-7 bg-bg-light rounded-lg h-full hover:-translate-y-3 transition-all">
-        <div className="h-full flex flex-col">
+      <div className="group h-full rounded-lg bg-bg-light p-7 transition-all hover:-translate-y-3">
+        <div className="flex h-full flex-col">
           {/* Heading */}
-          <div className="flex justify-between items-center">
+          <div className="flex items-center justify-between">
             <LuFolderCode size={30} className="text-accent" />
             <div className="flex items-center justify-center gap-3">
               {gitHubUrl && (
                 <Link href={gitHubUrl} target="_blank">
                   <SiGithub
                     size={20}
-                    className="hover:text-accent transition-all"
+                    className="transition-all hover:text-accent"
                   />
                 </Link>
               )}
@@ -59,26 +59,26 @@ export const ProjectCard = ({
                 <Link href={demoUrl} target="_blank">
                   <RxOpenInNewWindow
                     size={25}
-                    className="hover:text-accent transition-all"
+                    className="transition-all hover:text-accent"
                   />
                 </Link>
               )}
             </div>
           </div>
 
-          <div className="flex flex-col flex-grow">
+          <div className="flex flex-grow flex-col">
             {/* Body */}
-            <div className="py-8 flex flex-col gap-3">
-              <p className="font-semibold text-xl group-hover:text-accent transition-all">
+            <div className="flex flex-col gap-3 py-8">
+              <p className="text-xl font-semibold transition-all group-hover:text-accent">
                 {title}
               </p>
-              <p className="text-foreground-light font-light text-sm leading-loose">
+              <p className="text-sm font-light leading-loose text-foreground-light">
                 {description}
               </p>
             </div>
 
             {/* Footer */}
-            <ul className="mt-auto flex justify-center flex-wrap gap-y-3 text-foreground-light group-hover:text-accent">
+            <ul className="mt-auto flex flex-wrap justify-center gap-y-3 text-foreground-light group-hover:text-accent">
               {tags.map((tag, index) => (
                 <li key={index} className="text-sm transition-all">
                   {tag}
@@ -90,5 +90,5 @@ export const ProjectCard = ({
         </div>
       </div>
     </motion.li>
-  );
-};
+  )
+}

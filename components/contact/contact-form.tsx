@@ -1,11 +1,11 @@
-"use client";
+"use client"
 
-import * as z from "zod";
-import { useState, useTransition } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { ContactSchema } from "@/schemas";
-import { sendContactForm } from "@/actions/send-email";
+import * as z from "zod"
+import { useState, useTransition } from "react"
+import { useForm } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { ContactSchema } from "@/schemas"
+import { sendContactForm } from "@/actions/send-email"
 import {
   Form,
   FormControl,
@@ -13,17 +13,17 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Button } from "@/components/ui/button";
-import { FormError } from "@/components/contact/form-error";
-import { FormSuccess } from "@/components/contact/form-success";
+} from "@/components/ui/form"
+import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
+import { Button } from "@/components/ui/button"
+import { FormError } from "@/components/contact/form-error"
+import { FormSuccess } from "@/components/contact/form-success"
 
 export const ContactForm = () => {
-  const [error, setError] = useState<string | undefined>("");
-  const [success, setSucces] = useState<string | undefined>("");
-  const [isPending, startTransition] = useTransition();
+  const [error, setError] = useState<string | undefined>("")
+  const [success, setSucces] = useState<string | undefined>("")
+  const [isPending, startTransition] = useTransition()
 
   const form = useForm<z.infer<typeof ContactSchema>>({
     resolver: zodResolver(ContactSchema),
@@ -32,49 +32,49 @@ export const ContactForm = () => {
       email: "",
       message: "",
     },
-  });
+  })
 
   const onSubmit = (formData: z.infer<typeof ContactSchema>) => {
-    setError("");
-    setSucces("");
+    setError("")
+    setSucces("")
 
     startTransition(() => {
       sendContactForm(formData)
         .then((data) => {
           if (data.error) {
-            setError(data.error);
+            setError(data.error)
 
             setTimeout(() => {
-              setError("");
-            }, 3000);
+              setError("")
+            }, 3000)
           }
 
           if (data.success) {
-            setSucces(data.success);
+            setSucces(data.success)
 
             setTimeout(() => {
-              setSucces("");
-            }, 3000);
+              setSucces("")
+            }, 3000)
 
-            form.reset();
+            form.reset()
           }
         })
         .catch((err) => {
-          console.error("Error", err);
-          setError("Something went wrong!");
+          console.error("Error", err)
+          setError("Something went wrong!")
 
           setTimeout(() => {
-            setError("");
-          }, 3000);
-        });
-    });
-  };
+            setError("")
+          }, 3000)
+        })
+    })
+  }
 
   return (
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="max-w-lg mx-auto space-y-12"
+        className="mx-auto max-w-lg space-y-12"
       >
         <div className="space-y-8">
           <FormField
@@ -128,10 +128,10 @@ export const ContactForm = () => {
         <FormError message={error} />
         <FormSuccess message={success} />
 
-        <div className=" flex justify-center items-center">
+        <div className="flex items-center justify-center">
           <Button
             variant="outline"
-            className="w-1/2 font-medium text-base"
+            className="w-1/2 text-base font-medium"
             disabled={isPending}
           >
             Send
@@ -139,7 +139,7 @@ export const ContactForm = () => {
         </div>
       </form>
     </Form>
-  );
-};
+  )
+}
 
 // TODO: invece che mostrare i messaggi in questo modo potrei usare un toast (shadcn)

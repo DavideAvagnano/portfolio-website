@@ -1,46 +1,46 @@
-"use client";
+"use client"
 
-import { useEffect, useState } from "react";
+import { useEffect, useState } from "react"
 
-import { navLinks } from "@/data/navbar-data";
+import { navLinks } from "@/data/navbar-data"
 
-import { Logo } from "@/components/navbar/logo";
-import { NavItem } from "@/components/navbar/nav-item";
-import { MobileMenu } from "@/components/navbar/mobile-menu";
-import { SocialIcon } from "@/components/social-icon";
-import { ResumeDialog } from "@/components/resume-dialog";
+import { Logo } from "@/components/navbar/logo"
+import { NavItem } from "@/components/navbar/nav-item"
+import { MobileMenu } from "@/components/navbar/mobile-menu"
+import { SocialIcon } from "@/components/social-icon"
+import { ResumeDialog } from "@/components/resume-dialog"
 
-import { FaGithub, FaLinkedin } from "react-icons/fa";
-import { BiMenuAltRight } from "react-icons/bi";
+import { FaGithub, FaLinkedin } from "react-icons/fa"
+import { BiMenuAltRight } from "react-icons/bi"
 
 export const Navbar = () => {
-  const [activeSection, setActiveSection] = useState<string>("home");
-  const [toggleMobileMenu, setToggleMobileMenu] = useState<boolean>(false);
+  const [activeSection, setActiveSection] = useState<string>("home")
+  const [toggleMobileMenu, setToggleMobileMenu] = useState<boolean>(false)
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
+            setActiveSection(entry.target.id)
           }
-        });
+        })
       },
       { threshold: 0.6 } // entra almeno 60% della sezione
-    );
+    )
 
-    const sections = document.querySelectorAll("section");
-    sections.forEach((section) => observer.observe(section));
+    const sections = document.querySelectorAll("section")
+    sections.forEach((section) => observer.observe(section))
 
     return () => {
-      sections.forEach((section) => observer.unobserve(section));
-    };
-  }, []);
+      sections.forEach((section) => observer.unobserve(section))
+    }
+  }, [])
 
   return (
     <>
-      <header className="z-50 fixed top-0 w-full bg-background">
-        <nav className="flex items-center justify-between max-w-screen-xl mx-auto px-6 py-4">
+      <header className="fixed top-0 z-50 w-full bg-background">
+        <nav className="mx-auto flex max-w-screen-xl items-center justify-between px-6 py-4">
           {/* Logo */}
           <Logo />
 
@@ -74,7 +74,7 @@ export const Navbar = () => {
             onClick={() => setToggleMobileMenu((state) => !state)}
             className="md:hidden"
           >
-            <BiMenuAltRight size={35} className="text-accent cursor-pointer" />
+            <BiMenuAltRight size={35} className="cursor-pointer text-accent" />
           </div>
         </nav>
       </header>
@@ -84,5 +84,5 @@ export const Navbar = () => {
         onClose={() => setToggleMobileMenu(false)}
       />
     </>
-  );
-};
+  )
+}

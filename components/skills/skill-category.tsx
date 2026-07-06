@@ -1,10 +1,10 @@
-import { motion } from "framer-motion";
-import { SkillCategoryType } from "@/types/types";
+import { motion } from "framer-motion"
+import { SkillCategoryType } from "@/types/types"
 
 interface SkillCategoryProps {
-  category: SkillCategoryType;
-  isActive: boolean;
-  setActive: () => void;
+  category: SkillCategoryType
+  isActive: boolean
+  setActive: () => void
 }
 
 export const SkillCategory = ({
@@ -15,8 +15,8 @@ export const SkillCategory = ({
   return (
     <li className="relative">
       <button
-        className={`py-3 pl-4 w-28 sm:w-44 text-start text-xs sm:text-sm 2xl:text-base font-light tracking-widest ${
-          isActive && "text-accent bg-accent/[0.03]"
+        className={`w-28 py-3 pl-4 text-start text-xs font-light tracking-widest sm:w-44 sm:text-sm 2xl:text-base ${
+          isActive && "bg-accent/[0.03] text-accent"
         }`}
         onClick={setActive}
       >
@@ -30,12 +30,12 @@ export const SkillCategory = ({
               stiffness: 500,
               damping: 40,
             }}
-            className="absolute w-[2px] bg-accent inset-y-0 right-0"
+            className="absolute inset-y-0 right-0 w-[2px] bg-accent"
           ></motion.span>
         )}
       </button>
     </li>
-  );
-};
+  )
+}
 
 // TODO: animazione sullo sfondo quando clicco sulla categoria (anche per projects)

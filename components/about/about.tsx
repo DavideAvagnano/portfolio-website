@@ -1,6 +1,6 @@
-import Image from "next/image";
-import image from "@/public/about-full-img-min.png";
-import { SectionHeading } from "@/components/section-heading";
+import Image from "next/image"
+import image from "@/public/about-full-img-min.png"
+import { SectionHeading } from "@/components/section-heading"
 
 export const About = () => {
   return (
@@ -8,7 +8,7 @@ export const About = () => {
       <SectionHeading label="/about me" hasImg />
 
       <div className="md:flex md:justify-between md:gap-10">
-        <div className="md:basis-2/3 flex flex-col gap-5 text-foreground-light">
+        <div className="flex flex-col gap-5 text-foreground-light md:basis-2/3">
           <p>
             Hi! I&apos;m Davide, a{" "}
             <span className="font-semibold italic text-foreground">
@@ -42,15 +42,15 @@ export const About = () => {
             staying updated on emerging technologies.
           </p>
         </div>
-        <div className="hidden md:block md:basis-1/3 relative">
+        <div className="relative hidden md:block md:basis-1/3">
           <Image
             src={image}
             alt="Davide's Image, s software engineer with a background in aerospace engineering"
             fill
-            className="object-cover object-top hover:-translate-y-4 transition-all"
+            className="object-cover object-top transition-all hover:-translate-y-4"
           />
         </div>
       </div>
     </section>
-  );
-};
+  )
+}

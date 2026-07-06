@@ -71,9 +71,9 @@ export const projectsData = [
     gitHubUrl: "https://github.com/DavideAvagnano/Meditation-App",
     category: "frontend",
   },
-];
+]
 
 export const projectsCategories = [
   "all",
   ...new Set(projectsData.map((project) => project.category)),
-];
+]

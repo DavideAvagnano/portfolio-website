@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"
 import {
   SiTypescript,
   SiPython,
@@ -16,7 +16,7 @@ import {
   SiGit,
   SiGithub,
   SiRedux,
-} from "react-icons/si";
+} from "react-icons/si"
 
 export const skillsData = {
   languages: [
@@ -45,4 +45,4 @@ export const skillsData = {
     { name: "Git", icon: React.createElement(SiGit) },
     { name: "GitHub", icon: React.createElement(SiGithub) },
   ],
-};
+}

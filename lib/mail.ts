@@ -1,8 +1,8 @@
-import { Resend } from "resend";
+import { Resend } from "resend"
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resend = new Resend(process.env.RESEND_API_KEY)
 
-const myEmail = "dav.avagnano@gmail.com";
+const myEmail = "dav.avagnano@gmail.com"
 
 export const sendEmail = async (
   name: string,
@@ -19,5 +19,5 @@ export const sendEmail = async (
           <p><strong>Messaggio:</strong></p>
           <p>${message}</p>
         `,
-  });
-};
+  })
+}

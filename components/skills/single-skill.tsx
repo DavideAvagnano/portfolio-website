@@ -1,5 +1,5 @@
-import { motion } from "framer-motion";
-import { SkillType } from "@/types/types";
+import { motion } from "framer-motion"
+import { SkillType } from "@/types/types"
 
 const fadeInAnimationVariants = {
   initial: {
@@ -13,11 +13,11 @@ const fadeInAnimationVariants = {
       delay: 0.15 * index,
     },
   }),
-};
+}
 
 interface SingleSkillProps {
-  skill: SkillType;
-  index: number;
+  skill: SkillType
+  index: number
 }
 
 export const SingleSkill = ({ skill, index }: SingleSkillProps) => {
@@ -28,10 +28,10 @@ export const SingleSkill = ({ skill, index }: SingleSkillProps) => {
       whileInView="animate"
       viewport={{ once: true }}
       custom={index}
-      className="flex gap-2 items-center 2xl:text-lg"
+      className="flex items-center gap-2 2xl:text-lg"
     >
       <span className="text-accent">{skill.icon}</span>
       {skill.name}
     </motion.li>
-  );
-};
+  )
+}

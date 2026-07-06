@@ -1,4 +1,4 @@
-import * as z from "zod";
+import * as z from "zod"
 
 export const ContactSchema = z.object({
   name: z.string().min(1, {
@@ -15,4 +15,4 @@ export const ContactSchema = z.object({
     .max(400, {
       message: "Il messaggio può contenere al massimo 400 caratteri.",
     }),
-});
+})

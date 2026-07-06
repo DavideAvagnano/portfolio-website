@@ -48,10 +48,10 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground text-sm sm:text-base;
+    @apply bg-background text-sm text-foreground sm:text-base;
   }
 }
 
 .section {
-  @apply w-full max-w-screen-lg mx-auto pt-36 leading-loose;
+  @apply mx-auto w-full max-w-screen-lg pt-36 leading-loose;
 }

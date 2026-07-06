@@ -1,10 +1,10 @@
-import { navLinks } from "@/data/navbar-data";
-import { NavItem } from "@/components/navbar/nav-item";
-import { BiX } from "react-icons/bi";
+import { navLinks } from "@/data/navbar-data"
+import { NavItem } from "@/components/navbar/nav-item"
+import { BiX } from "react-icons/bi"
 
 interface MobileMenuProps {
-  isOpen: boolean;
-  onClose: () => void;
+  isOpen: boolean
+  onClose: () => void
 }
 
 export const MobileMenu = ({ isOpen, onClose }: MobileMenuProps) => {
@@ -18,11 +18,11 @@ export const MobileMenu = ({ isOpen, onClose }: MobileMenuProps) => {
       <div className="flex justify-end p-6">
         <BiX
           size={35}
-          className="text-accent cursor-pointer"
+          className="cursor-pointer text-accent"
           onClick={onClose}
         />
       </div>
-      <ul className="flex flex-col items-center justify-center gap-8 text-lg h-[calc(100%-80px)]">
+      <ul className="flex h-[calc(100%-80px)] flex-col items-center justify-center gap-8 text-lg">
         {navLinks.map((item) => (
           <NavItem
             key={item.hash}
@@ -33,5 +33,5 @@ export const MobileMenu = ({ isOpen, onClose }: MobileMenuProps) => {
         ))}
       </ul>
     </div>
-  );
-};
+  )
+}

@@ -1,22 +1,22 @@
-"use client";
+"use client"
 
-import { useState } from "react";
-import { projectsCategories, projectsData } from "@/data/projects-data";
+import { useState } from "react"
+import { projectsCategories, projectsData } from "@/data/projects-data"
 
-import { ProjectCategoryType } from "@/types/types";
+import { ProjectCategoryType } from "@/types/types"
 
-import { SectionHeading } from "@/components/section-heading";
-import { ProjectCategory } from "@/components/projects/project-category";
-import { ProjectCard } from "@/components/projects/project-card";
+import { SectionHeading } from "@/components/section-heading"
+import { ProjectCategory } from "@/components/projects/project-category"
+import { ProjectCard } from "@/components/projects/project-card"
 
 export const Projects = () => {
   const [activeCategory, setActiveCategory] =
-    useState<ProjectCategoryType>("all");
+    useState<ProjectCategoryType>("all")
 
   const filteredProjects =
     activeCategory === "all"
       ? projectsData
-      : projectsData.filter((project) => project.category === activeCategory);
+      : projectsData.filter((project) => project.category === activeCategory)
 
   return (
     <section id="projects" className="section">
@@ -35,11 +35,11 @@ export const Projects = () => {
       </ul>
 
       {/* Progetti filtrati */}
-      <ul className="pt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      <ul className="grid grid-cols-1 gap-5 pt-10 sm:grid-cols-2 lg:grid-cols-3">
         {filteredProjects.map((project, index) => (
           <ProjectCard key={project.title} index={index} {...project} />
         ))}
       </ul>
     </section>
-  );
-};
+  )
+}

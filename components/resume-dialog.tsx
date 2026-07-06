@@ -1,5 +1,5 @@
-import { Button } from "@/components/ui/button";
-import { HiDownload } from "react-icons/hi";
+import { Button } from "@/components/ui/button"
+import { HiDownload } from "react-icons/hi"
 import {
   Dialog,
   DialogTrigger,
@@ -7,7 +7,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogDescription,
-} from "@/components/ui/dialog";
+} from "@/components/ui/dialog"
 
 export const ResumeDialog = () => {
   return (
@@ -15,7 +15,7 @@ export const ResumeDialog = () => {
       <DialogTrigger asChild>
         <Button
           variant="outline"
-          className="rounded-md h-8 px-3 text-xs sm:h-9 sm:px-4 sm:py-2 sm:text-sm"
+          className="h-8 rounded-md px-3 text-xs sm:h-9 sm:px-4 sm:py-2 sm:text-sm"
         >
           Resume
         </Button>
@@ -37,7 +37,7 @@ export const ResumeDialog = () => {
             </Button>
             <HiDownload
               size={18}
-              className="group-hover:text-accent group-hover:scale-125"
+              className="group-hover:scale-125 group-hover:text-accent"
             />
           </a>
           <a
@@ -51,11 +51,11 @@ export const ResumeDialog = () => {
             </Button>
             <HiDownload
               size={18}
-              className="group-hover:text-accent group-hover:scale-125"
+              className="group-hover:scale-125 group-hover:text-accent"
             />
           </a>
         </div>
       </DialogContent>
     </Dialog>
-  );
-};
+  )
+}

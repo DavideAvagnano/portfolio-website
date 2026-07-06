@@ -158,9 +158,15 @@ Obiettivo: il pezzo forte, senza svendere i case study.
 
 ## Fase 7 — Pulizia & chiusura
 
-- [ ] Rimuovere asset morti: foto `src/assets/*` (se non più usate) → eliminare la
-      cartella. Vecchi `data/*` non usati. Icone/deps non più necessarie (valutare
-      `react-icons` se sostituito da `lucide`).
+- [ ] **Prune componenti shadcn**: in Fase 1 sono stati aggiunti **tutti i ~60**
+      componenti (+ deps pesanti: recharts, embla-carousel, react-day-picker, cmdk,
+      react-resizable-panels, date-fns, sonner). Tenere **solo quelli usati**,
+      rimuovere gli altri e le rispettive deps. _(Runtime già ok: i non usati sono
+      tree-shaken; questo è cleanup di repo/deps.)_
+- [ ] Rimuovere asset/data morti: foto `src/assets/*` (foto tolta dal design) →
+      eliminare la cartella. `src/data/*` (`navbar-data`, `projects-data`,
+      `skills-data`) sono dead code, sostituiti in Fase 4/5 → rimuovere. **`react-icons`**
+      è usato solo da `skills-data` → rimuovibile una volta tolto quel file.
 - [ ] Rimuovere componenti/file legacy rimasti.
 - [ ] `typecheck` + `lint` + `build` verdi; smoke test **entrambe le lingue × entrambi
       i temi**; form contatti.
@@ -178,10 +184,23 @@ Obiettivo: il pezzo forte, senza svendere i case study.
 3. Ogni fase resta **buildabile**; se una sezione vecchia va rimossa prima della
    nuova, usare stub temporanei per non rompere il build.
 
-## Dipendenze / cose da Davide (già soddisfatte salvo font)
+## Dipendenze / cose da Davide
 
 - [x] PDF CV IT/EN in `public/`.
 - [x] Anno inizio software (~2023) confermato.
 - [x] Side projects scelti (Authentication App, Dashboard Management).
-- [ ] **Font**: scelta finale a vista (proviamo A/B/C durante Fase 1).
+- [x] **Font deciso: coppia A (Fraunces + Inter)** — attiva in `src/lib/fonts.ts`
+      (`ACTIVE = "A"`; B/C restano provabili cambiando quella riga).
 - [ ] (Opzionale) screenshot Baaarber **solo con permesso cliente** (parte public).
+
+---
+
+## Stato avanzamento (per riprendere dopo un compact)
+
+- ✅ **Fase 1 FATTA e committata** (`fbbac5d`): design system Base UI (base-nova,
+  zinc), suite shadcn completa, tema light/dark, font A, shell minimale, pulizia
+  vecchie sezioni.
+- 🔜 **Prossima: Fase 2 — i18n (next-intl)** (IT default + EN, route `[locale]`).
+- Le decisioni e i contenuti sono in questo file + `redesign-goals.md` +
+  `site-content.md`; le regole di lavoro in `CLAUDE.md`. Reference visiva in
+  `private/` (gitignored).

@@ -14,19 +14,19 @@
 
 ## 1. Stato attuale vs target
 
-| Area | Attuale | Target (rif. baaarber) |
-|---|---|---|
-| Next.js | `^15.0.3` (installato 15.5.20) | `16.x` |
-| React | `^18.3.1` | `19.x` |
-| Tailwind CSS | `3.4.x` (config JS) | `4.x` (config CSS-first in `globals.css`) |
-| PostCSS plugin | `tailwindcss` | `@tailwindcss/postcss` |
-| ESLint | legacy `.eslintrc.json` | flat config `eslint.config.mjs` |
-| Struttura sorgenti | flat (`app/`, `components/`, `lib/`…) | `src/` con alias `@/* → ./src/*` |
-| Animazioni | `framer-motion` v11 | pacchetto `motion` (nuovo nome di framer-motion) |
-| Animazioni CSS | `tailwindcss-animate` | `tw-animate-css` (variante v4) |
-| Radix | pacchetti singoli `@radix-ui/react-*` | pacchetto unico `radix-ui` |
-| Zod | `^3.24` | `^4.x` |
-| Dipendenze morte | `axios`, `xml2js`, `dotenv` (non usate) | rimosse |
+| Area               | Attuale                                 | Target (rif. baaarber)                           |
+| ------------------ | --------------------------------------- | ------------------------------------------------ |
+| Next.js            | `^15.0.3` (installato 15.5.20)          | `16.x`                                           |
+| React              | `^18.3.1`                               | `19.x`                                           |
+| Tailwind CSS       | `3.4.x` (config JS)                     | `4.x` (config CSS-first in `globals.css`)        |
+| PostCSS plugin     | `tailwindcss`                           | `@tailwindcss/postcss`                           |
+| ESLint             | legacy `.eslintrc.json`                 | flat config `eslint.config.mjs`                  |
+| Struttura sorgenti | flat (`app/`, `components/`, `lib/`…)   | `src/` con alias `@/* → ./src/*`                 |
+| Animazioni         | `framer-motion` v11                     | pacchetto `motion` (nuovo nome di framer-motion) |
+| Animazioni CSS     | `tailwindcss-animate`                   | `tw-animate-css` (variante v4)                   |
+| Radix              | pacchetti singoli `@radix-ui/react-*`   | pacchetto unico `radix-ui`                       |
+| Zod                | `^3.24`                                 | `^4.x`                                           |
+| Dipendenze morte   | `axios`, `xml2js`, `dotenv` (non usate) | rimosse                                          |
 
 ---
 
@@ -47,6 +47,7 @@
 > Comando di verifica base dopo ogni fase: `npm run typecheck && npm run lint && npm run build`.
 
 ### Fase 0 — Preparazione ✅ (parziale, già fatto)
+
 - [x] Spostati su branch `development`
 - [x] Build/lint/format funzionanti sullo stato attuale (baseline verde)
 - [x] Vulnerabilità npm ridotte (23 → 2 residue, tooling interno Next)
@@ -55,7 +56,9 @@
 - [ ] Aggiungere `.nvmrc` con la versione Node (>= 20, consigliato 22)
 
 ### Fase 1 — Riorganizzazione in `src/` ✅ FATTA
+
 Spostati (con `git mv`, history preservata):
+
 - [x] `app/` → `src/app/`
 - [x] `components/` → `src/components/`
 - [x] `lib/` → `src/lib/`
@@ -74,6 +77,7 @@ Spostati (con `git mv`, history preservata):
 > Nota: `public/`, `next.config.ts`, i file di config e `credentials.json` restano in root.
 
 ### Fase 2 — Upgrade core: Next 16 + React 19
+
 - [ ] `npm i next@latest react@latest react-dom@latest`
 - [ ] `npm i -D eslint-config-next@latest @types/react@latest @types/react-dom@latest @types/node@latest`
 - [ ] Eseguire il codemod ufficiale: `npx @next/codemod@latest upgrade latest`
@@ -82,6 +86,7 @@ Spostati (con `git mv`, history preservata):
 - [ ] Rigenerare `next-env.d.ts` (auto al primo `next dev`/`build`)
 
 ### Fase 3 — Tailwind v3 → v4
+
 - [ ] `npm rm tailwindcss-animate tailwind.config.ts` deps; `npm i tailwindcss@latest @tailwindcss/postcss tw-animate-css`
 - [ ] `postcss.config.mjs`: sostituire `tailwindcss: {}` → `"@tailwindcss/postcss": {}`
 - [ ] **Eliminare `tailwind.config.ts`** e portare il tema dentro `src/app/globals.css`:
@@ -94,12 +99,14 @@ Spostati (con `git mv`, history preservata):
 - [ ] Verificare visivamente ogni sezione (intro, about, skills, projects, contact, footer): i colori custom (`foreground-light`, `bg-lightest`, ecc.) devono rendere identici.
 
 ### Fase 4 — Tooling (ESLint flat + prettier + script)
+
 - [ ] Rimuovere `.eslintrc.json`; creare `eslint.config.mjs` (copiare struttura baaarber: `defineConfig([...nextVitals, ...nextTs, globalIgnores([...])])`)
 - [ ] `package.json` scripts: `"lint": "eslint"` (non più `next lint`, deprecato in Next 16), aggiungere `"typecheck": "tsc --noEmit"`
 - [ ] Verificare `.prettierignore` (aggiungere `.next/`, `node_modules/`, `coverage/`, `package-lock.json`)
 - [ ] `npm run format` per riformattare tutto il codice spostato in `src/`
 
 ### Fase 5 — Pulizia & aggiornamento librerie
+
 - [ ] **Rimuovere dipendenze morte**: `axios`, `xml2js`, `@types/xml2js`, `dotenv` (nessun uso nel codice)
 - [ ] **`framer-motion` → `motion`**: `npm rm framer-motion && npm i motion`. Aggiornare gli import in `project-category.tsx`, `project-card.tsx`, `skill-category.tsx`, `single-skill.tsx`: `import { motion } from "framer-motion"` → `import { motion } from "motion/react"`. API compatibile.
 - [ ] **Radix unificato** (opzionale ma consigliato): `npm rm @radix-ui/react-dialog @radix-ui/react-label @radix-ui/react-slot && npm i radix-ui`. Aggiornare import in `ui/dialog.tsx`, `ui/label.tsx`, `ui/button.tsx` (Slot): `import * as DialogPrimitive from "@radix-ui/react-dialog"` → `import { Dialog as DialogPrimitive } from "radix-ui"`.
@@ -109,7 +116,9 @@ Spostati (con `git mv`, history preservata):
 - [ ] `npm audit` finale: obiettivo 0 vulnerabilità high/critical.
 
 ### Fase 6 — Route API, credenziali, cleanup endpoint di test
+
 > Nodo aperto: le route `/api/gsc` e `/api/gsc-test` leggono `credentials.json` da disco, che **non esiste su Vercel** → in produzione vanno in 500. Inoltre sono pubbliche e senza auth, e `gsc-test` è un duplicato con URL hardcoded.
+
 - [ ] **Decisione**: le route GSC servono ancora? (attualmente: da chiarire — l'utente non ricorda lo scopo)
   - Se **NO** → rimuovere `src/app/api/gsc`, `src/app/api/gsc-test`, `src/app/test`, e le dep `googleapis`
   - Se **SÌ** → migrare le credenziali da file su disco a variabile d'ambiente (`GOOGLE_APPLICATION_CREDENTIALS` come JSON in env, parsato in memoria), proteggere gli endpoint, rimuovere l'URL hardcoded in `gsc-test:21` (usare `process.env.SITE_URL`), deduplicare le due route
@@ -117,6 +126,7 @@ Spostati (con `git mv`, history preservata):
 - [ ] Spostare `google34c2b65274804d71.html` (verifica GSC) — resta in `public/`, OK
 
 ### Fase 7 — SEO, accessibilità, finiture (dal `notes.txt`)
+
 - [ ] **Pagina 404**: creare `src/app/not-found.tsx`
 - [ ] **Sitemap**: `src/app/sitemap.ts` (API nativa Next, sostituisce l'approccio manuale)
 - [ ] **Robots**: `src/app/robots.ts`
@@ -127,6 +137,7 @@ Spostati (con `git mv`, history preservata):
 - [ ] Rimuovere `notes.txt` una volta esaurita la TODO (contenuto migrato qui)
 
 ### Fase 8 — Verifica finale & chiusura
+
 - [ ] `npm run typecheck` pulito
 - [ ] `npm run lint` pulito
 - [ ] `npm run build` verde

@@ -1,70 +1,88 @@
-# Davide Avagnano's Portfolio Website
+# Davide Avagnano — Portfolio Website
 
-Welcome to my personal portfolio website, where I showcase my projects, skills, and experience in web development. This site is built using the latest technologies to deliver a smooth, aesthetic, and high-performance user experience. Below, you will find detailed information about the technologies used, features of the site, and deployment details.
+My personal portfolio: projects, skills, and experience as a software engineer.
+A single-page site built with a modern React/Next.js stack, focused on
+performance, accessibility, and SEO.
 
-## Features
+**Live:** [portfolio-website-blond-phi.vercel.app](https://portfolio-website-blond-phi.vercel.app/)
 
-- **Built with Next.js 15**: This site utilizes Next.js for its powerful SSR (Server-Side Rendering) capabilities, allowing for fast load times and SEO-friendly content. The server-side rendering helps in improving performance by rendering pages at request time.
-- **Server Actions**: The site integrates server actions to handle form submissions securely and efficiently, ensuring data is validated and processed on the server before any actions are taken.
-- **ShadCN**: A design system that provides a consistent and modular approach to styling components across the site. It simplifies the development process and maintains a clean, organized codebase.
-- **Zod for Form Validation**: For the contact form, I utilized Zod for robust form validation. This ensures all user inputs are properly validated before submission, and it provides clear feedback to the user.
-- **Email Sending with Resend**: The contact form integrates with Resend to send emails directly from the site. It provides a seamless experience for users and ensures that messages are sent securely.
-- **High Performance**: The site has been optimized for performance, scoring high on tools like Google Lighthouse for speed, accessibility, and SEO.
+## Tech stack
 
-## Projects and Skills Showcase
+| Area          | Stack                                              |
+| ------------- | -------------------------------------------------- |
+| Framework     | Next.js 16 (App Router, Turbopack), React 19       |
+| Language      | TypeScript (strict)                                |
+| Styling       | Tailwind CSS v4 (CSS-first config), tw-animate-css |
+| UI components | shadcn/ui + Radix UI                               |
+| Animations    | motion (ex framer-motion)                          |
+| Forms         | react-hook-form + Zod v4 validation                |
+| Email         | Resend (via Server Actions)                        |
+| Icons         | lucide-react, react-icons                          |
+| Tooling       | ESLint (flat config), Prettier                     |
+| Hosting       | Vercel                                             |
 
-- **Project Overviews**: Detailed descriptions of each project, highlighting the technologies used, challenges faced, and the final outcome.
-- **Skills**: A section dedicated to my skills in web development, including front-end technologies (Next.js, TypeScript, Tailwind CSS), backend technologies (Node.js, Prisma, PostgreSQL), and more.
-- **Animations with Framer Motion**: The site features dynamic animations created using Framer Motion, enhancing user interaction and visual appeal.
+## Project structure
 
-## Deployment
+```
+src/
+  app/          # App Router: layout, page, not-found, sitemap, robots, opengraph-image
+  components/   # UI e sezioni (intro, about, skills, projects, contact, footer, navbar)
+  actions/      # Server Actions (invio email)
+  lib/          # utils, config sito (site.ts), mail
+  data/         # dati statici (nav, progetti, skill)
+  schemas/      # schemi Zod
+  assets/       # immagini importate staticamente
+  types/        # tipi condivisi
+public/         # asset statici serviti via URL
+docs/           # documentazione (migration.md)
+```
 
-- **Vercel Deployment**: The website is deployed on Vercel, leveraging its global CDN for fast and reliable hosting. This ensures that users worldwide have a smooth experience when visiting the site.
+Import alias: `@/*` → `src/*`.
 
-## Demo
+## Getting started
 
-- **Live Site**: [Portfolio Website](https://portfolio-website-blond-phi.vercel.app/)
+Requisiti: Node `22` (vedi `.nvmrc`).
 
-## GitHub Repository
-
-- **Source Code**: [GitHub Repository](https://github.com/DavideAvagnano/portfolio-website)
-
-## Getting Started
-
-To run the portfolio locally, follow these steps:
-
-1. **Clone the repository**:
+1. **Clona e installa**
 
    ```bash
    git clone https://github.com/DavideAvagnano/portfolio-website.git
-   ```
-
-2. **Navigate to the project directory**:
-
-   ```bash
    cd portfolio-website
-   ```
-
-3. **Install dependencies**:
-
-   ```bash
    npm install
    ```
 
-4. **Start the development server**:
+2. **Configura le variabili d'ambiente**: copia `.env.example` in `.env` e
+   compila i valori.
+
+   ```bash
+   cp .env.example .env
+   ```
+
+   | Variabile        | Descrizione                                                  |
+   | ---------------- | ------------------------------------------------------------ |
+   | `RESEND_API_KEY` | Chiave API [Resend](https://resend.com) per il form contatti |
+   | `SITE_URL`       | URL di produzione (metadata, sitemap, robots, OG image)      |
+
+3. **Avvia il dev server**
 
    ```bash
    npm run dev
    ```
 
-5. **Open the site** in your browser:
-   ```
-   http://localhost:3000
-   ```
+   Apri [http://localhost:3000](http://localhost:3000).
 
-## Acknowledgements
+## Scripts
 
-- Special thanks to the developers and contributors of Next.js, ShadCN, Framer Motion, Zod, and Resend for making this project possible.
-- Inspired by various portfolio websites, this site aims to deliver a modern and functional experience for both personal and professional use.
+| Comando             | Azione                                 |
+| ------------------- | -------------------------------------- |
+| `npm run dev`       | Dev server (Turbopack)                 |
+| `npm run build`     | Build di produzione                    |
+| `npm run start`     | Avvia la build di produzione           |
+| `npm run lint`      | ESLint                                 |
+| `npm run typecheck` | Type-check TypeScript (`tsc --noEmit`) |
+| `npm run format`    | Formatta il codice con Prettier        |
 
-Feel free to explore, contact me through the form provided, or reach out via GitHub for any inquiries or collaborations.
+## Deployment
+
+Deploy su Vercel. Ricordati di impostare `RESEND_API_KEY` e `SITE_URL` tra le
+Environment Variables del progetto.

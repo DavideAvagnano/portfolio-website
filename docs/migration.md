@@ -46,14 +46,14 @@
 > Ogni fase è indipendente e verificabile. Committare a fine fase.
 > Comando di verifica base dopo ogni fase: `npm run typecheck && npm run lint && npm run build`.
 
-### Fase 0 — Preparazione ✅ (parziale, già fatto)
+### Fase 0 — Preparazione ✅ FATTA
 
 - [x] Spostati su branch `development`
 - [x] Build/lint/format funzionanti sullo stato attuale (baseline verde)
 - [x] Vulnerabilità npm ridotte (23 → 2 residue, tooling interno Next)
-- [ ] Assicurarsi che `.env`, `credentials.json` siano fuori da git (già in `.gitignore` ✔)
-- [ ] Creare `.env.example` con le sole **chiavi** (`RESEND_API_KEY`, `SITE_URL`, `GOOGLE_APPLICATION_CREDENTIALS`) senza valori
-- [ ] Aggiungere `.nvmrc` con la versione Node (>= 20, consigliato 22)
+- [x] `.env`, `credentials.json` fuori da git (già in `.gitignore` ✔)
+- [x] `.env.example` creato (`RESEND_API_KEY`, `SITE_URL`; `GOOGLE_APPLICATION_CREDENTIALS` non più necessaria dopo la rimozione GSC) + eccezione `!.env.example` in `.gitignore`
+- [x] `.nvmrc` aggiunto (Node `22`)
 
 ### Fase 1 — Riorganizzazione in `src/` ✅ FATTA
 
@@ -159,15 +159,15 @@ Eseguita con `npx @tailwindcss/upgrade` + rifiniture manuali.
 - [ ] **Non fatto (design, rimandato)**: animazioni di ingresso (intro/navbar, about/immagine, form) — restano in `notes.txt` (file personale gitignored)
 - [ ] Verifica Lighthouse (perf/SEO/a11y) — consigliata come check manuale finale
 
-### Fase 8 — Verifica finale & chiusura
+### Fase 8 — Verifica finale & chiusura ✅ FATTA (pronto al merge)
 
-- [ ] `npm run typecheck` pulito
-- [ ] `npm run lint` pulito
-- [ ] `npm run build` verde
-- [ ] `npm run dev` — smoke test manuale di tutte le sezioni + form contatti (Resend)
-- [ ] `npm audit` — 0 high/critical
-- [ ] Aggiornare `README.md` (stack, comandi, setup env)
-- [ ] Merge `development` → `main`
+- [x] `npm run typecheck` pulito
+- [x] `npm run lint` pulito
+- [x] `npm run build` verde (route: `/`, `/_not-found`, `/opengraph-image`, `/robots.txt`, `/sitemap.xml`)
+- [x] Smoke test dev di tutte le sezioni + endpoint SEO (form Resend: **da testare dall'utente** con la propria `RESEND_API_KEY`)
+- [x] `npm audit`: 0 high/critical (2 moderate residue = postcss dentro Next, non risolvibili)
+- [x] `README.md` aggiornato (stack, struttura, comandi, setup env)
+- [ ] **Merge `development` → `main`** ← ultimo passo, a cura dell'utente
 
 ---
 

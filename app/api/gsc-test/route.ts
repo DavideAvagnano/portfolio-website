@@ -1,6 +1,5 @@
 import { google } from "googleapis";
 import { NextResponse } from "next/server";
-import fs from "fs";
 import path from "path";
 
 // Percorso del file credentials.json
@@ -17,7 +16,7 @@ async function authenticate() {
 }
 
 // Funzione per ottenere la sitemap dalla Google Search Console API
-async function getSitemapUrls(auth: any) {
+async function getSitemapUrls(auth: Awaited<ReturnType<typeof authenticate>>) {
   const searchConsole = google.webmasters({ version: "v3", auth });
   const siteUrl = "https://portfolio-website-blond-phi.vercel.app/"; // Modifica con il tuo dominio
 
@@ -25,9 +24,12 @@ async function getSitemapUrls(auth: any) {
     const response = await searchConsole.sitemaps.list({ siteUrl });
     const sitemaps = response.data.sitemap || [];
 
+    console.log(response);
+
     return sitemaps.map((s) => s.path); // Restituisce gli URL delle sitemap
-  } catch (error: any) {
-    console.error("Errore nel recupero della sitemap:", error.message);
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    console.error("Errore nel recupero della sitemap:", message);
     throw new Error("Errore nel recupero della sitemap");
   }
 }
@@ -40,6 +42,7 @@ export async function GET() {
 
     return NextResponse.json({ sitemaps: sitemapUrls });
   } catch (error) {
+    console.log(error);
     return NextResponse.json(
       { error: "Impossibile ottenere la sitemap" },
       { status: 500 }

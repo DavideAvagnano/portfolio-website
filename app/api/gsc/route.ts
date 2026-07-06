@@ -21,7 +21,10 @@ async function authenticateGSC() {
 }
 
 // Funzione per recuperare gli errori di scansione
-async function getCrawlErrors(searchConsole: any, siteUrl: string) {
+async function getCrawlErrors(
+  searchConsole: Awaited<ReturnType<typeof authenticateGSC>>,
+  siteUrl: string
+) {
   try {
     const crawlErrors = await searchConsole.sites.get({
       siteUrl,
@@ -35,7 +38,10 @@ async function getCrawlErrors(searchConsole: any, siteUrl: string) {
 }
 
 // Funzione per recuperare l'elenco delle pagine indicizzate
-async function getIndexedPages(searchConsole: any, siteUrl: string) {
+async function getIndexedPages(
+  searchConsole: Awaited<ReturnType<typeof authenticateGSC>>,
+  siteUrl: string
+) {
   const sitemaps = await searchConsole.sitemaps.list({
     siteUrl,
   });
@@ -60,10 +66,11 @@ export async function GET(): Promise<NextResponse> {
       crawlErrors: crawlErrors,
       indexedPages: indexedPages,
     });
-  } catch (error: any) {
+  } catch (error) {
     console.error("Errore API GSC:", error);
+    const message = error instanceof Error ? error.message : String(error);
     return NextResponse.json(
-      { success: false, error: error.message },
+      { success: false, error: message },
       { status: 500 }
     );
   }

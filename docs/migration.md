@@ -133,15 +133,18 @@ Eseguita con `npx @tailwindcss/upgrade` + rifiniture manuali.
 - [ ] (Opzionale, **non fatto**) Consolidare le icone: si usano ancora sia `react-icons` che `lucide-react`. Da valutare in futuro.
 - [x] `npm audit`: 0 high/critical. Restano 2 moderate (postcss annidato dentro Next, non risolvibili senza downgrade).
 
-### Fase 6 — Route API, credenziali, cleanup endpoint di test
+### Fase 6 — Route API, credenziali, cleanup endpoint di test ✅ FATTA
 
-> Nodo aperto: le route `/api/gsc` e `/api/gsc-test` leggono `credentials.json` da disco, che **non esiste su Vercel** → in produzione vanno in 500. Inoltre sono pubbliche e senza auth, e `gsc-test` è un duplicato con URL hardcoded.
+> **Decisione utente: RIMUOVERE.** Le route GSC erano esperimenti SEO di scopo non ricordato, andavano in 500 in prod (leggevano `credentials.json` da disco, assente su Vercel) ed erano pubbliche/senza auth.
 
-- [ ] **Decisione**: le route GSC servono ancora? (attualmente: da chiarire — l'utente non ricorda lo scopo)
-  - Se **NO** → rimuovere `src/app/api/gsc`, `src/app/api/gsc-test`, `src/app/test`, e le dep `googleapis`
-  - Se **SÌ** → migrare le credenziali da file su disco a variabile d'ambiente (`GOOGLE_APPLICATION_CREDENTIALS` come JSON in env, parsato in memoria), proteggere gli endpoint, rimuovere l'URL hardcoded in `gsc-test:21` (usare `process.env.SITE_URL`), deduplicare le due route
-- [ ] Rimuovere `src/app/test/page.tsx` (placeholder "Test" pubblico) in ogni caso
-- [ ] Spostare `google34c2b65274804d71.html` (verifica GSC) — resta in `public/`, OK
+- [x] Rimosse `src/app/api/gsc/` e `src/app/api/gsc-test/`
+- [x] Rimossa `src/app/test/` (placeholder pubblico)
+- [x] Rimossa dipendenza `googleapis` (e con essa le vulnerabilità transitive uuid/gaxios)
+- [x] Verificato: `typecheck` + `lint` + `build` verdi; route residue solo `/` e `/_not-found`
+- [ ] **Da fare a mano dall'utente** (file gitignored / segreti, non toccati da Claude):
+  - `credentials.json` in root: ora inutilizzato → eliminabile per igiene (è una chiave service-account)
+  - `.env`: `GOOGLE_APPLICATION_CREDENTIALS` ora inutile; `SITE_URL` verrà riusato in Fase 7 (metadataBase/sitemap)
+  - `public/google34c2b65274804d71.html`: verifica proprietà GSC (indipendente dalle route) → tienilo se usi ancora la console GSC, altrimenti eliminabile
 
 ### Fase 7 — SEO, accessibilità, finiture (dal `notes.txt`)
 

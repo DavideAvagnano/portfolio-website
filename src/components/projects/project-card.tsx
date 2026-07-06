@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { motion } from "framer-motion"
+import { motion } from "motion/react"
 import { projectsData } from "@/data/projects-data"
 
 import { LuFolderCode } from "react-icons/lu"

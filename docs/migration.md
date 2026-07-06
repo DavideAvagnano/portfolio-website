@@ -76,14 +76,20 @@ Spostati (con `git mv`, history preservata):
 
 > Nota: `public/`, `next.config.ts`, i file di config e `credentials.json` restano in root.
 
-### Fase 2 — Upgrade core: Next 16 + React 19
+### Fase 2 — Upgrade core: Next 16 + React 19 ✅ FATTA (insieme a Fase 4)
 
-- [ ] `npm i next@latest react@latest react-dom@latest`
-- [ ] `npm i -D eslint-config-next@latest @types/react@latest @types/react-dom@latest @types/node@latest`
-- [ ] Eseguire il codemod ufficiale: `npx @next/codemod@latest upgrade latest`
-- [ ] **Breaking React 19**: verificare i tipi `React.ReactNode`/ref; con React 19 le `ref` sono prop normali (no più `forwardRef` obbligatorio) — i componenti `ui/` shadcn potrebbero avere warning.
-- [ ] **Breaking Next 16**: `params`/`searchParams` nelle pagine sono `Promise` (async). Le route API GSC usano `GET()` senza params → OK. Controllare eventuali `cookies()`/`headers()` (qui non usati).
-- [ ] Rigenerare `next-env.d.ts` (auto al primo `next dev`/`build`)
+- [x] `next@16.2`, `react@19.2`, `react-dom@19.2` installati
+- [x] `eslint-config-next@16.2`, `@types/react@19`, `@types/react-dom@19`, `@types/node` aggiornati
+- [x] `tsconfig` `jsx: preserve → react-jsx` (auto, allineato a baaarber)
+- [x] **React 19**: nessun `useFormState`/`useFormStatus`/`propTypes`/`defaultProps` nel codice; `forwardRef` (shadcn `ui/`) resta valido. Form contatti usa `useTransition` → compatibile.
+- [x] **Next 16**: nessuna pagina con `params`/`searchParams`/`cookies`/`headers` → nessun breaking async.
+- [x] `next-env.d.ts` rigenerato al build
+- [x] Verificato: `typecheck` + `lint` + `build` verdi; **smoke test dev**: `/` 200 con tutte le sezioni, `/test` 200, `/api/gsc` 200 (locale), nessun warning runtime nel log
+
+> **Anticipato da Fase 5** (accoppiato all'upgrade React 19):
+>
+> - [x] `framer-motion` → `motion@12` (peer di framer-motion 11 bloccava React 19). Import aggiornati in `project-card`, `project-category`, `skill-category`, `single-skill` → `motion/react`.
+> - [x] Radix aggiornati all'ultima (`react-dialog`, `react-label`, `react-slot`) per compat React 19 → eliminati i peer "invalid". L'unificazione nel pacchetto unico `radix-ui` resta in Fase 5.
 
 ### Fase 3 — Tailwind v3 → v4
 
@@ -98,18 +104,21 @@ Spostati (con `git mv`, history preservata):
 - [ ] **`tailwindcss-motion`**: la versione `0.4.x` supporta v4 via `@plugin`. Aggiungere `@plugin "tailwindcss-motion";` in `globals.css` (usato in `intro.tsx`). In alternativa rimpiazzare le classi `motion-*` con animazioni `motion` (framer) e droppare il plugin.
 - [ ] Verificare visivamente ogni sezione (intro, about, skills, projects, contact, footer): i colori custom (`foreground-light`, `bg-lightest`, ecc.) devono rendere identici.
 
-### Fase 4 — Tooling (ESLint flat + prettier + script)
+### Fase 4 — Tooling (ESLint flat + prettier + script) ✅ FATTA
 
-- [ ] Rimuovere `.eslintrc.json`; creare `eslint.config.mjs` (copiare struttura baaarber: `defineConfig([...nextVitals, ...nextTs, globalIgnores([...])])`)
-- [ ] `package.json` scripts: `"lint": "eslint"` (non più `next lint`, deprecato in Next 16), aggiungere `"typecheck": "tsc --noEmit"`
-- [ ] Verificare `.prettierignore` (aggiungere `.next/`, `node_modules/`, `coverage/`, `package-lock.json`)
-- [ ] `npm run format` per riformattare tutto il codice spostato in `src/`
+> Accoppiata a Fase 2: Next 16 **rimuove** `next lint`, quindi la flat config è obbligatoria. Inoltre i subpath flat di `eslint-config-next` (`/core-web-vitals`, `/typescript`) esistono solo da v16 → impossibile farla prima dell'upgrade.
+
+- [x] Rimosso `.eslintrc.json`; creato `eslint.config.mjs` (struttura baaarber: `defineConfig([...nextVitals, ...nextTs, globalIgnores([...])])`)
+- [x] `package.json`: `"lint": "eslint"` (`typecheck` già presente)
+- [x] `.prettierignore`: aggiunto `package-lock.json` (gli altri già presenti)
+- [x] `npm run format` eseguito
+- [x] Effetto collaterale: la flat config lint-a anche `tailwind.config.ts` → convertiti i `require()` in import ESM + shim `src/types/tailwindcss-motion.d.ts` (entrambi rimossi in Fase 3 con l'eliminazione del config)
 
 ### Fase 5 — Pulizia & aggiornamento librerie
 
 - [ ] **Rimuovere dipendenze morte**: `axios`, `xml2js`, `@types/xml2js`, `dotenv` (nessun uso nel codice)
-- [ ] **`framer-motion` → `motion`**: `npm rm framer-motion && npm i motion`. Aggiornare gli import in `project-category.tsx`, `project-card.tsx`, `skill-category.tsx`, `single-skill.tsx`: `import { motion } from "framer-motion"` → `import { motion } from "motion/react"`. API compatibile.
-- [ ] **Radix unificato** (opzionale ma consigliato): `npm rm @radix-ui/react-dialog @radix-ui/react-label @radix-ui/react-slot && npm i radix-ui`. Aggiornare import in `ui/dialog.tsx`, `ui/label.tsx`, `ui/button.tsx` (Slot): `import * as DialogPrimitive from "@radix-ui/react-dialog"` → `import { Dialog as DialogPrimitive } from "radix-ui"`.
+- [x] ~~**`framer-motion` → `motion`**~~ **FATTO in Fase 2** (era bloccante per React 19). Import aggiornati a `motion/react`.
+- [x] Radix aggiornati all'ultima per React 19 (Fase 2). **Resta da fare**: unificazione nel pacchetto unico `radix-ui` (`npm rm @radix-ui/react-* && npm i radix-ui`, aggiornare import in `ui/dialog.tsx`, `ui/label.tsx`, `ui/button.tsx`).
 - [ ] **Zod v3 → v4**: `npm i zod@latest`. Verificare `schemas/index.ts` e `@hookform/resolvers` (aggiornare a `^5` per compat zod4/RHF7). API zod per lo più compatibile; controllare `z.infer`.
 - [ ] Aggiornare le altre minori all'ultima: `lucide-react`, `react-hook-form`, `tailwind-merge` (→ v3), `clsx`, `class-variance-authority`.
 - [ ] (Opzionale) Consolidare le icone: attualmente si usano sia `react-icons` che `lucide-react`. Valutare se standardizzare su `lucide-react`.

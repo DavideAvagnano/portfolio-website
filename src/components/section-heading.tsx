@@ -18,6 +18,7 @@ export const SectionHeading = ({ label, hasImg }: SectionHeadingProps) => {
             src={image}
             alt="Davide's Image, s software engineer with a background in aerospace engineering"
             fill
+            sizes="(min-width: 640px) 112px, 80px"
             className="rounded-full bg-background transition-all hover:scale-105"
           />
         </div>

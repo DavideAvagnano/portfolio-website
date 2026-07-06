@@ -47,6 +47,7 @@ export const About = () => {
             src={image}
             alt="Davide's Image, s software engineer with a background in aerospace engineering"
             fill
+            sizes="(min-width: 1024px) 341px, 33vw"
             className="object-cover object-top transition-all hover:-translate-y-4"
           />
         </div>

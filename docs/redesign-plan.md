@@ -33,29 +33,41 @@ Inter / B Geist / C Space Grotesk+Inter).
 
 ---
 
-## Fase 1 — Fondamenta del design system (globals.css + shadcn + font + tema)
+## Fase 1 — Fondamenta del design system (globals.css + font + tema) ✅ FATTA
 
 Obiettivo: base visiva pulita e monocroma, tema light/dark funzionante, font pronto.
 
-- [ ] **Riscrivere `src/app/globals.css`** sul modello `~/repos/baaarber/src/app/globals.css`:
-      token shadcn v4 in **OKLCH**, base **neutral monocroma**, `@theme inline`,
-      `:root` = light, `.dark` = dark, `@custom-variant dark`. Tenere solo i token utili
-      (scartare chart/sidebar se non usati). Rimuovere l'attuale `--animate-blink` (cursore).
-- [ ] **Reset shadcn**: aggiornare `components.json` (baseColor neutral); **cancellare**
-      gli `ui/` attuali e **ri-aggiungere solo i necessari**: `button`, `dialog` (o
-      `drawer`/`sheet` per il modale progetti), `form`, `input`, `textarea`, `label`,
-      `dropdown-menu` (per i toggle lingua/tema).
-- [ ] **Font** via `next/font` (partiamo con **A: Fraunces + Inter**; predisporre lo
-      switch rapido per provare B/C a vista). Aggiornare `layout.tsx`.
-- [ ] **next-themes**: installare, `ThemeProvider` (attribute `class`,
-      `defaultTheme="system"`, `enableSystem`, fallback dark), gestione no-flash;
-      spostare i valori dark da `:root` a `.dark`.
-- [ ] Un **theme toggle** minimale (icona lucide) di prova.
-- [ ] Verifica: `typecheck` + `lint` + `build` verdi; light/dark switchano puliti.
+- [x] **`globals.css` riscritto** (modello baaarber): token shadcn v4 **OKLCH**,
+      **neutral monocromo**, `@theme inline`, `:root` = light, `.dark` = dark,
+      `@custom-variant dark`. Rimossi token inutili (chart/sidebar) e `--animate-blink`.
+- [x] **Font** via `next/font`: **Fraunces** (display, `--font-serif`) + **Inter**
+      (testo, `--font-sans`) in `layout.tsx`. _(Coppia A; switch a B/C banale a vista.)_
+- [x] **next-themes**: `ThemeProvider` (`attribute="class"`, `defaultTheme="system"`,
+      `enableSystem`, `disableTransitionOnChange`), `suppressHydrationWarning`.
+- [x] **ModeToggle** (icona lucide) guidato da CSS `.dark` (niente stato → niente
+      hydration mismatch / niente `react-hooks/set-state-in-effect`).
+- [x] **Shell minimale** (`page.tsx`) + `not-found.tsx` sui nuovi token.
+- [x] Verifica: `typecheck` + `lint` + `build` verdi; smoke dev (home 200, font ok,
+      no errori/hydration).
 
-> ⚠️ Rischio: la ricostruzione shadcn tocca tutti i componenti che importano da
-> `@/components/ui`. Le sezioni vecchie verranno comunque riscritte (Fasi 3-5), ma
-> tenere il build verde a ogni step (eventuale stub temporaneo).
+**Pivot importante — shadcn ora su Base UI:** il nuovo preset shadcn
+(`shadcn init --preset … --template next`) usa **Base UI** (`@base-ui/react`), non
+più Radix. Colto al volo (siamo a Fase 1, costo minimo):
+
+- Deps: `+@base-ui/react +shadcn` (quest'ultimo serve per `@import "shadcn/tailwind.css"`),
+  `−radix-ui`. Base color **zinc**, stile **base-nova**.
+- `globals.css`, `components.json` e `ui/button.tsx` allineati al preset (valori zinc,
+  set token completo, scala radius). Font nostri: **Fraunces** (`--font-heading`) +
+  **Inter** (`--font-sans`).
+- **Base UI ≠ Radix**: niente `asChild`/`Slot` → si usa il prop **`render`**
+  (es. `<Button render={<Link/>}>` nella 404).
+- **Pulizia (clean slate)**: rimosse TUTTE le vecchie sezioni + i componenti `ui/`
+  radix. Restano `theme-provider`, `mode-toggle`, `ui/button`. Logica riusabile
+  tenuta (`actions/`, `schemas/`, `lib/`, `data/`, `assets/`).
+
+**Altre deviazioni:**
+
+- **`opengraph-image`** ancora vecchio stile (navy/mint) → aggiornamento in Fase 6.
 
 ---
 

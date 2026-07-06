@@ -1,14 +1,10 @@
 import type { Metadata } from "next"
-import { Poppins } from "next/font/google"
 import "./globals.css"
 
 import { siteConfig } from "@/lib/site"
-import { Navbar } from "@/components/navbar/navbar"
-
-const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-})
+import { fontVariables } from "@/lib/fonts"
+import { ThemeProvider } from "@/components/theme-provider"
+import { cn } from "@/lib/utils"
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -53,10 +49,13 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
-      <body className={poppins.className}>
-        <Navbar />
-        {children}
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={cn(fontVariables, "antialiased")}
+    >
+      <body>
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   )

@@ -40,8 +40,12 @@ npm run format      # prettier (prima del commit)
 - **Next.js 16** (App Router/RSC, Turbopack), **React 19**, **TypeScript strict**.
 - **Tailwind CSS v4** — config **CSS-first** in `src/app/globals.css`
   (`@theme`, `@custom-variant dark`). **Non** esiste `tailwind.config.ts`.
-- **shadcn/ui** + **radix-ui** (pacchetto unificato: `Slot` → `Slot.Root`),
-  **motion** (non framer-motion), **react-hook-form** + **Zod v4**, **Resend**.
+- **shadcn/ui** su **Base UI** (`@base-ui/react`) — stile `base-nova`, base color
+  `zinc`. **Non** Radix (`asChild`/`Slot` non esistono → per il polimorfismo si usa
+  il prop **`render`**, es. `<Button render={<Link .../>}>`). `globals.css` importa
+  `shadcn/tailwind.css`.
+- **motion** (non framer-motion), **react-hook-form** + **Zod v4**, **Resend**,
+  **next-themes** (tema), **next-intl** (i18n, in arrivo).
 - Struttura **`src/`**; alias **`@/* → ./src/*`**. Asset importati staticamente in
   `src/assets`, non in `public/`.
 - **Niente `any`**: la regola ESLint `no-explicit-any` **blocca il build**.

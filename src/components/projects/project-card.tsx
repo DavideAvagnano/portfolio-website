@@ -66,13 +66,13 @@ export const ProjectCard = ({
             </div>
           </div>
 
-          <div className="flex flex-grow flex-col">
+          <div className="flex grow flex-col">
             {/* Body */}
             <div className="flex flex-col gap-3 py-8">
               <p className="text-xl font-semibold transition-all group-hover:text-accent">
                 {title}
               </p>
-              <p className="text-sm font-light leading-loose text-foreground-light">
+              <p className="text-sm leading-loose font-light text-foreground-light">
                 {description}
               </p>
             </div>

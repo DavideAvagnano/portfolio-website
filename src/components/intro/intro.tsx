@@ -14,15 +14,13 @@ export const Intro = () => {
   return (
     <section
       id="intro"
-      className="flex min-h-screen max-w-screen-sm flex-col items-center justify-center gap-5 text-center md:pt-40"
+      className="flex min-h-screen max-w-160 flex-col items-center justify-center gap-5 text-center md:pt-40"
     >
       <h1 className="flex items-center justify-center gap-2 text-4xl sm:text-6xl md:text-7xl">
         <span className="font-semibold">
           hi, <span className="text-accent">Davide</span> here.
         </span>
-        <span className="motion-preset-blink text-accent motion-duration-1500">
-          |
-        </span>
+        <span className="animate-blink text-accent">|</span>
       </h1>
       <p className="text-xl text-foreground-light sm:text-2xl md:text-[28px]">
         I build fast, scalable, and impactful web apps.

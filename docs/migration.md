@@ -91,18 +91,26 @@ Spostati (con `git mv`, history preservata):
 > - [x] `framer-motion` → `motion@12` (peer di framer-motion 11 bloccava React 19). Import aggiornati in `project-card`, `project-category`, `skill-category`, `single-skill` → `motion/react`.
 > - [x] Radix aggiornati all'ultima (`react-dialog`, `react-label`, `react-slot`) per compat React 19 → eliminati i peer "invalid". L'unificazione nel pacchetto unico `radix-ui` resta in Fase 5.
 
-### Fase 3 — Tailwind v3 → v4
+### Fase 3 — Tailwind v3 → v4 ✅ FATTA (via codemod ufficiale)
 
-- [ ] `npm rm tailwindcss-animate tailwind.config.ts` deps; `npm i tailwindcss@latest @tailwindcss/postcss tw-animate-css`
-- [ ] `postcss.config.mjs`: sostituire `tailwindcss: {}` → `"@tailwindcss/postcss": {}`
-- [ ] **Eliminare `tailwind.config.ts`** e portare il tema dentro `src/app/globals.css`:
-  - `@import "tailwindcss";` + `@import "tw-animate-css";` in testa
-  - `@custom-variant dark (&:is(.dark *));` per il dark mode class-based
-  - Blocco `@theme inline { --color-background: var(--background); … }` che mappa i token attuali (`background`, `foreground`, `foreground-light`, `bg-light`, `bg-lightest`, `primary`, `accent`, `destructive`, `border`, `input`, `ring`, `card`, `popover`, `muted`, `secondary`, `chart-1..5`)
-  - I valori restano in `:root { --background: … }` (già presenti in HSL). In v4 vanno wrappati: es. `--background: hsl(216 65% 11%);` **oppure** convertiti in OKLCH come baaarber (opzionale, migliora la gestione colore)
-  - `borderRadius` → token `--radius-*` in `@theme`
-- [ ] **`tailwindcss-motion`**: la versione `0.4.x` supporta v4 via `@plugin`. Aggiungere `@plugin "tailwindcss-motion";` in `globals.css` (usato in `intro.tsx`). In alternativa rimpiazzare le classi `motion-*` con animazioni `motion` (framer) e droppare il plugin.
-- [ ] Verificare visivamente ogni sezione (intro, about, skills, projects, contact, footer): i colori custom (`foreground-light`, `bg-lightest`, ecc.) devono rendere identici.
+Eseguita con `npx @tailwindcss/upgrade` + rifiniture manuali.
+
+- [x] Tailwind `3.4` → `4.3.2`, aggiunto `@tailwindcss/postcss`, `tailwindcss-animate` → **`tw-animate-css`** (port v4-nativo)
+- [x] `postcss.config.mjs`: `tailwindcss` → `@tailwindcss/postcss` (auto dal tool)
+- [x] **`tailwind.config.ts` eliminato**; tema migrato in `src/app/globals.css`:
+  - `@import "tailwindcss";` + `@import "tw-animate-css";`
+  - `@custom-variant dark (&:is(.dark *));`
+  - `@theme { --color-*: hsl(var(--*)); ... }` — **token HSL preservati identici** (nessuna conversione OKLCH, per garantire resa uguale)
+  - valori raw in `:root { --background: 216 65% 11%; ... }` invariati
+  - `--radius-*` in `@theme`
+  - layer di compatibilità per il colore bordi (`currentcolor` è il nuovo default v4)
+- [x] Utility deprecate v4 migrate dal tool su 12 file: `h-[1px]`→`h-px`, `max-w-screen-lg`→`max-w-(--breakpoint-lg)`, `max-w-screen-sm`→`max-w-(--breakpoint-sm)`, + rename silenziosi (`rounded`/`shadow`/`ring`/`blur`)
+- [x] **`tailwindcss-motion` rimosso** (plugin NON compatibile v4: definisce una utility con selettore `@media`, rifiutata dal motore v4). Usato solo per il cursore lampeggiante dell'hero → sostituito con keyframe nativa `--animate-blink` in `@theme` (`intro.tsx`: `motion-preset-blink motion-duration-1500` → `animate-blink`)
+- [x] `.prettierrc`: `tailwindConfig` → `tailwindStylesheet: ./src/app/globals.css` (ora valido, siamo su v4)
+- [x] `components.json`: `tailwind.config` → `""`
+- [x] Verificato: `typecheck` + `lint` + `build` verdi; CSS compilato contiene tutti i token custom (`166 100% 70%`, `bg-bg-lightest`, `text-foreground-light`), la keyframe `blink` e le utility `animate-in` di tw-animate-css
+- [ ] **CHECK VISIVO UTENTE** in corso (dopo restart del dev server): confrontare intro/about/skills/projects/contact/footer con lo stato pre-v4
+- [ ] ⚠️ Da confermare a occhio: il **cursore lampeggiante** (nuova keyframe `blink 1.5s step-end` — ritmo del blink potrebbe differire leggermente dal preset originale di tailwindcss-motion; facilmente regolabile in `globals.css`)
 
 ### Fase 4 — Tooling (ESLint flat + prettier + script) ✅ FATTA
 

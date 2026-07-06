@@ -16,7 +16,7 @@ export const SkillCategory = ({
     <li className="relative">
       <button
         className={`w-28 py-3 pl-4 text-start text-xs font-light tracking-widest sm:w-44 sm:text-sm 2xl:text-base ${
-          isActive && "bg-accent/[0.03] text-accent"
+          isActive && "bg-accent/3 text-accent"
         }`}
         onClick={setActive}
       >

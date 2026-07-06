@@ -16,7 +16,7 @@ export const ProjectCategory = ({
     <li className="relative">
       <button
         className={`px-5 py-3 text-xs font-light tracking-widest sm:px-10 sm:text-sm lg:px-14 2xl:text-base ${
-          isActive && "bg-accent/[0.03] text-accent"
+          isActive && "bg-accent/3 text-accent"
         }`}
         onClick={setActive}
       >

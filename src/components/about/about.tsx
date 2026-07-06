@@ -11,11 +11,11 @@ export const About = () => {
         <div className="flex flex-col gap-5 text-foreground-light md:basis-2/3">
           <p>
             Hi! I&apos;m Davide, a{" "}
-            <span className="font-semibold italic text-foreground">
+            <span className="font-semibold text-foreground italic">
               software engineer
             </span>{" "}
             with a background in{" "}
-            <span className="font-semibold italic text-foreground">
+            <span className="font-semibold text-foreground italic">
               aerospace engineering
             </span>
             . My passion for programming started during my studies, where I

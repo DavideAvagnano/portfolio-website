@@ -22,17 +22,23 @@ Obiettivo del sito: presentarsi come **CV** a recruiter/clienti.
 
 ## 2. Prima di dire "fatto" (verifica)
 
-Dopo ogni modifica non banale, questi devono essere **verdi**:
+Dopo ogni modifica non banale, questi devono essere **verdi** — sono sicuri da
+lanciare mentre Davide ha il dev server attivo:
 
 ```bash
 npm run typecheck   # tsc --noEmit
 npm run lint        # eslint (flat config)
-npm run build       # next build
 npm run format      # prettier (prima del commit)
 ```
 
-- Per cambi con superficie a runtime, fai anche uno **smoke test** reale
-  (`npm run dev`, verifica le pagine/flussi toccati), non solo il build.
+- **`npm run build` SOLO prima del merge in `main`**, e **solo se il dev di Davide
+  è fermo** (concordarlo). `next build` e `next dev` condividono la cartella `.next`:
+  lanciarli insieme corrompe la cache di Turbopack e fa crashare il dev (500,
+  `ENOENT routes-manifest.json`, `Persisting/Compaction failed`). Durante lo
+  sviluppo NON lanciare build. Vedi memoria `no-build-during-user-dev`.
+- Gli **smoke test** dei check visivi/runtime li fa **Davide** sul suo `npm run dev`
+  (porta 3000). Se mi serve verificare il runtime, glielo chiedo o gli chiedo di
+  fermare il dev — non avvio `next start`/`next build` in parallelo.
 - Riporta i risultati onestamente: se qualcosa fallisce, dillo con l'output.
 
 ## 3. Stack & convenzioni

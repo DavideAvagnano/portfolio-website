@@ -1,5 +1,5 @@
 import Image from "next/image"
-import image from "@/public/about-face-img.png"
+import image from "@/assets/about-face-img.png"
 
 interface SectionHeadingProps {
   label: string

@@ -1,5 +1,5 @@
 import Image from "next/image"
-import image from "@/public/about-full-img-min.png"
+import image from "@/assets/about-full-img-min.png"
 import { SectionHeading } from "@/components/section-heading"
 
 export const About = () => {

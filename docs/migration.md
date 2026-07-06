@@ -122,15 +122,16 @@ Eseguita con `npx @tailwindcss/upgrade` + rifiniture manuali.
 - [x] `npm run format` eseguito
 - [x] Effetto collaterale: la flat config lint-a anche `tailwind.config.ts` → convertiti i `require()` in import ESM + shim `src/types/tailwindcss-motion.d.ts` (entrambi rimossi in Fase 3 con l'eliminazione del config)
 
-### Fase 5 — Pulizia & aggiornamento librerie
+### Fase 5 — Pulizia & aggiornamento librerie ✅ FATTA
 
-- [ ] **Rimuovere dipendenze morte**: `axios`, `xml2js`, `@types/xml2js`, `dotenv` (nessun uso nel codice)
-- [x] ~~**`framer-motion` → `motion`**~~ **FATTO in Fase 2** (era bloccante per React 19). Import aggiornati a `motion/react`.
-- [x] Radix aggiornati all'ultima per React 19 (Fase 2). **Resta da fare**: unificazione nel pacchetto unico `radix-ui` (`npm rm @radix-ui/react-* && npm i radix-ui`, aggiornare import in `ui/dialog.tsx`, `ui/label.tsx`, `ui/button.tsx`).
-- [ ] **Zod v3 → v4**: `npm i zod@latest`. Verificare `schemas/index.ts` e `@hookform/resolvers` (aggiornare a `^5` per compat zod4/RHF7). API zod per lo più compatibile; controllare `z.infer`.
-- [ ] Aggiornare le altre minori all'ultima: `lucide-react`, `react-hook-form`, `tailwind-merge` (→ v3), `clsx`, `class-variance-authority`.
-- [ ] (Opzionale) Consolidare le icone: attualmente si usano sia `react-icons` che `lucide-react`. Valutare se standardizzare su `lucide-react`.
-- [ ] `npm audit` finale: obiettivo 0 vulnerabilità high/critical.
+- [x] **Dipendenze morte rimosse**: `axios`, `xml2js`, `@types/xml2js`, `dotenv` (zero utilizzi)
+- [x] ~~**`framer-motion` → `motion`**~~ **FATTO in Fase 2** (era bloccante per React 19). Import a `motion/react`.
+- [x] **Radix unificato**: `@radix-ui/react-dialog|label|slot` → pacchetto unico **`radix-ui@1.6`**. Import aggiornati (pattern baaarber) in `ui/button.tsx`, `ui/label.tsx`, `ui/dialog.tsx`, `ui/form.tsx`. Nota: nel pacchetto unificato `Slot` è un namespace → `Slot` diventa **`Slot.Root`**.
+- [x] **Zod v3 → v4** (`zod@4.4`) + **`@hookform/resolvers@5`** (compat zod4/RHF7). `schemas/index.ts`: `z.string().email()` → **`z.email()`** (idioma zod 4). `zodResolver` invariato.
+- [x] Minori aggiornate: `lucide-react@1.23`, `react-hook-form@7.81`, `tailwind-merge@3.6`, `react-icons@5.7` (clsx/cva già all'ultima).
+- [x] Verificato: `typecheck` + `lint` + `build` verdi; **smoke test dev**: home 200, dialog resume presente, tutte le sezioni, zero errori runtime (incluso il cambio `Slot.Root`).
+- [ ] (Opzionale, **non fatto**) Consolidare le icone: si usano ancora sia `react-icons` che `lucide-react`. Da valutare in futuro.
+- [x] `npm audit`: 0 high/critical. Restano 2 moderate (postcss annidato dentro Next, non risolvibili senza downgrade).
 
 ### Fase 6 — Route API, credenziali, cleanup endpoint di test
 

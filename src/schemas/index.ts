@@ -4,7 +4,7 @@ export const ContactSchema = z.object({
   name: z.string().min(1, {
     message: "Il nome è obbligatorio.",
   }),
-  email: z.string().email({
+  email: z.email({
     message: "Inserisci un'email valida.",
   }),
   message: z

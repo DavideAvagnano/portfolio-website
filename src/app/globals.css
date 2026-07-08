@@ -145,13 +145,4 @@
       scroll-behavior: smooth;
     }
   }
-  /* Focus sempre visibile. Sta in `base` di proposito: i componenti shadcn
-     dichiarano `outline-none` + un `focus-visible:ring-*` dedicato, e le utility
-     (layer `utilities`) vincono su questa regola. Così il ring resta quello del
-     design system dove c'è, e questo outline copre tutto il resto (link testuali,
-     switch lingua, ancore del footer). */
-  :focus-visible {
-    outline: 2px solid var(--ring);
-    outline-offset: 2px;
-  }
 }

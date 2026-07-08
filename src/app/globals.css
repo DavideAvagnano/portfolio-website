@@ -126,4 +126,11 @@
   html {
     @apply font-sans;
   }
+  /* Scroll fluido verso le ancore delle sezioni, disattivato per chi preferisce
+     meno movimento. */
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
 }

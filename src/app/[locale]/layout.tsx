@@ -6,13 +6,9 @@ import {
   getTranslations,
   setRequestLocale,
 } from "next-intl/server"
-import "../globals.css"
 
 import { routing, type Locale } from "@/i18n/routing"
 import { siteConfig } from "@/lib/site"
-import { fontVariables } from "@/lib/fonts"
-import { ThemeProvider } from "@/components/theme-provider"
-import { cn } from "@/lib/utils"
 
 // Prerender statico di una pagina per lingua.
 export function generateStaticParams() {
@@ -92,19 +88,14 @@ export default async function LocaleLayout({
   // Abilita il rendering statico delle sezioni figlie.
   setRequestLocale(locale)
 
+  // `<html>`/`<body>`/`ThemeProvider` stanno nel root layout (stabile al cambio
+  // lingua). Qui resta solo il provider i18n coi messaggi espliciti, che si
+  // ri-renderizza per fornire le traduzioni della nuova lingua.
   const messages = await getMessages()
 
   return (
-    <html
-      lang={locale}
-      suppressHydrationWarning
-      className={cn(fontVariables, "antialiased")}
-    >
-      <body>
-        <NextIntlClientProvider messages={messages}>
-          <ThemeProvider>{children}</ThemeProvider>
-        </NextIntlClientProvider>
-      </body>
-    </html>
+    <NextIntlClientProvider messages={messages}>
+      {children}
+    </NextIntlClientProvider>
   )
 }

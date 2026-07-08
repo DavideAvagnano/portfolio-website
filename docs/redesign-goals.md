@@ -194,8 +194,11 @@ Scala tipografica ampia, gerarchia netta (hero grande, etichette sezione piccole
 
 ### Iconografia
 
-- Ridotta al minimo: poche icone UI (`lucide-react`) per social/toggle. **Niente
-  tech-icons** nelle competenze (sono testo). Coerenza e sobrietà.
+- Ridotta al minimo: poche icone UI (`lucide-react`) per la UI (toggle tema, menu,
+  download CV). **Social come SVG inline** (`components/icons.tsx`, `currentColor`):
+  lucide ha rimosso i marchi GitHub/LinkedIn per trademark, e `react-icons` sarebbe
+  una dipendenza intera per due icone. **Niente tech-icons** nelle competenze (sono
+  testo). Coerenza e sobrietà.
 
 ---
 

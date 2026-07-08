@@ -93,12 +93,11 @@ tutto il copy nasce già i18n).
       `createNextIntlPlugin()`. Config in `src/i18n/`: `routing.ts` (locales
       `["it","en"]`, default `it`, `localePrefix: "as-needed"`, `localeMeta`, helper
       `resolveLocale`), `request.ts` (carica `messages/{locale}.json`), `navigation.ts`.
-- [x] Route ristrutturate sotto `src/app/[locale]/` (`layout.tsx` con `<html lang>` +
-      font + tema + `NextIntlClientProvider`, `page.tsx`, `not-found.tsx`, catch-all
-      `[...rest]/page.tsx` → `notFound()`). Root `app/layout.tsx` → solo `children`
-      (+ `metadataBase` globale). Fallback `app/not-found.tsx` con proprio `<html>`.
+- [x] Route ristrutturate sotto `src/app/[locale]/` (`page.tsx`, `not-found.tsx`,
+      catch-all `[...rest]/page.tsx` → `notFound()`).
       **Middleware in `src/proxy.ts`** (Next 16 ha rinominato `middleware`→`proxy`) =
-      `createMiddleware(routing)`.
+      `createMiddleware(routing)`. _(Vedi Fase 3 per l'assetto finale dei layout:
+      `<html>`/tema nel root, provider i18n in `[locale]`.)_
 - [x] **`NextIntlClientProvider` con `messages` ESPLICITI** (`getMessages()`), non
       l'inherit v4 via promise. ⚠️ **Non tornare all'inherit senza messages:**
       quella variante rimonta il sottoalbero al cambio lingua → ricrea lo script
@@ -115,9 +114,11 @@ tutto il copy nasce già i18n).
       IT · EN testuale) con `router.replace(pathname, { locale })` → preserva la pagina.
 - [x] Verifica (smoke test `next start`): root con `Accept-Language: en` → 307 `/en`;
       root IT → 200; `/it` → 307 `/`; `<html lang>` corretto; hreflang + canonical +
-      sitemap con alternates ok; 404 localizzato (IT/EN). `/[locale]` prerenderata
-      **SSG** (`/it`, `/en`). `typecheck` + `lint` + `format` verdi; smoke visivo di
-      Davide su dev: cambio lingua IT↔EN ok, tema ok, **nessun warning** in console.
+      sitemap con alternates ok; 404 localizzato (IT/EN).
+      `typecheck` + `lint` + `format` verdi; smoke visivo di Davide su dev: cambio
+      lingua IT↔EN ok, tema ok, **nessun warning** in console.
+      _(All'epoca `/[locale]` era prerenderata SSG; in Fase 3 è passata a rendering
+      dinamico — vedi la nota lì.)_
 
 **Nota (limite noto, non bloccante):** i **404** renderizzano il guscio HTML iniziale
 globale (`__next_error__`) col contenuto localizzato idratato client-side —
@@ -126,19 +127,67 @@ comportamento standard di Next col pattern root/`[locale]` split. Irrilevante pe
 
 ---
 
-## Fase 3 — Shell di layout (header, footer, scaffold sezioni)
+## Fase 3 — Shell di layout (header, footer, scaffold sezioni) ✅ FATTA
 
 Obiettivo: la "cornice" editoriale minimale.
 
-- [ ] **Header** nuovo: nome/logo tipografico + nav testuale (Profilo · Percorso ·
-      Competenze · Progetti · Contatti) + **language switch** + **theme toggle** +
-      **bottone CV** (scarica `cv-davide-avagnano-<locale>.pdf`).
-- [ ] **Footer** nuovo: anno **dinamico**, contatti, essenziale.
-- [ ] **Layout**: colonna unica stretta e centrata, spaziatura generosa; componente
-      riutilizzabile "sezione" (etichetta piccola + filetto + contenuto).
-- [ ] Rimuovere i vecchi: `navbar/`, `mobile-menu`, `logo`, `resume-dialog`,
-      `social-icon` (rifare minimale), `section-heading` (rifare).
-- [ ] Verifica build + navigazione ancore.
+- [x] **`Container`** (`components/container.tsx`): **unica fonte di verità** per
+      larghezza (`max-w-4xl`), centratura e padding orizzontale. Header/footer restano
+      **full-bleed** (sfondo, blur, filetti a tutta viewport) e usano `Container` solo
+      per il contenuto → la larghezza NON può stare su un wrapper esterno.
+      _(Niente `.container` di Tailwind: è una max-width "a scalini" che cresce fino a
+      1536px, l'opposto di una colonna di lettura fissa.)_
+- [x] **Header** (`components/site-header.tsx`): sticky, `backdrop-blur`, hairline.
+      Marchio: **logo "D" su mobile**, nome tipografico da `sm`. Nav ad ancore (`md+`).
+      Gruppo destro raggruppato semanticamente: **preferenze** (lingua, tema) separate
+      da un **filetto verticale** dall'**azione** (CV).
+- [x] **Menu mobile** (`components/mobile-nav.tsx`): `Sheet` laterale (Base UI) con
+      voci numerate, lingua e CV. Il tema resta in barra. ⚠️ Il dialog **blocca lo
+      scroll del body**: il salto all'ancora avviene in `onOpenChangeComplete`, cioè a
+      chiusura completata (niente `setTimeout` magici).
+- [x] **Footer** (`components/site-footer.tsx`): nome + tagline, social a icone,
+      **anno dinamico**, "torna su". _(Indirizzo email per esteso → sezione Contatti,
+      Fase 4.)_
+- [x] **`Section`** (`components/section.tsx`): indice `01` + etichetta uppercase +
+      filetto + contenuto, `scroll-mt` per l'header sticky, `aria-labelledby`.
+- [x] **`Logo`** (`components/logo.tsx`): SVG **inline** con `fill-foreground` /
+      `fill-background` → si inverte col tema (un PNG sarebbe un quadrato nero su
+      fondo nero nel dark). Nessuna richiesta di rete, nitido a ogni dimensione.
+- [x] **Icone social** (`components/icons.tsx` + `social-links.tsx`): GitHub/LinkedIn/
+      Email come SVG inline con `fill="currentColor"` → seguono tema e hover gratis.
+      lucide ha **rimosso** i marchi `Github`/`Linkedin` (trademark) e `react-icons`
+      sarebbe una dipendenza intera per due icone (oltretutto da rimuovere in Fase 7).
+      Envelope **piena** (Heroicons solid) per coerenza ottica coi marchi.
+- [x] `NAV_ITEMS` + `navIndex` in **`lib/nav.ts`** (erano duplicati header/home).
+- [x] Hero (eyebrow, saluto, ruolo, posizionamento, social) + 5 sezioni scaffold con
+      testo di preview (contenuti reali → Fasi 4-5).
+- [x] Smooth-scroll ancore in `globals.css` (rispetta `prefers-reduced-motion`);
+      aria-label i18n su `ModeToggle`/CV/menu; link solo-icona con area di tap ≈36px.
+- [x] Messaggi: `nav` (+`menu`/`openMenu`), `sections`, `cv`, `footer`; hero rivisto
+      (it/en). `email` aggiunta a `siteConfig.author`.
+- [x] Verifica: `typecheck` + `lint` + `format` verdi; smoke curl `/` e `/en` → 200,
+      nav/sezioni/footer/CV per-locale ok. _(Vecchi `navbar/`, `logo`, ecc. già
+      rimossi nel clean slate di Fase 1: niente da togliere.)_
+
+**Cambio di architettura dei layout (fix del flash del tema):**
+
+`<html>`, `<body>` e `ThemeProvider` sono stati spostati **dal `[locale]/layout` al
+root `app/layout.tsx`**. Motivo: il root **non** si ri-renderizza al cambio lingua,
+quindi la classe tema (`dark`) che next-themes applica a `<html>` a runtime non viene
+più toccata → **niente flash bianco** cambiando lingua in dark mode. È anche il setup
+canonico di next-themes. Nel `[locale]/layout` resta `NextIntlClientProvider` +
+`setRequestLocale` + `generateMetadata`. Il not-found globale non ha più un `<html>`
+proprio.
+
+⚠️ **Conseguenza:** il root usa `getLocale()` per `<html lang>`, che legge la
+richiesta → **`/[locale]` è passata da SSG (`●`) a rendering dinamico (`ƒ`)**.
+Accettato: per un CV è irrilevante (SSR ~40ms, pienamente indicizzabile, `lang`
+corretto lato server), e l'alternativa per riavere l'SSG darebbe `lang` errato sul
+`/en` in SSR — peggio per la SEO.
+
+**Convenzione Base UI:** per un LINK con aspetto da bottone usare
+`buttonVariants({...})` su un `<a>`/`Link`, **non** `<Button render={<a/>}>`: Base UI
+forza `role="button"` e romperebbe la semantica del link (vedi `CLAUDE.md` §3).
 
 ---
 
@@ -243,8 +292,13 @@ Obiettivo: il pezzo forte, senza svendere i case study.
   middleware in `src/proxy.ts`, SEO per-locale (hreflang/canonical/sitemap), language
   switcher canonico (`router.replace`), messaggi it/en con `messages` espliciti nel
   provider (no warning next-themes).
-- 🔜 **Prossima: Fase 3 — Shell di layout** (header con nav/lang/theme/CV, footer,
-  componente "sezione").
+- ✅ **Fase 3 FATTA**: `Container` (unica fonte di verità larghezza), header sticky
+  (logo mobile / nome desktop, nav ancore, lang·tema | CV), menu mobile `Sheet`,
+  footer con social a icone, `Section`, logo e icone SVG inline theme-aware,
+  `lib/nav.ts`. **`<html>`+tema spostati nel root layout** (fix flash del tema) →
+  `/[locale]` ora è dinamico invece che SSG (scelta consapevole).
+- 🔜 **Prossima: Fase 4 — Sezioni di contenuto** (Hero, Profilo, Percorso,
+  Competenze, Contatti) con copy reale da `site-content.md`.
 - Le decisioni e i contenuti sono in questo file + `redesign-goals.md` +
   `site-content.md`; le regole di lavoro in `CLAUDE.md`. Reference visiva in
   `private/` (gitignored).

@@ -1,39 +1,65 @@
 import { getTranslations, setRequestLocale } from "next-intl/server"
 import { resolveLocale } from "@/i18n/routing"
-import { ModeToggle } from "@/components/mode-toggle"
-import { LocaleSwitcher } from "@/components/locale-switcher"
+import { NAV_ITEMS, navIndex } from "@/lib/nav"
+import { Container } from "@/components/container"
+import { SiteHeader } from "@/components/site-header"
+import { SiteFooter } from "@/components/site-footer"
+import { SocialLinks } from "@/components/social-links"
+import { Section } from "@/components/section"
 
-// Shell minimale (Fase 1-2 del redesign): valida design system, font, tema e i18n.
-// Le sezioni reali (Profilo, Percorso, Competenze, Progetti, Contatti) arrivano
-// nelle fasi successive — vedi docs/redesign-plan.md.
+// Home one-page. Fase 3: shell editoriale (header/footer) + scaffold delle sezioni
+// con il componente `Section`. Hero e contenuti reali delle sezioni (Profilo,
+// Percorso, Competenze, Progetti, Contatti) arrivano nelle Fasi 4-5.
 export default async function Home({
   params,
 }: {
   params: Promise<{ locale: string }>
 }) {
   const locale = await resolveLocale(params)
-  // Abilita il rendering statico di questa pagina.
   setRequestLocale(locale)
 
   const t = await getTranslations("hero")
+  const tn = await getTranslations("nav")
+  const ts = await getTranslations("sections")
 
   return (
-    <main className="mx-auto flex min-h-screen max-w-2xl flex-col justify-center px-6 py-24">
-      <div className="mb-10 flex items-center justify-between">
-        <LocaleSwitcher />
-        <ModeToggle />
-      </div>
+    <>
+      <SiteHeader />
 
-      <p className="text-sm font-medium tracking-widest text-muted-foreground uppercase">
-        {t("eyebrow")}
-      </p>
-      <h1 className="mt-4 font-heading text-5xl font-semibold tracking-tight sm:text-6xl">
-        {t("greeting")}
-      </h1>
-      <p className="mt-6 text-lg text-muted-foreground">{t("role")}</p>
-      <p className="mt-4 max-w-prose leading-relaxed text-muted-foreground">
-        {t("intro")}
-      </p>
-    </main>
+      <main>
+        {/* Hero */}
+        <section id="top">
+          <Container className="py-16">
+            <p className="text-xs font-medium tracking-widest text-muted-foreground uppercase">
+              {t("eyebrow")}
+            </p>
+            <h1 className="mt-6 font-heading text-4xl font-semibold tracking-tight text-balance sm:text-6xl">
+              {t("greeting")}
+            </h1>
+            <p className="mt-6 max-w-xl text-lg text-pretty text-muted-foreground sm:text-xl">
+              {t("role")}
+            </p>
+            <p className="mt-4 max-w-xl leading-relaxed text-pretty text-muted-foreground">
+              {t("intro")}
+            </p>
+
+            <SocialLinks className="mt-8" />
+          </Container>
+        </section>
+
+        {/* Sezioni (scaffold) */}
+        <Container>
+          {NAV_ITEMS.map((id, i) => (
+            <Section key={id} id={id} index={navIndex(i)} label={tn(id)}>
+              <p className="max-w-xl text-pretty text-muted-foreground">
+                {ts(id)}
+              </p>
+            </Section>
+          ))}
+        </Container>
+      </main>
+
+      <SiteFooter />
+    </>
   )
 }

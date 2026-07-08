@@ -1,5 +1,5 @@
 import { useTranslations } from "next-intl"
-import { Button } from "@/components/ui/button"
+import { buttonVariants } from "@/components/ui/button"
 import { Link } from "@/i18n/navigation"
 
 // 404 localizzato: reso all'interno del layout `[locale]`, quindi con font, tema
@@ -14,14 +14,16 @@ export default function NotFound() {
       </p>
       <h1 className="text-2xl font-semibold sm:text-3xl">{t("title")}</h1>
       <p className="max-w-md text-muted-foreground">{t("description")}</p>
-      <Button
-        render={<Link href="/" />}
-        variant="outline"
-        size="lg"
-        className="mt-4"
+      <Link
+        href="/"
+        className={buttonVariants({
+          variant: "outline",
+          size: "lg",
+          className: "mt-4",
+        })}
       >
         {t("back")}
-      </Button>
+      </Link>
     </main>
   )
 }

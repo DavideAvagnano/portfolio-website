@@ -3,19 +3,43 @@
     "title": "Davide Avagnano — Software Engineer",
     "description": "Davide Avagnano, freelance software engineer. I build accessible, scalable, high-performance web applications with React and the Next.js ecosystem."
   },
-  "hero": {
-    "eyebrow": "Work in progress",
-    "greeting": "Hi, I'm Davide.",
-    "role": "Fullstack Developer — React, Next.js, Node.js, PostgreSQL.",
-    "intro": "New site under construction. I'm starting from a clean base: typography, light/dark theme and a minimal editorial structure."
+  "nav": {
+    "profile": "Profile",
+    "path": "Journey",
+    "skills": "Skills",
+    "projects": "Projects",
+    "contact": "Contact",
+    "menu": "Menu",
+    "openMenu": "Open menu"
+  },
+  "cv": {
+    "label": "CV",
+    "aria": "Download CV as PDF"
+  },
+  "theme": {
+    "toggle": "Toggle theme"
   },
   "localeSwitcher": {
     "label": "Language",
     "it": "Italian",
     "en": "English"
   },
-  "theme": {
-    "toggle": "Toggle theme"
+  "hero": {
+    "eyebrow": "Fullstack Developer · Freelance",
+    "greeting": "Hi, I'm Davide.",
+    "role": "I build and maintain end-to-end production systems with TypeScript, React, Next.js and Node.js on PostgreSQL.",
+    "intro": "I've contributed to high-volume platforms and built a complete SaaS on my own. My center of gravity is the backend: data modeling, type-safe APIs, async workers, security and deployment."
+  },
+  "sections": {
+    "profile": "Who I am and how I work — from aerospace engineering to a backend-heavy focus.",
+    "path": "The journey timeline: education, self-taught, freelance since 2025.",
+    "skills": "Languages, frontend, backend, database, infrastructure and integrations — by category.",
+    "projects": "Real case studies grouped by type: SaaS, data & performance marketing, infra & security.",
+    "contact": "Let's work together: tell me about your project and I'll get back to you."
+  },
+  "footer": {
+    "tagline": "Freelance fullstack developer. End-to-end production systems.",
+    "backToTop": "Back to top"
   },
   "notFound": {
     "code": "404",

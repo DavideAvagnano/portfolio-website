@@ -1,20 +1,38 @@
 import type { Metadata } from "next"
-import { siteConfig } from "@/lib/site"
+import { getLocale } from "next-intl/server"
+import "./globals.css"
 
-// Impostato qui così vale per TUTTE le route (incluse `_not-found` e
-// `opengraph-image`), che non passano dal layout `[locale]`. Evita il warning
-// "metadataBase not set" e permette di risolvere le immagini OG in assoluto.
+import { siteConfig } from "@/lib/site"
+import { fontVariables } from "@/lib/fonts"
+import { ThemeProvider } from "@/components/theme-provider"
+import { cn } from "@/lib/utils"
+
+// Impostato qui così vale per TUTTE le route (incluse `_not-found`).
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
 }
 
-// Root layout richiesto da Next: con l'i18n routing (`[locale]`) il vero layout
-// — `<html>`, font, provider — vive in `app/[locale]/layout.tsx`. Qui si passano
-// solo i children.
-export default function RootLayout({
+// Root layout: `<html>`, `<body>` e `ThemeProvider` vivono QUI (non in `[locale]`).
+// Motivo: questo layout NON si ri-renderizza al cambio lingua, quindi la classe
+// tema (`dark`/`light`) che next-themes applica a `<html>` a runtime non viene mai
+// toccata → niente flash del tema quando si cambia lingua (e lo script anti-FOUC
+// non viene ricreato sul client → niente warning React 19).
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  return children
+  const locale = await getLocale()
+
+  return (
+    <html
+      lang={locale}
+      suppressHydrationWarning
+      className={cn(fontVariables, "antialiased")}
+    >
+      <body>
+        <ThemeProvider>{children}</ThemeProvider>
+      </body>
+    </html>
+  )
 }

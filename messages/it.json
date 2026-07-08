@@ -3,19 +3,43 @@
     "title": "Davide Avagnano — Software Engineer",
     "description": "Davide Avagnano, software engineer freelance. Costruisco applicazioni web accessibili, scalabili e performanti con React e l'ecosistema Next.js."
   },
-  "hero": {
-    "eyebrow": "Work in progress",
-    "greeting": "Ciao, sono Davide.",
-    "role": "Fullstack Developer — React, Next.js, Node.js, PostgreSQL.",
-    "intro": "Nuovo sito in costruzione. Sto ripartendo da una base pulita: tipografia, tema chiaro/scuro e una struttura editoriale minimale."
+  "nav": {
+    "profile": "Profilo",
+    "path": "Percorso",
+    "skills": "Competenze",
+    "projects": "Progetti",
+    "contact": "Contatti",
+    "menu": "Menu",
+    "openMenu": "Apri il menu"
+  },
+  "cv": {
+    "label": "CV",
+    "aria": "Scarica il CV in PDF"
+  },
+  "theme": {
+    "toggle": "Cambia tema"
   },
   "localeSwitcher": {
     "label": "Lingua",
     "it": "Italiano",
     "en": "Inglese"
   },
-  "theme": {
-    "toggle": "Cambia tema"
+  "hero": {
+    "eyebrow": "Fullstack Developer · Freelance",
+    "greeting": "Ciao, sono Davide.",
+    "role": "Costruisco e mantengo sistemi di produzione end-to-end con TypeScript, React, Next.js e Node.js su PostgreSQL.",
+    "intro": "Ho contribuito a piattaforme ad alto volume e ho costruito da solo un SaaS completo. Il mio baricentro è il backend: modellazione dati, API type-safe, worker asincroni, sicurezza e deploy."
+  },
+  "sections": {
+    "profile": "Chi sono e come lavoro — dalla transizione dall'ingegneria aerospaziale al baricentro backend.",
+    "path": "La timeline del percorso: formazione, autodidatta, freelance dal 2025.",
+    "skills": "Linguaggi, frontend, backend, database, infrastruttura e integrazioni — per categoria.",
+    "projects": "Case study reali raggruppati per tipo: SaaS, data & performance marketing, infra & security.",
+    "contact": "Lavoriamo insieme: raccontami il progetto e ti rispondo."
+  },
+  "footer": {
+    "tagline": "Fullstack developer freelance. Sistemi di produzione end-to-end.",
+    "backToTop": "Torna su"
   },
   "notFound": {
     "code": "404",

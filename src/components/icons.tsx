@@ -1,8 +1,8 @@
 // Icone SVG inline.
 //
 // Perché non lucide: ha rimosso i marchi `Github`/`Linkedin` (trademark).
-// Perché non react-icons: sarebbe una dipendenza intera per due icone — ed è già
-// destinata alla rimozione in Fase 7 (la usa solo `data/skills-data.ts`, dead code).
+// Perché non react-icons: sarebbe una dipendenza intera per due icone (infatti è
+// stata rimossa in Fase 7, era usata solo da un file di dati ormai morto).
 //
 // Tutte usano `fill="currentColor"`: seguono il colore del testo, quindi si
 // adattano da sole a tema chiaro/scuro e agli stati hover, senza codice extra.

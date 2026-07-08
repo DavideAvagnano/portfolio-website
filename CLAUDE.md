@@ -53,10 +53,14 @@ npm run format      # prettier (prima del commit)
   **`buttonVariants({ variant, size })`** come `className` su un `<a>`/`Link`
   normale — **NON** `<Button render={<a/>}>`: Base UI's Button forza sempre
   `role="button"` e romperebbe la semantica del link (a11y).
-- **motion** (non framer-motion), **react-hook-form** + **Zod v4**, **Resend**,
-  **next-themes** (tema), **next-intl** (i18n, in arrivo).
+- **react-hook-form** + **Zod v4**, **Resend**, **next-themes** (tema), **next-intl**
+  (i18n). **Niente `motion`**: rimosso in Fase 7 — il sito non ha animazioni allo
+  scroll, solo hover e transizioni dei componenti Base UI.
+- **`components/ui/` è la suite shadcn completa** (~60 componenti, molti inutilizzati):
+  è una scelta di Davide, **non è dead code da potare** — e con essa restano le sue
+  dipendenze (recharts, cmdk, embla, react-day-picker, …).
 - Struttura **`src/`**; alias **`@/* → ./src/*`**. Asset importati staticamente in
-  `src/assets`, non in `public/`.
+  `src/assets`, non in `public/` (oggi contiene i TTF dell'immagine OG).
 - **Niente `any`**: la regola ESLint `no-explicit-any` **blocca il build**.
 - Prettier: **no punto e virgola**, doppie virgolette, `printWidth: 80`. Il plugin
   Tailwind usa `tailwindStylesheet` (v4) — non `tailwindConfig`.

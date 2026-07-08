@@ -364,26 +364,37 @@ dedicate o `<details>`), non un'altra prop.
 
 ## Fase 7 — Pulizia & chiusura
 
-- [ ] **Prune componenti shadcn**: in Fase 1 sono stati aggiunti **tutti i ~60**
-      componenti (+ deps pesanti: recharts, embla-carousel, react-day-picker, cmdk,
-      react-resizable-panels, date-fns). Tenere **solo quelli usati**, rimuovere gli
-      altri e le rispettive deps. _(Runtime già ok: i non usati sono tree-shaken;
-      questo è cleanup di repo/deps.)_ ⚠️ **`sonner` è usato** (toast del form
-      contatti, Fase 4): non rimuoverlo.
-- [ ] **Rimuovere `motion`**: dopo lo scarto delle entrate allo scroll (Fase 6) non ha
-      più nessun import nel codice. _(`tw-animate-css` invece **resta**: è importato da
-      `globals.css` e serve ai componenti shadcn.)_
-- [ ] Rimuovere asset/data morti: le **foto** `src/assets/*.png` (foto tolta dal design)
-      → rimuovere. ⚠️ **La cartella `src/assets/` resta**: in Fase 6 ci sono finiti i
-      **TTF dell'immagine OG** (`fonts/fraunces-600.ttf`, `fonts/inter-400.ttf`), che
-      servono a build-time. `src/data/*` (`navbar-data`, `projects-data`, `skills-data`)
-      sono dead code, sostituiti in Fase 4/5 → rimuovere. **`react-icons`** è usato solo
-      da `skills-data` → rimuovibile una volta tolto quel file.
-- [ ] Rimuovere componenti/file legacy rimasti.
-- [ ] `typecheck` + `lint` + `build` verdi; smoke test **entrambe le lingue × entrambi
-      i temi**; form contatti.
-- [ ] Aggiornare `README.md` (nuove sezioni, i18n, tema).
-- [ ] Merge `development` → `main` (a cura di Davide).
+- [x] ~~**Prune componenti shadcn**~~ → **ANNULLATO, per scelta di Davide.** La suite
+      completa (~60 componenti in `components/ui/`) **resta**, e con essa le sue
+      dipendenze (`recharts`, `embla-carousel-react`, `react-day-picker`, `cmdk`,
+      `react-resizable-panels`, `input-otp`, `date-fns`, `@shadcn/react`, `sonner`).
+      Motivo: averla a disposizione per il futuro. _(Nessun costo a runtime: i
+      componenti non usati sono tree-shaken e non finiscono nel bundle; è solo peso in
+      `node_modules`.)_ ⚠️ **Se un giorno si volesse ridurla:** `date-fns` arriva già
+      come dependency di `react-day-picker`, non serve come dep diretta.
+- [x] **Rimosse le deps morte**: `motion` (dopo lo scarto delle entrate allo scroll in
+      Fase 6, zero import) e `react-icons` (la usava solo `skills-data`, ora eliminato).
+      Nessuna delle due serviva a un componente `ui/` — verificato. _(`tw-animate-css`
+      **resta**: lo importa `globals.css`.)_
+- [x] **Rimossi asset/data morti**: le foto `src/assets/*.png` (foto tolta dal design);
+      `data/navbar-data.ts`, `data/projects-data.ts`, `data/skills-data.ts` e
+      `types/types.ts` (esisteva solo per derivare tipi dai due file dead → cartella
+      `src/types/` eliminata). ⚠️ **`src/assets/` resta**: ospita i TTF dell'immagine OG
+      (`fonts/fraunces-600.ttf`, `fonts/inter-400.ttf`), letti a build-time.
+- [x] Verificato con un'analisi degli import (non a grep): dopo le rimozioni **non
+      restano file orfani** fuori dagli entrypoint di Next.
+- [x] `typecheck` + `lint` + `format` verdi. **`npm run build` verde** (col dev fermo) +
+      smoke sulla build reale (`next start`): `/` e `/en` 200, `/it` → 307, 404
+      localizzato, redirect per `Accept-Language`, `robots.txt`/`sitemap.xml`, `<html lang>`
+      corretto, **entrambe le OG servite come PNG** (sono `●` SSG: i TTF vengono letti a
+      build-time e Next li traccia). Nessun errore a runtime.
+      _(Il form contatti non è stato testato end-to-end: invierebbe una mail vera.)_
+- [x] `README.md` riscritto: era fermo a **Radix** (siamo su Base UI), `motion` e
+      `react-icons`, e a una struttura di cartelle che non esiste più. Aggiunte le
+      sezioni i18n, tema, a11y e la convenzione `buttonVariants` vs `render`.
+- [x] `site-content.md`: corretta la nota implementativa che diceva "il sito usa
+      `react-icons/si`" — le competenze sono liste di testo, senza icone.
+- [ ] Merge `development` → `main` (a cura di Davide) → **deploy in produzione**.
 
 ---
 
@@ -436,8 +447,13 @@ dedicate o `<details>`), non un'altra prop.
   `opengraph-image` rifatta **per lingua** sotto `[locale]/` (+ matcher di `proxy.ts`
   aggiornato, TTF in `src/assets/fonts/`). **Le entrate allo scroll sono state
   implementate e poi scartate**: niente motion, il sito resta statico alla lettura.
-- 🔜 **Prossima: Fase 7 — Pulizia & chiusura.** Prima però mancano gli **smoke visivi di
-  Davide** per la Fase 6: pass responsive mobile e Lighthouse su `/` e `/en`.
+- ✅ **Fase 6 smoke visivi**: fatti da Davide, tutto funziona.
+- ✅ **Fase 7 FATTA**: rimossi data/types/foto morti e le deps `motion` + `react-icons`;
+  `README.md` riscritto; `site-content.md` corretto. **Il prune della suite shadcn è
+  stato annullato per scelta di Davide**: `components/ui/` resta completa, con le sue
+  dipendenze.
+- 🔜 **Rimane solo il merge `development` → `main`** (lo fa Davide: è il deploy in
+  produzione).
 - Le decisioni e i contenuti sono in questo file + `redesign-goals.md` +
   `site-content.md`; le regole di lavoro in `CLAUDE.md`. Reference visiva in
   `private/` (gitignored).

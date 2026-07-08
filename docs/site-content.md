@@ -125,11 +125,12 @@ feature/plan gating); sicurezza dati (PII AES-256-GCM, blind index HMAC, rate
 limiting, GDPR); i18n (fino a 7 lingue); multi-tenant config-driven; caching
 multi-livello (Varnish→Redis→DB→in-memory).
 
-> **Nota implementativa:** il sito usa `react-icons/si` (Simple Icons). Molte di
-> queste tech hanno un'icona (`SiTypescript`, `SiReact`, `SiNextdotjs`, `SiTrpc`,
-> `SiDrizzle`, `SiPostgresql`, `SiRedis`, `SiElasticsearch`, `SiDocker`, `SiNginx`,
-> `SiOpenai`, ecc.). Alcune (BullMQ, PM2, Varnish, tRPC a volte) potrebbero non
-> avere icona → usare fallback testuale o `lucide-react`.
+> **Nota implementativa (aggiornata in Fase 7):** ~~il sito usa `react-icons/si`~~ —
+> **niente icone per le tecnologie.** Il redesign presenta le competenze come **liste
+> di testo** categorizzate (`components/sections/skills.tsx` + `data/skills.ts`), quindi
+> non serve un'icona per ogni tech. `react-icons` è stato **rimosso** dalle dipendenze;
+> le uniche icone sono `lucide-react` (UI) e i tre SVG inline in `components/icons.tsx`
+> (GitHub, LinkedIn, email).
 
 ---
 
@@ -416,7 +417,7 @@ conseguito e da rinnovare, non attivo.)_
   Hypefill, ixily, log-manager). Struttura scheda diversa: niente demo/repo, sì
   metriche/highlights/ruolo. Vecchi progetti → rimossi o sezione minore (§5.6).
 - **Skills → riscrivere** su §4 (categorie: Linguaggi, Frontend, Backend, Database,
-  Cache & code, AI, Infra/DevOps, Integrazioni). Attenzione icone react-icons (§4).
+  Cache & code, AI, Infra/DevOps, Integrazioni). Rese come liste di testo, senza icone (§4).
 - **About → riscrivere** con la narrativa §3 (transizione + crescita + baricentro
   backend/architettura).
 - **Hero → aggiornare** il posizionamento (§2), mantenendo un tono personale.

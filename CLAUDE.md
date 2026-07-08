@@ -49,7 +49,10 @@ npm run format      # prettier (prima del commit)
 - **shadcn/ui** su **Base UI** (`@base-ui/react`) — stile `base-nova`, base color
   `zinc`. **Non** Radix (`asChild`/`Slot` non esistono → per il polimorfismo si usa
   il prop **`render`**, es. `<Button render={<Link .../>}>`). `globals.css` importa
-  `shadcn/tailwind.css`.
+  `shadcn/tailwind.css`. **Per un LINK con aspetto da bottone** (`<a>`/`Link`) usa
+  **`buttonVariants({ variant, size })`** come `className` su un `<a>`/`Link`
+  normale — **NON** `<Button render={<a/>}>`: Base UI's Button forza sempre
+  `role="button"` e romperebbe la semantica del link (a11y).
 - **motion** (non framer-motion), **react-hook-form** + **Zod v4**, **Resend**,
   **next-themes** (tema), **next-intl** (i18n, in arrivo).
 - Struttura **`src/`**; alias **`@/* → ./src/*`**. Asset importati staticamente in

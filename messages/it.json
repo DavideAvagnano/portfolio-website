@@ -1,7 +1,8 @@
 {
   "metadata": {
     "title": "Davide Avagnano — Software Engineer",
-    "description": "Davide Avagnano, software engineer freelance. Costruisco applicazioni web accessibili, scalabili e performanti con React e l'ecosistema Next.js."
+    "description": "Davide Avagnano, software engineer freelance. Costruisco applicazioni web accessibili, scalabili e performanti con React e l'ecosistema Next.js.",
+    "ogTagline": "Sistemi di produzione end-to-end. TypeScript, Node.js, PostgreSQL."
   },
   "nav": {
     "profile": "Profilo",
@@ -10,7 +11,8 @@
     "projects": "Progetti",
     "contact": "Contatti",
     "menu": "Menu",
-    "openMenu": "Apri il menu"
+    "openMenu": "Apri il menu",
+    "skipToContent": "Salta al contenuto"
   },
   "cv": {
     "label": "CV",

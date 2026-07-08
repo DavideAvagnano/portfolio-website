@@ -31,7 +31,7 @@ export function CvButton({
         className
       )}
     >
-      <ArrowDownToLine className="size-4" />
+      <ArrowDownToLine aria-hidden className="size-4" />
       {label}
     </a>
   )

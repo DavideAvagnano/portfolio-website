@@ -287,24 +287,78 @@ Obiettivo: il pezzo forte, senza svendere i case study.
 - I punti chiave sono **array** nei messaggi (lunghezza variabile per progetto) →
   letti con `t.raw()`, che con i messaggi tipizzati resta type-safe.
 
-⚠️ **Nota SEO, da decidere in Fase 6:** Base UI monta il Portal del drawer solo
-all'apertura, quindi **il testo dei case study non è nel DOM iniziale** (compare solo
-come JSON nel payload dei messaggi). Se si vuole che i case study siano indicizzati,
-serve `keepMounted` sul `DrawerPortal`. Trade-off: contenuto in HTML vs. payload più
-pesante e contenuto `hidden` (che i motori comunque pesano meno).
+⚠️ **Nota SEO → risolta in Fase 6** con `keepMounted` (con una correzione importante
+sulla premessa: vedi la nota nella Fase 6).
 
 ---
 
-## Fase 6 — Motion, responsive, a11y, SEO
+## Fase 6 — Responsive, a11y, SEO _(niente motion: vedi sotto)_
 
-- [ ] **Motion discreto**: entrate allo scroll, hover misurati, transizioni tema/lingua
-      (`motion` + `tw-animate-css`). Niente effetti appariscenti.
-- [ ] **Responsive**: pass mobile completo (l'editoriale a colonna unica aiuta).
-- [ ] **A11y**: contrasto **AA in entrambi i temi**, focus states, `aria-label`,
-      ordine tab, `lang` per-locale.
-- [ ] **SEO**: verificare metadata/OG per-locale, hreflang, sitemap/robots, l'immagine
-      OG (aggiornarla al nuovo stile).
-- [ ] Verifica Lighthouse (perf/SEO/a11y) su `/it` e `/en`.
+- [x] **Motion allo scroll: SCARTATO.** Era stato implementato (`components/reveal.tsx`,
+      entrate in dissolvenza con `motion`), poi **rimosso per scelta di Davide**: il sito
+      resta statico alla lettura, coerente col minimalismo editoriale. Restano solo le
+      transizioni di **hover** (`transition-colors`), quelle dei componenti Base UI
+      (drawer, sheet) e lo **smooth-scroll** delle ancore — già in `globals.css` e già
+      disattivato sotto `prefers-reduced-motion`. La dipendenza `motion` non ha più
+      alcun import: **va rimossa nel prune di Fase 7**.
+- [x] **A11y**: skip link (`nav.skipToContent`) come primo elemento focusabile →
+      `<main id="main" tabIndex={-1}>`; icone decorative `aria-hidden` (toggle tema,
+      menu, CV, freccia della card); indici editoriali (`01`, `02`…) `aria-hidden`
+      (lo screen reader leggeva "01 Profilo"); numerini del menu mobile riportati a
+      colore pieno (a `/60` erano sotto 3:1); focus outline di base in `globals.css`.
+- [x] **Contrasto AA verificato numericamente** (non a occhio): tutte le coppie
+      testo/sfondo dei token sono ≥ 4.5:1 in **entrambi** i temi. **Trovato e corretto
+      un difetto**: `--ring` light era zinc-400 → **2.63:1**, sotto il minimo 3:1 di
+      WCAG 2.4.11 per l'indicatore di focus. Sceso a zinc-500 → **4.83:1** (deviazione
+      consapevole dal preset shadcn `zinc`; il dark era già conforme, 4.12:1).
+- [x] **SEO**: metadata/hreflang/canonical/sitemap/robots per-locale verificati sul dev
+      (`/` IT, `/en`, `/it` → 307, 404 localizzato). **`opengraph-image` rifatta** nello
+      stile editoriale monocromo e spostata sotto `[locale]/` → una per lingua, copy da
+      `metadata.ogTagline`. Le due PNG 1200×630 sono state generate e **ispezionate**.
+- [ ] **Responsive**: pass mobile completo → **smoke visivo di Davide** (serve browser).
+- [ ] Verifica Lighthouse (perf/SEO/a11y) su `/` e `/en` → **Davide** (serve browser).
+
+**`keepMounted` sui case study — premessa iniziale sbagliata, decisione confermata:**
+
+Si era detto che `keepMounted` avrebbe messo il testo dei case study **nell'HTML
+iniziale**. **Non è vero**, ed è stato verificato: zero `data-slot="drawer-popup"` nel
+markup SSR. `createPortal` non ha rappresentazione server-side — `FloatingPortal` crea
+il container in un layout effect, quindi in SSR il subtree è `null`, con o senza
+`keepMounted`.
+
+Cosa fa davvero `keepMounted`: il pannello entra nel DOM **all'idratazione** invece che
+al click, con `hidden` da chiuso (fuori dal tab order, non annunciato). Quindi:
+
+- **Googlebot lo indicizza** (esegue JS e renderizza) — prima non l'avrebbe visto mai.
+  Essendo `hidden`, lo pesa meno del contenuto visibile.
+- I bot che **non** eseguono JS (anteprime social, alcuni crawler) continuano a non
+  vederlo. È il tetto raggiungibile finché il dettaglio vive in un drawer.
+
+Confermato: il costo è nullo e il guadagno reale. Se un giorno i case study dovessero
+essere indicizzabili anche senza JS, servirebbe portarli fuori dal portal (pagine
+dedicate o `<details>`), non un'altra prop.
+
+**Altre note:**
+
+- **`proxy.ts`, matcher aggiornato**: l'OG image ora vive sotto `[locale]/`, quindi il
+  suo path è `/it/opengraph-image` (verificato: è l'URL che Next mette in `og:image`).
+  Il vecchio lookahead escludeva solo `/opengraph-image` in root → il middleware
+  l'avrebbe trattata come pagina, redirezionando `/it/*` → `/*` e servendo un 404.
+  Ora esclude `.*opengraph-image`. Redirect delle pagine ri-verificati, intatti.
+- **Font dell'OG**: satori non legge woff2 né i variable font, e `next/font` vive nel
+  browser → servono **TTF statici** su disco, letti con `readFile`. In
+  `src/assets/fonts/` (Fraunces 600, Inter 400). Sono asset di **build**: non finiscono
+  nel bundle client. Verificata la copertura dei glifi (incluso `·`).
+- **Perché niente entrate allo scroll** (per non riproporle in futuro): con `motion` le
+  sezioni partono da `opacity: 0` inline, quindi senza JS resterebbero **invisibili** —
+  serviva un fallback CSS (`prefers-reduced-motion` + `<noscript>`) per non nascondere
+  il contenuto. Complessità che, tolto l'effetto, sparisce del tutto. Se un giorno le si
+  rivuole: **non** usare `useReducedMotion()` per il fallback (darebbe un DOM diverso tra
+  server e client → hydration mismatch); neutralizzare con CSS `!important`, che batte
+  lo stile inline di motion.
+- **Transizione di tema**: resta `disableTransitionOnChange` (scelta di Fase 1). Una
+  transizione morbida sui colori richiederebbe di toglierlo, riaprendo gli artefatti di
+  ripitturazione che quella prop esiste per evitare. Il cambio resta istantaneo.
 
 ---
 
@@ -316,10 +370,15 @@ pesante e contenuto `hidden` (che i motori comunque pesano meno).
       altri e le rispettive deps. _(Runtime già ok: i non usati sono tree-shaken;
       questo è cleanup di repo/deps.)_ ⚠️ **`sonner` è usato** (toast del form
       contatti, Fase 4): non rimuoverlo.
-- [ ] Rimuovere asset/data morti: foto `src/assets/*` (foto tolta dal design) →
-      eliminare la cartella. `src/data/*` (`navbar-data`, `projects-data`,
-      `skills-data`) sono dead code, sostituiti in Fase 4/5 → rimuovere. **`react-icons`**
-      è usato solo da `skills-data` → rimuovibile una volta tolto quel file.
+- [ ] **Rimuovere `motion`**: dopo lo scarto delle entrate allo scroll (Fase 6) non ha
+      più nessun import nel codice. _(`tw-animate-css` invece **resta**: è importato da
+      `globals.css` e serve ai componenti shadcn.)_
+- [ ] Rimuovere asset/data morti: le **foto** `src/assets/*.png` (foto tolta dal design)
+      → rimuovere. ⚠️ **La cartella `src/assets/` resta**: in Fase 6 ci sono finiti i
+      **TTF dell'immagine OG** (`fonts/fraunces-600.ttf`, `fonts/inter-400.ttf`), che
+      servono a build-time. `src/data/*` (`navbar-data`, `projects-data`, `skills-data`)
+      sono dead code, sostituiti in Fase 4/5 → rimuovere. **`react-icons`** è usato solo
+      da `skills-data` → rimuovibile una volta tolto quel file.
 - [ ] Rimuovere componenti/file legacy rimasti.
 - [ ] `typecheck` + `lint` + `build` verdi; smoke test **entrambe le lingue × entrambi
       i temi**; form contatti.
@@ -371,9 +430,14 @@ pesante e contenuto `hidden` (che i motori comunque pesano meno).
   tipo + modale di dettaglio (`components/project-card.tsx`), side project con link
   GitHub, copy IT/EN nel namespace `projects`. Cautele di framing applicate (no link
   cliente, no LOC su ixily, "scala del sistema" invece di "risultati").
-- 🔜 **Prossima: Fase 6 — Motion, responsive, a11y, SEO.** Include la decisione su
-  `keepMounted` per indicizzare i case study (vedi nota in Fase 5) e il rifacimento
-  di `opengraph-image` (ancora nello stile navy/mint).
+- ✅ **Fase 6 FATTA** (salvo smoke visivo): pass a11y (skip link, icone e indici
+  `aria-hidden`, focus outline globale), **contrasto AA verificato numericamente** →
+  corretto `--ring` light (2.63:1 → 4.83:1), `keepMounted` sui case study,
+  `opengraph-image` rifatta **per lingua** sotto `[locale]/` (+ matcher di `proxy.ts`
+  aggiornato, TTF in `src/assets/fonts/`). **Le entrate allo scroll sono state
+  implementate e poi scartate**: niente motion, il sito resta statico alla lettura.
+- 🔜 **Prossima: Fase 7 — Pulizia & chiusura.** Prima però mancano gli **smoke visivi di
+  Davide** per la Fase 6: pass responsive mobile e Lighthouse su `/` e `/en`.
 - Le decisioni e i contenuti sono in questo file + `redesign-goals.md` +
   `site-content.md`; le regole di lavoro in `CLAUDE.md`. Reference visiva in
   `private/` (gitignored).

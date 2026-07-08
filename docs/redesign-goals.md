@@ -166,9 +166,13 @@ Scala tipografica ampia, gerarchia netta (hero grande, etichette sezione piccole
 
 - **Forme sobrie**: radius contenuti, bordi/filetti sottili, **poche o zero ombre**,
   superfici piatte. Densità bassa, ritmo verticale generoso.
-- **Motion discreto**: entrate leggere allo scroll, hover misurati, transizione
-  fluida di **tema** e **lingua**. Stack: `motion` + `tw-animate-css` (già presenti).
-  Niente effetti appariscenti.
+- **Motion: quasi assente** _(deciso in Fase 6, dopo averlo provato)_. **Niente entrate
+  allo scroll**: erano state implementate e poi scartate — la pagina resta ferma alla
+  lettura, coerente col minimalismo editoriale. Restano solo **hover misurati**
+  (`transition-colors`), le transizioni dei componenti Base UI (drawer, sheet) e lo
+  **smooth-scroll** delle ancore (disattivato sotto `prefers-reduced-motion`). Il cambio
+  di **tema** è istantaneo di proposito (`disableTransitionOnChange`, evita gli artefatti
+  di ripitturazione). Stack: solo `tw-animate-css`; **`motion` non è più usato**.
 
 ### Componenti chiave
 
@@ -248,7 +252,8 @@ Scala tipografica ampia, gerarchia netta (hero grande, etichette sezione piccole
 Si parte dallo stack già modernizzato nella migrazione conclusa (git history):
 
 - Next.js 16 (App Router/RSC), React 19, TypeScript strict.
-- Tailwind CSS v4 (config CSS-first in `globals.css`), tw-animate-css, `motion`.
+- Tailwind CSS v4 (config CSS-first in `globals.css`), tw-animate-css. _(`motion` era
+  in stack ma non è più usato: rimozione nel prune di Fase 7.)_
 - shadcn/ui su **Base UI** (`@base-ui/react`, stile `base-nova`) — non più Radix.
   react-hook-form + Zod, Resend (contatti).
 - Deploy Vercel (auto-deploy da `main`), SEO/OG/sitemap/robots già presenti.
@@ -263,8 +268,7 @@ accessibilità e SEO impostate in Fase 7.
 - Backend/CMS per i contenuti (restano in file/dati versionati; niente headless CMS).
 - Blog o aree autenticate.
 - Ridiscutere lo stack di base (già fatto nella migrazione).
-- Animazioni "di ingresso" del vecchio TODO come priorità a sé — rientrano nel
-  linguaggio di motion complessivo, non come task isolato.
+- Animazioni "di ingresso": **escluse del tutto** (provate in Fase 6 e scartate — vedi §5).
 
 ---
 
@@ -276,6 +280,8 @@ accessibilità e SEO impostate in Fase 7.
   Priorità: pulizia e semplicità.
 - **Motivo "developer" abbandonato** (niente `<DA/>`, slash, cursore, menta neon).
 - **Palette monocroma** (neutri, niente accento colore).
+- **Niente motion allo scroll** _(deciso in Fase 6, dopo averlo provato e scartato)_:
+  solo hover, transizioni dei componenti e smooth-scroll delle ancore.
 - **Ripartenza pulita shadcn**: riscrivere `globals.css` (modello baaarber, OKLCH),
   reinit shadcn base neutral, ri-scaricare solo i componenti necessari, cancellare
   gli `ui/` attuali.

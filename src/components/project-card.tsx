@@ -68,11 +68,14 @@ export function ProjectCard({ project }: { project: Project }) {
         </span>
         <span className="mt-0.5 flex shrink-0 items-center gap-1 text-xs text-muted-foreground transition-colors group-hover:text-foreground">
           <span className="sr-only sm:not-sr-only">{t("labels.details")}</span>
-          <ArrowUpRight className="size-4" />
+          <ArrowUpRight aria-hidden className="size-4" />
         </span>
       </DrawerTrigger>
 
-      <DrawerContent className="md:data-[swipe-axis=x]:[--drawer-content-width:38rem]">
+      <DrawerContent
+        keepMounted
+        className="md:data-[swipe-axis=x]:[--drawer-content-width:38rem]"
+      >
         <DrawerHeader>
           <DrawerTitle className="text-xl">{t(`${item}.title`)}</DrawerTitle>
           <DrawerDescription className="text-pretty">

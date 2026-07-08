@@ -18,9 +18,10 @@ export function ModeToggle() {
       onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
     >
       {/* Visibilità guidata dalla classe `.dark` (CSS), non da stato React:
-          SSR e client rendono lo stesso DOM → niente hydration mismatch. */}
-      <Sun className="hidden size-5 dark:block" />
-      <Moon className="size-5 dark:hidden" />
+          SSR e client rendono lo stesso DOM → niente hydration mismatch.
+          `aria-hidden`: l'etichetta del bottone è già `aria-label`. */}
+      <Sun aria-hidden className="hidden size-5 dark:block" />
+      <Moon aria-hidden className="size-5 dark:hidden" />
     </Button>
   )
 }

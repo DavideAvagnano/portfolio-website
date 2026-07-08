@@ -1,4 +1,4 @@
-import { setRequestLocale } from "next-intl/server"
+import { getTranslations, setRequestLocale } from "next-intl/server"
 import { resolveLocale } from "@/i18n/routing"
 import { Container } from "@/components/container"
 import { SiteHeader } from "@/components/site-header"
@@ -13,7 +13,6 @@ import { Contact } from "@/components/sections/contact"
 // Home one-page. Ogni sezione è un componente in `components/sections/` e ricava
 // da sé il proprio indice editoriale da `NAV_ITEMS` (vedi `sectionIndex`), così
 // l'ordine della pagina resta l'unica fonte di verità della numerazione.
-// I case study dei Progetti arrivano in Fase 5.
 export default async function Home({
   params,
 }: {
@@ -22,11 +21,24 @@ export default async function Home({
   const locale = await resolveLocale(params)
   setRequestLocale(locale)
 
+  const t = await getTranslations("nav")
+
   return (
     <>
+      {/* Primo elemento focusabile della pagina: scavalca header e nav (WCAG 2.4.1).
+          Invisibile al mouse, appare solo al focus da tastiera. */}
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-3 focus:left-3 focus:z-60 focus:rounded-md focus:border focus:border-border focus:bg-background focus:px-4 focus:py-2 focus:text-sm focus:font-medium"
+      >
+        {t("skipToContent")}
+      </a>
+
       <SiteHeader />
 
-      <main>
+      {/* `tabIndex={-1}`: senza, il browser sposta lo scroll ma non il focus, e il
+          tab successivo ripartirebbe dall'header — lo skip link sarebbe inutile. */}
+      <main id="main" tabIndex={-1} className="outline-none">
         <Hero />
 
         <Container>

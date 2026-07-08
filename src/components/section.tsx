@@ -24,7 +24,9 @@ export function Section({
     >
       <div className="flex items-baseline gap-4">
         {index && (
-          <span className="text-xs tabular-nums sm:text-sm">{index}</span>
+          <span aria-hidden className="text-xs tabular-nums sm:text-sm">
+            {index}
+          </span>
         )}
         <h2
           id={`${id}-label`}

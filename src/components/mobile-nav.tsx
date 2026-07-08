@@ -66,7 +66,7 @@ export function MobileNav() {
           />
         }
       >
-        <Menu className="size-5" />
+        <Menu aria-hidden className="size-5" />
       </SheetTrigger>
 
       <SheetContent side="right" className="w-[85%] max-w-xs gap-0 p-0">
@@ -93,7 +93,10 @@ export function MobileNav() {
               onClick={(event) => handleNavClick(event, item)}
               className="flex items-baseline gap-3 rounded-md px-3 py-3 text-base font-medium transition-colors hover:bg-muted"
             >
-              <span className="text-xs text-muted-foreground/60 tabular-nums">
+              <span
+                aria-hidden
+                className="text-xs text-muted-foreground tabular-nums"
+              >
                 {navIndex(i)}
               </span>
               {t(item)}

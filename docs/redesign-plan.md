@@ -55,9 +55,10 @@ Obiettivo: base visiva pulita e monocroma, tema light/dark funzionante, font pro
 più Radix. Colto al volo (siamo a Fase 1, costo minimo):
 
 - Deps: `+@base-ui/react +shadcn` (quest'ultimo serve per `@import "shadcn/tailwind.css"`),
-  `−radix-ui`. Base color **zinc**, stile **base-nova**.
-- `globals.css`, `components.json` e `ui/button.tsx` allineati al preset (valori zinc,
-  set token completo, scala radius). Font nostri: **Fraunces** (`--font-heading`) +
+  `−radix-ui`. Base color **zinc** _(→ migrato a **neutral** in Fase 7)_, stile **base-nova**.
+- `globals.css`, `components.json` e `ui/button.tsx` allineati al preset (valori zinc
+  all'epoca, oggi neutral; set token completo, scala radius). Font nostri: **Fraunces**
+  (`--font-heading`) +
   **Inter** (`--font-sans`).
 - **Base UI ≠ Radix**: niente `asChild`/`Slot` → si usa il prop **`render`**
   (es. `<Button render={<Link/>}>` nella 404).
@@ -251,6 +252,14 @@ Obiettivo: il pezzo forte, senza svendere i case study.
 - [x] **Card essenziali** raggruppate **per tipo**, niente filtri/tab (con sei voci
       non servono, e sarebbero contro il minimalismo). Ordine **per impatto**:
       Baaarber → Hypefill → Scalability → ixily → fy-log-manager → side.
+      _(Rifatte dopo la Fase 7: la lista a piena larghezza risultava un muro di testo.
+      Ora **griglia a 2 colonne** (1 su mobile) di card con filetto e superficie, con
+      **anteprima dello stack** — prime 3 tech + "+N" — e la freccia in alto a destra.
+      Il gruppo con una sola voce prende l'intera riga (`sm:col-span-2`), invece di
+      lasciare mezza riga vuota. `ProjectCardBody` è condiviso tra i case study
+      (`<button>` che apre il drawer) e i side project (`<a>` verso GitHub): stesso
+      aspetto, semantica diversa. ⚠️ Solo `<span>` là dentro: il contenuto di un
+      `<button>` dev'essere **phrasing content**.)_
 - [x] **Drawer di dettaglio** (`components/project-card.tsx`, Base UI `Drawer`):
       contesto → stack → punti chiave → scala del sistema → ruolo, più la nota
       "progetto cliente: codice e ambienti non sono pubblici". Entra **da destra su
@@ -311,10 +320,13 @@ sulla premessa: vedi la nota nella Fase 6).
       sull'indicatore nativo del browser, che soddisfa già WCAG 2.4.7. La regola dava
       coerenza cromatica col tema monocromo, non conformità.)_
 - [x] **Contrasto AA verificato numericamente** (non a occhio): tutte le coppie
-      testo/sfondo dei token sono ≥ 4.5:1 in **entrambi** i temi. **Trovato e corretto
-      un difetto**: `--ring` light era zinc-400 → **2.63:1**, sotto il minimo 3:1 di
-      WCAG 2.4.11 per l'indicatore di focus. Sceso a zinc-500 → **4.83:1** (deviazione
-      consapevole dal preset shadcn `zinc`; il dark era già conforme, 4.12:1).
+      testo/sfondo dei token sono ≥ 4.5:1 in **entrambi** i temi.
+      ⚠️ **Eccezione nota, accettata da Davide** (vedi la nota "Palette neutral" più
+      in basso): il `--ring` in **light** è neutral-400 → **2.59:1**, sotto il minimo
+      3:1 di WCAG 2.4.11 per l'indicatore di focus. È il valore del preset neutral e
+      **si tiene com'è**, per fedeltà al preset. _(Storia: sotto zinc era stato
+      abbassato a zinc-500 per conformità; il passaggio a neutral ha riportato il
+      valore di preset e si è scelto di lasciarlo.)_
 - [x] **SEO**: metadata/hreflang/canonical/sitemap/robots per-locale verificati sul dev
       (`/` IT, `/en`, `/it` → 307, 404 localizzato). **`opengraph-image` rifatta** nello
       stile editoriale monocromo e spostata sotto `[locale]/` → una per lingua, copy da
@@ -368,6 +380,18 @@ dedicate o `<details>`), non un'altra prop.
 
 ## Fase 7 — Pulizia & chiusura
 
+- [x] **Palette: da zinc a neutral** _(scelta di Davide)_. In `globals.css` i token
+      sono passati al preset **neutral** di shadcn (chroma e hue azzerati: `0.145 0 0`
+      invece di `0.141 0.005 285.823`) → grigio puro, senza la sfumatura blu-viola di
+      zinc. Coerente con la palette monocroma dei goals. Ricadute gestite:
+      **(a)** l'immagine OG usa hex hardcoded (satori non legge `oklch()`) → aggiornati
+      da valori zinc a neutral (`#0a0a0a`, `#a1a1a1`, `#262626`, `#525252`);
+      **(b)** il `--ring` light: vedi l'eccezione WCAG accettata, sotto.
+      ⚠️ **`--ring` light = neutral-400 (2.59:1), sotto il minimo 3:1 di WCAG 2.4.11.**
+      È il valore del preset e **si tiene com'è**, per fedeltà al preset (deciso da
+      Davide). Nel dark il preset usa già neutral-500 (0.556, conforme). Se in futuro
+      si vuole la conformità anche in light, portare **solo** `--ring` di `:root` a
+      `oklch(0.556 0 0)` → 4.18:1. **Non è un bug da "correggere" senza chiedere.**
 - [x] ~~**Prune componenti shadcn**~~ → **ANNULLATO, per scelta di Davide.** La suite
       completa (~60 componenti in `components/ui/`) **resta**, e con essa le sue
       dipendenze (`recharts`, `embla-carousel-react`, `react-day-picker`, `cmdk`,
@@ -425,8 +449,8 @@ dedicate o `<details>`), non un'altra prop.
 ## Stato avanzamento (per riprendere dopo un compact)
 
 - ✅ **Fase 1 FATTA e committata** (`fbbac5d`): design system Base UI (base-nova,
-  zinc), suite shadcn completa, tema light/dark, font A, shell minimale, pulizia
-  vecchie sezioni.
+  zinc → poi neutral in Fase 7), suite shadcn completa, tema light/dark, font A, shell
+  minimale, pulizia vecchie sezioni.
 - ✅ **Fase 2 FATTA e committata**: i18n next-intl, route `[locale]`,
   `localePrefix: "as-needed"` (IT su root, EN su `/en`), detection browser attiva,
   middleware in `src/proxy.ts`, SEO per-locale (hreflang/canonical/sitemap), language
@@ -446,8 +470,9 @@ dedicate o `<details>`), non un'altra prop.
   GitHub, copy IT/EN nel namespace `projects`. Cautele di framing applicate (no link
   cliente, no LOC su ixily, "scala del sistema" invece di "risultati").
 - ✅ **Fase 6 FATTA** (salvo smoke visivo): pass a11y (skip link, icone e indici
-  `aria-hidden`, focus outline globale), **contrasto AA verificato numericamente** →
-  corretto `--ring` light (2.63:1 → 4.83:1), `keepMounted` sui case study,
+  `aria-hidden`), **contrasto AA verificato numericamente** (le coppie testo/sfondo
+  sono conformi; il `--ring` light resta sotto soglia per fedeltà al preset neutral —
+  scelta consapevole), `keepMounted` sui case study,
   `opengraph-image` rifatta **per lingua** sotto `[locale]/` (+ matcher di `proxy.ts`
   aggiornato, TTF in `src/assets/fonts/`). **Le entrate allo scroll sono state
   implementate e poi scartate**: niente motion, il sito resta statico alla lettura.

@@ -128,8 +128,8 @@ l'estetica "developer" attuale (niente `<DA/>`, slash nei titoli, cursore, menta
 
 ### Palette
 
-- **Monocroma** _(deciso)_: scala di neutri (base `neutral`/`zinc`), **niente
-  accento colore**. Contrasto e gerarchia dati da peso tipografico e spazio, non dal
+- **Monocroma** _(deciso)_: scala di neutri (base **`neutral`**, grigio puro; era
+  `zinc`, migrato in Fase 7), **niente accento colore**. Contrasto e gerarchia dati da peso tipografico e spazio, non dal
   colore. Light: bianco/off-white + testo quasi-nero + grigi per meta/filetti.
 - **Dark derivato**: contraltare scuro neutro (non "navy neon"), accessibile (AA).
 

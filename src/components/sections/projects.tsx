@@ -1,10 +1,14 @@
-import { ArrowUpRight } from "lucide-react"
 import { useTranslations } from "next-intl"
 
 import { Section } from "@/components/section"
 import { ProjectCard } from "@/components/project-card"
+import {
+  ProjectCardBody,
+  projectCardShell,
+} from "@/components/project-card-body"
 import { sectionIndex } from "@/lib/nav"
 import { PROJECT_GROUPS, SIDE_PROJECTS } from "@/data/projects"
+import { cn } from "@/lib/utils"
 
 function GroupLabel({ children }: { children: React.ReactNode }) {
   return (
@@ -12,6 +16,10 @@ function GroupLabel({ children }: { children: React.ReactNode }) {
       {children}
     </h3>
   )
+}
+
+function CardGrid({ children }: { children: React.ReactNode }) {
+  return <div className="mt-4 grid gap-4 sm:grid-cols-2">{children}</div>
 }
 
 // Sezione minore, in coda: progetti personali del periodo da autodidatta. Qui il
@@ -23,35 +31,24 @@ function SideProjects() {
   return (
     <div>
       <GroupLabel>{t("groups.side")}</GroupLabel>
-      <ul className="mt-2 divide-y divide-border/50">
+      <CardGrid>
         {SIDE_PROJECTS.map((project) => (
-          <li key={project.id}>
-            <a
-              href={project.repo}
-              target="_blank"
-              rel="noreferrer"
-              aria-label={`${t(`side.${project.id}.title`)} — ${t("labels.viewSource")}`}
-              className="group -mx-3 flex items-start gap-4 rounded-lg px-3 py-5 transition-colors hover:bg-muted/50"
-            >
-              <div className="flex-1">
-                <h4 className="font-heading font-medium tracking-tight">
-                  {t(`side.${project.id}.title`)}
-                </h4>
-                <p className="mt-1 text-sm text-pretty text-muted-foreground">
-                  {t(`side.${project.id}.tagline`)}
-                </p>
-                <p className="mt-2 text-xs text-muted-foreground">
-                  {project.stack.join(", ")}
-                </p>
-              </div>
-              <ArrowUpRight
-                aria-hidden
-                className="mt-0.5 size-4 shrink-0 text-muted-foreground transition-colors group-hover:text-foreground"
-              />
-            </a>
-          </li>
+          <a
+            key={project.id}
+            href={project.repo}
+            target="_blank"
+            rel="noreferrer"
+            className={projectCardShell}
+          >
+            <ProjectCardBody
+              title={t(`side.${project.id}.title`)}
+              tagline={t(`side.${project.id}.tagline`)}
+              stack={project.stack}
+              srLabel={t("labels.viewSource")}
+            />
+          </a>
         ))}
-      </ul>
+      </CardGrid>
     </div>
   )
 }
@@ -70,15 +67,19 @@ export function Projects() {
     >
       <p className="max-w-xl text-pretty text-muted-foreground">{t("intro")}</p>
 
-      <div className="mt-12 space-y-12">
+      <div className="mt-12 space-y-10">
         {PROJECT_GROUPS.map((group) => (
           <div key={group.id}>
             <GroupLabel>{t(`groups.${group.id}`)}</GroupLabel>
-            <div className="mt-2 divide-y divide-border/50">
+            <CardGrid>
               {group.projects.map((project) => (
-                <ProjectCard key={project.id} project={project} />
+                <ProjectCard
+                  key={project.id}
+                  project={project}
+                  className={cn(group.projects.length === 1 && "sm:col-span-2")}
+                />
               ))}
-            </div>
+            </CardGrid>
           </div>
         ))}
 

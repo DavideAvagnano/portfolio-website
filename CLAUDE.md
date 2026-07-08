@@ -47,7 +47,9 @@ npm run format      # prettier (prima del commit)
 - **Tailwind CSS v4** — config **CSS-first** in `src/app/globals.css`
   (`@theme`, `@custom-variant dark`). **Non** esiste `tailwind.config.ts`.
 - **shadcn/ui** su **Base UI** (`@base-ui/react`) — stile `base-nova`, base color
-  `zinc`. **Non** Radix (`asChild`/`Slot` non esistono → per il polimorfismo si usa
+  `neutral` (grigio puro; migrato da `zinc` in Fase 7 per un monocromo senza tinta —
+  i token in `globals.css` e `components.json` sono allineati). **Non** Radix
+  (`asChild`/`Slot` non esistono → per il polimorfismo si usa
   il prop **`render`**, es. `<Button render={<Link .../>}>`). `globals.css` importa
   `shadcn/tailwind.css`. **Per un LINK con aspetto da bottone** (`<a>`/`Link`) usa
   **`buttonVariants({ variant, size })`** come `className` su un `<a>`/`Link`

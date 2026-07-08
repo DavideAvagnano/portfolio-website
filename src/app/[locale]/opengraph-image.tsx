@@ -23,12 +23,13 @@ export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }))
 }
 
-// Token del tema dark, in hex: satori non interpreta `oklch()`.
-const BACKGROUND = "#09090b" // --background (dark)
-const FOREGROUND = "#fafafa" // --foreground (dark)
-const MUTED = "#a1a1aa" // --muted-foreground (dark)
-const RULE = "#27272a" // filetto
-const FAINT = "#52525b" // badge lingua: subordinato, ma leggibile
+// Token del tema dark, in hex: satori non interpreta `oklch()`. Scala **neutral**
+// (grigio puro), coerente con globals.css — non zinc (che tende al blu-viola).
+const BACKGROUND = "#0a0a0a" // --background dark (neutral-950)
+const FOREGROUND = "#fafafa" // --foreground dark (neutral-50)
+const MUTED = "#a1a1a1" // --muted-foreground dark (neutral-400)
+const RULE = "#262626" // filetto (neutral-800)
+const FAINT = "#525252" // badge lingua: subordinato, ma leggibile (neutral-600)
 
 export default async function OpengraphImage({
   params,

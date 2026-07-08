@@ -1,9 +1,9 @@
 import { cn } from "@/lib/utils"
 
 // Marchio "D" come SVG **inline** invece che `next/image`:
-// - si adatta al tema (quadrato = `foreground`, lettera = `background`; i colori
-//   originali #09090b/#fafafa coincidono già con i nostri token) → nel dark si
-//   inverte da solo, mentre un PNG resterebbe un quadrato nero su fondo nero;
+// - si adatta al tema via token (quadrato = `foreground`, lettera = `background`)
+//   → nel dark si inverte da solo, mentre un PNG resterebbe un quadrato nero su
+//   fondo nero;
 // - nessuna richiesta di rete e nitido a qualsiasi dimensione (niente `width`/
 //   `height` da indovinare).
 // La versione raster del marchio serve solo come `src/app/favicon.ico`.

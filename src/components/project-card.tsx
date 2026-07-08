@@ -1,9 +1,13 @@
 "use client"
 
-import { ArrowUpRight } from "lucide-react"
 import { useFormatter, useTranslations } from "next-intl"
 
+import { cn } from "@/lib/utils"
 import { useIsMobile } from "@/hooks/use-mobile"
+import {
+  ProjectCardBody,
+  projectCardShell,
+} from "@/components/project-card-body"
 import { Button } from "@/components/ui/button"
 import {
   Drawer,
@@ -27,9 +31,7 @@ function Block({
 }) {
   return (
     <section>
-      <h3 className="text-xs font-medium tracking-widest text-muted-foreground uppercase">
-        {label}
-      </h3>
+      <h3 className="text-xs font-medium tracking-widest uppercase">{label}</h3>
       <div className="mt-3">{children}</div>
     </section>
   )
@@ -43,7 +45,13 @@ function Block({
  * È un client component perché il pannello è interattivo; i messaggi sono già nel
  * provider, quindi legge le traduzioni da sé invece di ricevere una dozzina di prop.
  */
-export function ProjectCard({ project }: { project: Project }) {
+export function ProjectCard({
+  project,
+  className,
+}: {
+  project: Project
+  className?: string
+}) {
   const t = useTranslations("projects")
   const format = useFormatter()
   const isMobile = useIsMobile()
@@ -57,19 +65,13 @@ export function ProjectCard({ project }: { project: Project }) {
       showSwipeHandle={isMobile}
       swipeDirection={isMobile ? "down" : "right"}
     >
-      <DrawerTrigger className="group -mx-3 flex w-full items-start gap-4 rounded-lg px-3 py-5 text-left transition-colors hover:bg-muted/50 focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none">
-        <span className="flex-1">
-          <span className="block font-heading font-medium tracking-tight">
-            {t(`${item}.title`)}
-          </span>
-          <span className="mt-1 block text-sm text-pretty text-muted-foreground">
-            {t(`${item}.tagline`)}
-          </span>
-        </span>
-        <span className="mt-0.5 flex shrink-0 items-center gap-1 text-xs text-muted-foreground transition-colors group-hover:text-foreground">
-          <span className="sr-only sm:not-sr-only">{t("labels.details")}</span>
-          <ArrowUpRight aria-hidden className="size-4" />
-        </span>
+      <DrawerTrigger className={cn(projectCardShell, className)}>
+        <ProjectCardBody
+          title={t(`${item}.title`)}
+          tagline={t(`${item}.tagline`)}
+          stack={project.stack}
+          srLabel={t("labels.details")}
+        />
       </DrawerTrigger>
 
       <DrawerContent
@@ -83,7 +85,7 @@ export function ProjectCard({ project }: { project: Project }) {
           </DrawerDescription>
         </DrawerHeader>
 
-        <div className="min-h-0 flex-1 scroll-fade space-y-7 overflow-y-auto p-4 pt-6">
+        <div className="min-h-0 flex-1 scroll-fade space-y-7 overflow-y-auto p-6">
           <Block label={t("labels.context")}>
             <p className="leading-relaxed text-pretty">
               {t(`${item}.context`)}
@@ -105,7 +107,7 @@ export function ProjectCard({ project }: { project: Project }) {
                 >
                   <span
                     aria-hidden
-                    className="mt-2.5 size-1 shrink-0 rounded-full bg-border"
+                    className="mt-2.5 size-1 shrink-0 rounded-full bg-muted-foreground"
                   />
                   {highlight}
                 </li>

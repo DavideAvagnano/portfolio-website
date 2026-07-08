@@ -305,7 +305,11 @@ sulla premessa: vedi la nota nella Fase 6).
       `<main id="main" tabIndex={-1}>`; icone decorative `aria-hidden` (toggle tema,
       menu, CV, freccia della card); indici editoriali (`01`, `02`…) `aria-hidden`
       (lo screen reader leggeva "01 Profilo"); numerini del menu mobile riportati a
-      colore pieno (a `/60` erano sotto 3:1); focus outline di base in `globals.css`.
+      colore pieno (a `/60` erano sotto 3:1).
+      _(Era stata aggiunta anche una regola `:focus-visible` in `globals.css`, poi
+      **rimossa da Davide** (`dc3a3bb`): gli elementi senza ring dedicato ricadono
+      sull'indicatore nativo del browser, che soddisfa già WCAG 2.4.7. La regola dava
+      coerenza cromatica col tema monocromo, non conformità.)_
 - [x] **Contrasto AA verificato numericamente** (non a occhio): tutte le coppie
       testo/sfondo dei token sono ≥ 4.5:1 in **entrambi** i temi. **Trovato e corretto
       un difetto**: `--ring` light era zinc-400 → **2.63:1**, sotto il minimo 3:1 di

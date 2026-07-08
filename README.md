@@ -117,9 +117,10 @@ sitemap con alternates e una **immagine OpenGraph per lingua**.
 
 ## Accessibility
 
-Skip link, focus visibile su ogni elemento interattivo, icone decorative marcate
-`aria-hidden`, e contrasto **AA verificato** su tutte le coppie testo/sfondo in entrambi
-i temi. Nessuna animazione allo scroll; lo smooth-scroll delle ancore rispetta
+Skip link, icone decorative marcate `aria-hidden`, e contrasto **AA verificato** su tutte
+le coppie testo/sfondo in entrambi i temi. Il focus è visibile ovunque: i componenti
+`ui/` hanno un `focus-visible:ring-*` dedicato, il resto usa l'indicatore nativo del
+browser. Nessuna animazione allo scroll; lo smooth-scroll delle ancore rispetta
 `prefers-reduced-motion`.
 
 ## Deployment

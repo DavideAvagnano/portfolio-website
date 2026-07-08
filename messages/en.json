@@ -72,8 +72,112 @@
     "patterns": "Patterns",
     "patternsList": "End-to-end type-safe architectures from database to client, multi-source ETL, event-driven systems and async jobs, fine-grained RBAC, encryption of personal data, multi-tenancy, multi-layer caching, internationalization."
   },
-  "sections": {
-    "projects": "Real case studies grouped by type: SaaS, data & performance marketing, infra & security."
+  "projects": {
+    "intro": "Real case studies, grouped by type. Client projects are told in words: they have no public repository or demo.",
+    "groups": {
+      "saas": "SaaS products",
+      "data": "Data & performance marketing",
+      "infra": "Infra & security",
+      "side": "Side projects"
+    },
+    "labels": {
+      "context": "Context",
+      "stack": "Stack",
+      "highlights": "Highlights",
+      "metrics": "System scale",
+      "role": "Role",
+      "noPublicLink": "Client project: the code and environments are not public.",
+      "details": "Details",
+      "close": "Close",
+      "viewSource": "Source on GitHub"
+    },
+    "metrics": {
+      "loc": "lines of code",
+      "tables": "tables",
+      "procedures": "tRPC procedures",
+      "endpoints": "endpoints",
+      "workers": "workers in production",
+      "locales": "languages",
+      "landings": "landing pages",
+      "sites": "vertical sites",
+      "connectors": "ETL connectors"
+    },
+    "items": {
+      "baaarber": {
+        "title": "Baaarber",
+        "tagline": "A booking SaaS for barbershops and salons, built end-to-end.",
+        "context": "A platform covering the full operational cycle of a salon: the public site where customers book on their own, and the admin app for services, opening hours, staff, offers and notifications. At its heart is the availability engine, which computes free slots on the fly. Commissioned by a client in the beauty/booking space.",
+        "highlights": [
+          "The availability engine is the single source of truth: the same function draws the calendar and validates the booking. When two bookings race for the same slot, the database decides — with a partial unique index.",
+          "Authorization on two orthogonal axes in AND: RBAC scopes (anti-escalation) and commercial plan features, cached and fail-closed.",
+          "Personal data encrypted at rest (AES-256-GCM) with a blind index for lookups. The encryption boundary is guarded by CI and by TypeScript brand types: misusing it is a compile error, not a production incident.",
+          "Optimistic concurrency, universal soft-delete and six idempotent scheduled workers.",
+          "Multi-channel notifications with an outbox pattern and retries; an AI layer with cost governance (spend caps, usage log, per-model pricing)."
+        ],
+        "role": "Architecture, full-stack development, documentation and deployment — almost entirely on my own."
+      },
+      "hypefill": {
+        "title": "Hypefill",
+        "tagline": "A multi-tenant B2B SaaS for e-commerce analytics and operations.",
+        "context": "It centralizes data from Shopify, couriers, Meta Ads, exchange rates and fuel prices to compute real-time multi-currency net margins. It includes a conversational assistant with a RAG architecture that answers by querying the data.",
+        "highlights": [
+          "End-to-end type-safety from database to client, across 122 procedures.",
+          "Multi-node AI assistant: hybrid BM25 + kNN search on Elasticsearch, SQL generation against a read-only database, and widgets described in natural language.",
+          "Background processing with queues, distributed locking and retries with backoff.",
+          "Composable multi-level permissions; encrypted personal data; Shopify webhooks verified with HMAC.",
+          "Advanced PostgreSQL usage: daterange, JSONB, partial unique indexes."
+        ],
+        "role": "Full-stack development of the platform: architecture, AI/RAG system, background processing, RBAC, integrations."
+      },
+      "scalability": {
+        "title": "Scalability ecosystem",
+        "tagline": "Marketing intelligence and lead generation: three applications covering the whole funnel.",
+        "context": "Three interconnected applications covering campaign creation, landing pages, event collection, call tracking and data reconciliation across platforms. A multi-tenant marketing intelligence SaaS is the brain, a renderer of branded landing pages is the body, and a configuration-distribution daemon is the nervous system. Domain: healthcare and senior benefits, US market.",
+        "highlights": [
+          "Cross-platform reconciliation: merging ad spend, web conversions and phone conversions into a single truth, with weighted averages and match scoring. It is the heart of the system and the hardest problem in it.",
+          "Dashboards updated in real time via PostgreSQL LISTEN/NOTIFY, an automation rule engine and bulk campaign management.",
+          "Multi-tenant landing page renderer with a quiz and chatbot engine described in JSON: new funnels without writing code.",
+          "Multi-layer caching (reverse proxy → Redis → database) and per-domain builds.",
+          "Fine-grained RBAC and more than fifteen worker processes in production."
+        ],
+        "role": "Full-stack contribution: frontend, APIs, workers, database schema, integrations, deployment."
+      },
+      "ixily": {
+        "title": "ixily ecosystem",
+        "tagline": "Ad arbitrage: traffic bought from seven ad networks, routed to twenty-seven vertical sites.",
+        "context": "A closed loop of ad arbitrage: buying traffic, multi-language vertical sites, monetization through sponsored search feeds and server-to-server conversion tracking. Three projects: an ETL and analytics backend, a multi-site consumer frontend, and a management dashboard.",
+        "highlights": [
+          "Ten config-driven ETL connectors behind a shared abstraction: adding a data source is configuration, not new code.",
+          "Config-driven multi-tenancy: twenty-seven domains served from a single codebase.",
+          "Server-to-server conversion tracking, with hashing of personal data.",
+          "An AI pipeline for content generation and translations into a headless CMS.",
+          "In the dashboard, a reusable universal table and URL-driven state."
+        ],
+        "role": "A multi-year ecosystem built by many hands: I contributed to it, I don't claim authorship of it."
+      },
+      "logManager": {
+        "title": "fy-log-manager",
+        "tagline": "Security operations automation: from detection to response.",
+        "context": "It automates the detection→response cycle across multi-server web infrastructure: it analyses IDS alerts through Elasticsearch, produces reports of malicious IPs and manages firewall rules on remote servers — blocking, ageing, pruning.",
+        "highlights": [
+          "A multi-stage, protocol-aware IP filtering pipeline.",
+          "Streaming reads over large volumes of alerts (Scroll API), without loading everything into memory.",
+          "Firewall rule lifecycle with metadata: every block stays traceable and reversible.",
+          "Runtime-validated configuration, structured logging, execution as a system service."
+        ],
+        "role": "Conception and development of the tool, integration with the logging stack and with production servers."
+      }
+    },
+    "side": {
+      "authApp": {
+        "title": "Authentication App",
+        "tagline": "Authentication with NextAuth v5: login, password reset and two-factor verification by email."
+      },
+      "dashboard": {
+        "title": "Dashboard Management",
+        "tagline": "Inventory management app with dynamic charts, an Express API and deployment on AWS."
+      }
+    }
   },
   "contact": {
     "title": "Let's work together.",

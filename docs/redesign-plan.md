@@ -240,21 +240,58 @@ indice editoriale (`sectionIndex(id)` in `lib/nav.ts`, che legge la posizione in
 
 ---
 
-## Fase 5 — Progetti / case study (card + modale)
+## Fase 5 — Progetti / case study (card + modale) ✅ FATTA
 
 Obiettivo: il pezzo forte, senza svendere i case study.
 
-- [ ] **Nuovo modello dati** `data/projects` (case study): `title`, `tagline`, `type`
-      (SaaS / Data & Perf. Marketing / Infra & Security / Side), `stack[]`, `highlights[]`,
-      `metrics[]`, `role`, `links?` (solo side projects). Contenuti da §5 di `site-content.md`.
-- [ ] **Lista/card essenziali** raggruppate **per tipo** (no filtri/tab), ordine per
-      impatto: Baaarber → Hypefill → Scalability → ixily → log-manager → side.
-- [ ] **Modale/drawer di dettaglio** al click: problema → stack → highlights →
-      metriche → ruolo. Rispettare le **cautele** (no link Baaarber, no dettagli
-      sensibili Scalability, attribuzione onesta ixily).
-- [ ] **Side projects** (2: Authentication App, Dashboard Management) con link GitHub.
-- [ ] i18n dei contenuti progetti.
-- [ ] Verifica build + modale accessibile (focus trap, ESC, aria).
+- [x] **Modello dati** `data/projects.ts`: solo ciò che **non si traduce** — `id`
+      (union, non `string`: rende type-safe le chiavi `projects.items.<id>.*`),
+      `stack[]`, `metrics[]` (`{key, value, approx?}`), `repo` (solo side project).
+      Titolo, tagline, contesto, punti chiave e ruolo sono copy tradotto.
+- [x] **Card essenziali** raggruppate **per tipo**, niente filtri/tab (con sei voci
+      non servono, e sarebbero contro il minimalismo). Ordine **per impatto**:
+      Baaarber → Hypefill → Scalability → ixily → fy-log-manager → side.
+- [x] **Drawer di dettaglio** (`components/project-card.tsx`, Base UI `Drawer`):
+      contesto → stack → punti chiave → scala del sistema → ruolo, più la nota
+      "progetto cliente: codice e ambienti non sono pubblici". Entra **da destra su
+      desktop, dal basso su mobile** (`swipeDirection` + `showSwipeHandle` guidati da
+      `useIsMobile()`): il gesto di chiusura combacia con il lato di ingresso.
+- [x] **Side projects** (Authentication App, Dashboard Management) con link GitHub,
+      **senza** modale: la profondità sta nel repository.
+- [x] i18n dei contenuti progetti (namespace `projects`; `sections` rimosso perché
+      non serviva più). Numeri formattati per locale con `useFormatter().number()`.
+- [x] Verifica: `typecheck` + `lint` + `format` verdi; smoke curl `/` e `/en`.
+
+**Cautele di framing applicate** (`site-content.md` §10):
+
+- Nessun link pubblico per i progetti cliente, **Baaarber incluso**.
+- Scalability: solo livello architetturale — niente IP/token, niente rotazione proxy
+  o sniffing via monkeypatch.
+- ixily: ruolo esplicito ("ho contribuito, non ne rivendico l'authorship"). Le LOC
+  restano perché il blocco si chiama "scala del sistema" e il ruolo è dichiarato: il
+  numero misura il sistema, non la produzione personale.
+- L'etichetta delle metriche è **"Scala del sistema"**, non "risultati": i numeri
+  descrivono il sistema, non la produzione personale. Se quell'etichetta cambia,
+  vanno rivalutate le LOC di ixily e Scalability.
+
+**Scelte non ovvie:**
+
+- Il titolo della card è uno `<span>`, non un `<h3>`: un heading dentro `<button>` è
+  HTML non valido (il bottone ammette solo contenuto di frase).
+- Il pannello laterale di serie è largo **24rem**: troppo stretto per un case study.
+  Lo allarghiamo a 38rem con `md:data-[swipe-axis=x]:[--drawer-content-width:38rem]`.
+  Funziona **senza `!important`**: stessa specificità della regola di base
+  (`data-[swipe-axis=x]:sm:…`), ma Tailwind emette il blocco `md` dopo quello `sm`
+  (verificato nel CSS generato). Sotto `md` l'asse è verticale → la regola non tocca
+  il drawer mobile.
+- I punti chiave sono **array** nei messaggi (lunghezza variabile per progetto) →
+  letti con `t.raw()`, che con i messaggi tipizzati resta type-safe.
+
+⚠️ **Nota SEO, da decidere in Fase 6:** Base UI monta il Portal del drawer solo
+all'apertura, quindi **il testo dei case study non è nel DOM iniziale** (compare solo
+come JSON nel payload dei messaggi). Se si vuole che i case study siano indicizzati,
+serve `keepMounted` sul `DrawerPortal`. Trade-off: contenuto in HTML vs. payload più
+pesante e contenuto `hidden` (che i motori comunque pesano meno).
 
 ---
 
@@ -330,8 +367,13 @@ Obiettivo: il pezzo forte, senza svendere i case study.
   Competenze, Contatti) con copy reale IT/EN da `site-content.md`; `data/journey.ts` +
   `data/skills.ts` (id/tech non traducibili); form contatti con schema-factory i18n,
   server action a codici d'errore, escaping HTML e `replyTo` nella mail.
-- 🔜 **Prossima: Fase 5 — Progetti / case study** (card + modale, raggruppati per
-  tipo). La sezione `#projects` è oggi ancora un placeholder.
+- ✅ **Fase 5 FATTA**: `data/projects.ts` (id/stack/metriche), card raggruppate per
+  tipo + modale di dettaglio (`components/project-card.tsx`), side project con link
+  GitHub, copy IT/EN nel namespace `projects`. Cautele di framing applicate (no link
+  cliente, no LOC su ixily, "scala del sistema" invece di "risultati").
+- 🔜 **Prossima: Fase 6 — Motion, responsive, a11y, SEO.** Include la decisione su
+  `keepMounted` per indicizzare i case study (vedi nota in Fase 5) e il rifacimento
+  di `opengraph-image` (ancora nello stile navy/mint).
 - Le decisioni e i contenuti sono in questo file + `redesign-goals.md` +
   `site-content.md`; le regole di lavoro in `CLAUDE.md`. Reference visiva in
   `private/` (gitignored).

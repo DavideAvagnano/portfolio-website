@@ -24,17 +24,15 @@ export function Section({
     >
       <div className="flex items-baseline gap-4">
         {index && (
-          <span className="text-xs text-muted-foreground tabular-nums">
-            {index}
-          </span>
+          <span className="text-xs tabular-nums sm:text-sm">{index}</span>
         )}
         <h2
           id={`${id}-label`}
-          className="text-xs font-medium tracking-widest text-muted-foreground uppercase"
+          className="text-xs font-medium tracking-widest uppercase sm:text-sm"
         >
           {label}
         </h2>
-        <span aria-hidden className="h-px flex-1 bg-border/60" />
+        <span aria-hidden className="h-px flex-1 bg-border" />
       </div>
 
       <div className="mt-8">{children}</div>

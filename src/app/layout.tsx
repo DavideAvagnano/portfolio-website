@@ -5,6 +5,7 @@ import "./globals.css"
 import { siteConfig } from "@/lib/site"
 import { fontVariables } from "@/lib/fonts"
 import { ThemeProvider } from "@/components/theme-provider"
+import { Toaster } from "@/components/ui/sonner"
 import { cn } from "@/lib/utils"
 
 // Impostato qui così vale per TUTTE le route (incluse `_not-found`).
@@ -31,7 +32,10 @@ export default async function RootLayout({
       className={cn(fontVariables, "antialiased")}
     >
       <body>
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          {children}
+          <Toaster />
+        </ThemeProvider>
       </body>
     </html>
   )

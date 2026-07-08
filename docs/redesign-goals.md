@@ -249,7 +249,8 @@ Si parte dallo stack già modernizzato nella migrazione conclusa (git history):
 
 - Next.js 16 (App Router/RSC), React 19, TypeScript strict.
 - Tailwind CSS v4 (config CSS-first in `globals.css`), tw-animate-css, `motion`.
-- shadcn/ui + Radix (`radix-ui`), react-hook-form + Zod, Resend (contatti).
+- shadcn/ui su **Base UI** (`@base-ui/react`, stile `base-nova`) — non più Radix.
+  react-hook-form + Zod, Resend (contatti).
 - Deploy Vercel (auto-deploy da `main`), SEO/OG/sitemap/robots già presenti.
 
 Il redesign deve **preservare**: type-safety, `typecheck`/`lint`/`build` verdi,
@@ -300,8 +301,13 @@ accessibilità e SEO impostate in Fase 7.
 
 ### ❓ Ancora aperte
 
-- **Font**: scelta finale tra A / B / C.
-- **Dipendenza CV**: i 2 PDF (IT/EN) da generare dal `cv-system`.
-- **Timeline/framing anni**: vedi nota in `site-content.md` §6 (riformulazione
-  onesta del percorso software; bagnino ridimensionato).
-- **Attribuzione** per ecosistema (livello di claim per progetto).
+- **Attribuzione** per ecosistema (livello di claim per progetto) — da fissare
+  progetto per progetto in **Fase 5** (case study).
+- **(Opzionale)** screenshot Baaarber, solo con permesso del cliente.
+
+### ✅ Chiuse dopo la stesura
+
+- **Font**: coppia **A (Fraunces + Inter)**, attiva in `src/lib/fonts.ts`.
+- **PDF CV** IT/EN presenti in `public/`.
+- **Timeline/framing anni**: risolto in Fase 4 (percorso software da ~2023,
+  freelance da feb 2025; bagnino fuori dalla narrazione tech).

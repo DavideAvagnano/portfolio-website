@@ -4,11 +4,11 @@
 > [`redesign-goals.md`](redesign-goals.md), con i contenuti da
 > [`site-content.md`](site-content.md). Stessa filosofia della **migrazione tecnica
 > già conclusa** (Next 16 / React 19 / Tailwind v4 — vedi git history): **fasi
-> atomiche, un commit per fase, dopo ogni fase `typecheck` + `lint` + `build`
-> verdi** prima di procedere.
+> atomiche, un commit per fase, dopo ogni fase `typecheck` + `lint` + `format`
+> verdi** prima di procedere. _(`build` solo prima del merge in `main`, col dev
+> fermo — vedi `CLAUDE.md` §2.)_
 >
-> Branch: `development`. **Non si committa finché Davide non dà l'ok** (fase attuale
-> = preparazione).
+> Branch: `development`. **Non si committa finché Davide non dà l'ok.**
 
 ---
 
@@ -191,24 +191,52 @@ forza `role="button"` e romperebbe la semantica del link (vedi `CLAUDE.md` §3).
 
 ---
 
-## Fase 4 — Sezioni di contenuto (Hero, Profilo, Percorso, Competenze, Contatti)
+## Fase 4 — Sezioni di contenuto (Hero, Profilo, Percorso, Competenze, Contatti) ✅ FATTA
 
 Obiettivo: costruire le sezioni testuali nello stile nuovo, con copy da messages.
 
-- [ ] **Hero**: saluto tipografico ("Ciao, sono Davide" / EN), ruolo, one-liner di
-      posizionamento (§2 content), link social. **Niente foto, niente cursore.**
-- [ ] **Profilo** (about): narrativa §3 (transizione + baricentro backend). Rimuovere
-      "currently seeking a role" e tono junior.
-- [ ] **Percorso**: timeline a 2 colonne (anno · tappa) — laurea 2020 → software da
-      ~2023 (autodidatta/frontend) → freelance 2025 (§6 content). _(Grafico opzionale,
-      di default omesso per pulizia.)_
-- [ ] **Competenze**: liste testo a 2 colonne (etichetta sx / tech dx) — categorie §4
-      content (Linguaggi, Frontend, Backend, Database, Cache & code, AI, Infra/DevOps,
-      Integrazioni).
-- [ ] **Contatti**: blocco CTA "Lavoriamo insieme" + **form Resend** minimale
-      (riusare `actions/send-email` + `schemas`, restilizzati).
-- [ ] Copy IT + EN in `messages/`.
-- [ ] Verifica build + entrambe le lingue.
+Ogni sezione è un componente in **`components/sections/`** e ricava da sé il proprio
+indice editoriale (`sectionIndex(id)` in `lib/nav.ts`, che legge la posizione in
+`NAV_ITEMS`): l'ordine della pagina è l'unica fonte di verità della numerazione.
+
+- [x] **Hero** (`sections/hero.tsx`): eyebrow, saluto tipografico, ruolo, riga di
+      posizionamento, social + luogo. **Niente foto, niente cursore, niente CTA a
+      bottone** (la CTA del sito sono il CV nell'header e la sezione Contatti).
+- [x] **Profilo** (`sections/profile.tsx`): "lead" in font display + 4 paragrafi
+      (transizione aerospaziale → autodidatta dal 2023 → freelance da feb 2025 →
+      baricentro backend → eredità del metodo ingegneristico). Nessun tono junior,
+      nessun "in cerca di lavoro".
+- [x] **Percorso** (`sections/journey.tsx`): `<ol>` timeline a 2 colonne
+      (periodo · tappa) separata da filetti. Tappe in **`data/journey.ts`** (soli id
+      stabili), copy nel namespace `journey`. _(Grafico "crescita": omesso.)_
+- [x] **Competenze** (`sections/skills.tsx`): `<dl>` a 2 colonne (etichetta sx /
+      tech dx). I **nomi delle tecnologie non si traducono** → vivono in
+      **`data/skills.ts`**; nei messaggi c'è solo l'**etichetta di categoria**.
+      La riga "Pattern" è invece prosa → sta nei messaggi (`skills.patternsList`).
+- [x] **Contatti** (`sections/contact.tsx` + `contact-form.tsx`): blocco CTA
+      "Lavoriamo insieme" + email per esteso (link con `buttonVariants({variant:"link"})`) + form Resend minimale su primitive shadcn (`Field`/`FieldLabel`/`FieldError`).
+      Esito dell'invio via **toast** (`sonner`, `<Toaster/>` montato nel root layout
+      dentro `ThemeProvider`, così segue il tema). Il blocco CTA è un server component,
+      solo il form è `"use client"` (bundle client minimo).
+- [x] Copy IT + EN in `messages/` (namespace `profile`, `journey`, `skills`,
+      `contact`; `sections` ridotto al solo placeholder `projects`).
+- [x] Verifica: `typecheck` + `lint` + `format` verdi; smoke curl `/` e `/en` → 200
+      con contenuti e `<html lang>` corretti per lingua; parità chiavi it/en.
+
+**Form contatti — scelte non ovvie:**
+
+- `schemas/index.ts` espone una **factory** `createContactSchema(messages)`: i testi
+  d'errore sono tradotti, quindi il client costruisce lo schema con `useTranslations`.
+  Il server ri-valida con lo schema "neutro" e risponde con un **codice** d'errore
+  (`invalid` | `send`), non con un testo: la locale del form non è nota all'action.
+- `useWatch({control, name})` e **non** `form.watch()` per il contatore di caratteri:
+  `watch()` restituisce una funzione che il React Compiler non sa memoizzare → farebbe
+  **saltare la compilazione** dell'intero componente (warning `react-hooks/incompatible-library`).
+- A11y: `data-invalid` su `Field` + `aria-invalid` sull'input; `FieldError` rende già
+  un `role="alert"` (l'errore viene annunciato appena compare). L'esito dell'invio è un
+  toast, non un messaggio inline.
+- `lib/mail.ts`: **escaping HTML** del contenuto del form (prima veniva interpolato
+  grezzo nell'HTML della mail) e `replyTo` sul mittente reale.
 
 ---
 
@@ -247,9 +275,10 @@ Obiettivo: il pezzo forte, senza svendere i case study.
 
 - [ ] **Prune componenti shadcn**: in Fase 1 sono stati aggiunti **tutti i ~60**
       componenti (+ deps pesanti: recharts, embla-carousel, react-day-picker, cmdk,
-      react-resizable-panels, date-fns, sonner). Tenere **solo quelli usati**,
-      rimuovere gli altri e le rispettive deps. _(Runtime già ok: i non usati sono
-      tree-shaken; questo è cleanup di repo/deps.)_
+      react-resizable-panels, date-fns). Tenere **solo quelli usati**, rimuovere gli
+      altri e le rispettive deps. _(Runtime già ok: i non usati sono tree-shaken;
+      questo è cleanup di repo/deps.)_ ⚠️ **`sonner` è usato** (toast del form
+      contatti, Fase 4): non rimuoverlo.
 - [ ] Rimuovere asset/data morti: foto `src/assets/*` (foto tolta dal design) →
       eliminare la cartella. `src/data/*` (`navbar-data`, `projects-data`,
       `skills-data`) sono dead code, sostituiti in Fase 4/5 → rimuovere. **`react-icons`**
@@ -292,13 +321,17 @@ Obiettivo: il pezzo forte, senza svendere i case study.
   middleware in `src/proxy.ts`, SEO per-locale (hreflang/canonical/sitemap), language
   switcher canonico (`router.replace`), messaggi it/en con `messages` espliciti nel
   provider (no warning next-themes).
-- ✅ **Fase 3 FATTA**: `Container` (unica fonte di verità larghezza), header sticky
-  (logo mobile / nome desktop, nav ancore, lang·tema | CV), menu mobile `Sheet`,
-  footer con social a icone, `Section`, logo e icone SVG inline theme-aware,
-  `lib/nav.ts`. **`<html>`+tema spostati nel root layout** (fix flash del tema) →
-  `/[locale]` ora è dinamico invece che SSG (scelta consapevole).
-- 🔜 **Prossima: Fase 4 — Sezioni di contenuto** (Hero, Profilo, Percorso,
-  Competenze, Contatti) con copy reale da `site-content.md`.
+- ✅ **Fase 3 FATTA e committata** (`6b9a571`): `Container` (unica fonte di verità
+  larghezza), header sticky (logo mobile / nome desktop, nav ancore, lang·tema | CV),
+  menu mobile `Sheet`, footer con social a icone, `Section`, logo e icone SVG inline
+  theme-aware, `lib/nav.ts`. **`<html>`+tema spostati nel root layout** (fix flash del
+  tema) → `/[locale]` ora è dinamico invece che SSG (scelta consapevole).
+- ✅ **Fase 4 FATTA**: sezioni in `components/sections/` (Hero, Profilo, Percorso,
+  Competenze, Contatti) con copy reale IT/EN da `site-content.md`; `data/journey.ts` +
+  `data/skills.ts` (id/tech non traducibili); form contatti con schema-factory i18n,
+  server action a codici d'errore, escaping HTML e `replyTo` nella mail.
+- 🔜 **Prossima: Fase 5 — Progetti / case study** (card + modale, raggruppati per
+  tipo). La sezione `#projects` è oggi ancora un placeholder.
 - Le decisioni e i contenuti sono in questo file + `redesign-goals.md` +
   `site-content.md`; le regole di lavoro in `CLAUDE.md`. Reference visiva in
   `private/` (gitignored).

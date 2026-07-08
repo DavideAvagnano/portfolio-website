@@ -28,14 +28,77 @@
     "eyebrow": "Fullstack Developer · Freelance",
     "greeting": "Ciao, sono Davide.",
     "role": "Costruisco e mantengo sistemi di produzione end-to-end con TypeScript, React, Next.js e Node.js su PostgreSQL.",
-    "intro": "Ho contribuito a piattaforme ad alto volume e ho costruito da solo un SaaS completo. Il mio baricentro è il backend: modellazione dati, API type-safe, worker asincroni, sicurezza e deploy."
+    "intro": "Ho contribuito a piattaforme ad alto volume e ho costruito da solo un SaaS completo. Il mio baricentro è il backend: modellazione dati, API type-safe, worker asincroni, sicurezza e deploy.",
+    "location": "Napoli, Italia — lavoro da remoto, disponibile a relocation."
+  },
+  "profile": {
+    "lead": "Vengo dall'ingegneria aerospaziale. Oggi progetto e costruisco sistemi che vanno in produzione, dal database al deploy.",
+    "p1": "Mi sono laureato in Ingegneria Aerospaziale alla Federico II nel 2020. Ho iniziato la magistrale e l'ho interrotta dopo due esami: avevo capito che quello che volevo fare davvero era scrivere software. Dal 2023 mi sono formato da autodidatta, partendo dal frontend con React, Next.js e TypeScript e arrivando al full-stack.",
+    "p2": "Da febbraio 2025 lavoro a tempo pieno come fullstack developer freelance, per più clienti. Ho contribuito a piattaforme di produzione ad alto volume — marketing intelligence, analytics e-commerce, riconciliazione dati cross-platform — e in parallelo ho progettato e sviluppato in autonomia un SaaS di booking, dall'architettura al deploy.",
+    "p3": "Il mio baricentro è il backend: modellazione dei dati, API type-safe end-to-end, worker asincroni e idempotenti, autorizzazione granulare, cifratura dei dati personali, deploy e osservabilità. Uso l'AI dove porta valore reale, con attenzione ai costi, non come effetto speciale.",
+    "p4": "Dell'ingegneria mi è rimasto il metodo: modellare il problema prima di scrivere il codice, e considerare la documentazione parte del lavoro finito."
+  },
+  "journey": {
+    "degree": {
+      "period": "2020",
+      "title": "Laurea in Ingegneria Aerospaziale",
+      "description": "Università Federico II, Napoli — 105/110. Magistrale iniziata e interrotta dopo due esami, per riorientarmi verso il software."
+    },
+    "selfTaught": {
+      "period": "2023 — 2024",
+      "title": "Riconversione da autodidatta",
+      "description": "Dallo studio ai primi progetti reali: frontend con React, Next.js e TypeScript, poi il salto al full-stack. Base tecnica costruita da zero, fuori dai percorsi accademici."
+    },
+    "freelance": {
+      "period": "Febbraio 2025",
+      "title": "Primo ingaggio da freelance",
+      "description": "Inizio a lavorare come fullstack developer a consulenza. Contribuisco a ecosistemi di performance marketing e data analytics, e a tooling di security operations."
+    },
+    "now": {
+      "period": "2025 — oggi",
+      "title": "Fullstack Developer, a consulenza",
+      "description": "Lavoro a tempo pieno per più clienti, in team da 3 a 5 persone, a contatto con CTO, design e marketing. In parallelo progetto e sviluppo in autonomia un SaaS di booking, dall'architettura al deploy."
+    }
+  },
+  "skills": {
+    "languages": "Linguaggi",
+    "frontend": "Frontend",
+    "backend": "Backend",
+    "database": "Database",
+    "queues": "Cache & code",
+    "ai": "AI / LLM",
+    "infra": "Infra & DevOps",
+    "integrations": "Integrazioni",
+    "patterns": "Pattern",
+    "patternsList": "Architetture type-safe dal database al client, ETL multi-sorgente, sistemi event-driven e job asincroni, RBAC granulare, cifratura dei dati personali, multi-tenancy, caching multi-livello, internazionalizzazione."
   },
   "sections": {
-    "profile": "Chi sono e come lavoro — dalla transizione dall'ingegneria aerospaziale al baricentro backend.",
-    "path": "La timeline del percorso: formazione, autodidatta, freelance dal 2025.",
-    "skills": "Linguaggi, frontend, backend, database, infrastruttura e integrazioni — per categoria.",
-    "projects": "Case study reali raggruppati per tipo: SaaS, data & performance marketing, infra & security.",
-    "contact": "Lavoriamo insieme: raccontami il progetto e ti rispondo."
+    "projects": "Case study reali raggruppati per tipo: SaaS, data & performance marketing, infra & security."
+  },
+  "contact": {
+    "title": "Lavoriamo insieme.",
+    "intro": "Hai un prodotto da portare in produzione, un sistema da rimettere in ordine o un team da rinforzare? Scrivimi due righe su cosa ti serve.",
+    "emailLabel": "Email",
+    "location": "Napoli, Italia — da remoto",
+    "form": {
+      "name": "Nome",
+      "namePlaceholder": "Come ti chiami",
+      "email": "Email",
+      "emailPlaceholder": "dove ti rispondo",
+      "message": "Messaggio",
+      "messagePlaceholder": "Raccontami il progetto: contesto, obiettivo e tempistiche.",
+      "submit": "Invia messaggio",
+      "sending": "Invio in corso…",
+      "success": "Messaggio inviato. Ti rispondo appena posso.",
+      "errorInvalid": "Controlla i campi e riprova.",
+      "errorSend": "Non sono riuscito a inviare il messaggio. Riprova più tardi, oppure scrivimi direttamente via email.",
+      "errors": {
+        "nameRequired": "Il nome è obbligatorio.",
+        "emailInvalid": "Inserisci un'email valida.",
+        "messageMin": "Il messaggio deve contenere almeno {min} caratteri.",
+        "messageMax": "Il messaggio può contenere al massimo {max} caratteri."
+      }
+    }
   },
   "footer": {
     "tagline": "Fullstack developer freelance. Sistemi di produzione end-to-end.",

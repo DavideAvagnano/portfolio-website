@@ -26,10 +26,12 @@ export default async function Home({
   return (
     <>
       {/* Primo elemento focusabile della pagina: scavalca header e nav (WCAG 2.4.1).
-          Invisibile al mouse, appare solo al focus da tastiera. */}
+          `focus-visible` e non `focus`: dopo il cambio lingua next-intl naviga e
+          Next sposta il focus a inizio pagina (qui) — con `focus:` diventava
+          visibile anche via mouse. `focus-visible` lo mostra solo da tastiera. */}
       <a
         href="#main"
-        className="sr-only focus:not-sr-only focus:absolute focus:top-3 focus:left-3 focus:z-60 focus:rounded-md focus:border focus:border-border focus:bg-background focus:px-4 focus:py-2 focus:text-sm focus:font-medium"
+        className="sr-only focus-visible:not-sr-only focus-visible:absolute focus-visible:top-3 focus-visible:left-3 focus-visible:z-60 focus-visible:rounded-md focus-visible:border focus-visible:border-border focus-visible:bg-background focus-visible:px-4 focus-visible:py-2 focus-visible:text-sm focus-visible:font-medium"
       >
         {t("skipToContent")}
       </a>

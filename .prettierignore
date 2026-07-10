@@ -5,4 +5,5 @@ node_modules/
 coverage/
 pnpm-lock.yaml
 package-lock.json
-.pnpm-store/
+.pnpm-store/# File di verifica Google Search Console: contenuto esatto, non formattarlo
+public/google*.html

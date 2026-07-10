@@ -161,7 +161,7 @@
           "Pipeline AI per generazione di contenuti e traduzioni verso un CMS headless.",
           "Nella dashboard, una tabella universale riutilizzabile e stato guidato dall'URL."
         ],
-        "role": "Ecosistema pluriennale e a più mani: ho contribuito allo sviluppo, non ne rivendico l'authorship."
+        "role": "Ecosistema pluriennale e a più mani: ho contribuito allo sviluppo."
       },
       "logManager": {
         "title": "log-manager",
@@ -173,7 +173,7 @@
           "Ciclo di vita delle regole firewall con metadati: ogni blocco resta tracciabile e reversibile.",
           "Configurazione validata a runtime, logging strutturato, esecuzione come servizio di sistema."
         ],
-        "role": "Ideazione e sviluppo del tool, integrazione con lo stack di logging e con i server di produzione."
+        "role": "Contributo allo sviluppo del tool — parti del sistema e integrazione con lo stack di logging e i server di produzione."
       }
     },
     "side": {

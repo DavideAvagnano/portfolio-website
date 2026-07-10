@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>CV — Davide Avagnano</title>
+    <style>
+      :root {
+        --ink: #1a1a1a;
+        --muted: #555;
+        --accent: #22405c;
+        --line: #d9dde2;
+        --font: "Helvetica Neue", Arial, "Segoe UI", sans-serif;
+      }
+      @page {
+        size: A4;
+        margin: 11mm 15mm;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: var(--font);
+        color: var(--ink);
+        font-size: 10pt;
+        line-height: 1.26;
+        hyphens: none;
+      }
+      strong {
+        color: var(--ink);
+        font-weight: 700;
+      }
+
+      header {
+        border-bottom: 2px solid var(--accent);
+        padding-bottom: 6px;
+        margin-bottom: 8px;
+      }
+      .name {
+        font-size: 20pt;
+        font-weight: 700;
+        letter-spacing: 0.2px;
+      }
+      .role {
+        font-size: 10.5pt;
+        font-weight: 600;
+        color: var(--accent);
+        margin-top: 2px;
+      }
+      .contacts {
+        font-size: 8.8pt;
+        color: var(--muted);
+        margin-top: 5px;
+      }
+      .contacts a {
+        color: var(--muted);
+        text-decoration: none;
+      }
+      .sep {
+        margin: 0 5px;
+        color: var(--line);
+      }
+
+      section {
+        margin-bottom: 6px;
+      }
+      h2 {
+        font-size: 8.6pt;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1.1px;
+        color: var(--accent);
+        margin: 0 0 5px;
+        padding-bottom: 2px;
+        border-bottom: 1px solid var(--line);
+      }
+      p {
+        margin: 0 0 4px;
+      }
+      .summary {
+        color: #2b2b2b;
+        text-align: justify;
+      }
+
+      .skill-row {
+        margin-bottom: 2.5px;
+      }
+      .skill-cat {
+        font-weight: 700;
+        color: var(--ink);
+      }
+
+      .job {
+        margin-bottom: 5px;
+      }
+      .job-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+      }
+      .job-title {
+        font-weight: 700;
+        color: var(--ink);
+        font-size: 10.3pt;
+      }
+      .job-meta {
+        font-size: 8.9pt;
+        color: var(--muted);
+        white-space: nowrap;
+      }
+      .job-sub {
+        font-size: 9pt;
+        color: var(--muted);
+        font-style: italic;
+        margin: 1px 0 3px;
+      }
+      ul {
+        margin: 2px 0 0;
+        padding-left: 15px;
+      }
+      li {
+        margin-bottom: 1.5px;
+      }
+
+      .line {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        margin-bottom: 2px;
+      }
+      .line .right {
+        color: var(--muted);
+        font-size: 8.9pt;
+        white-space: nowrap;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="name">Davide Avagnano</div>
+      <div class="role">
+        Software Engineer · Full-Stack · TypeScript · Node.js · PostgreSQL
+      </div>
+      <div class="contacts">
+        <a href="mailto:dav.avagnano@gmail.com">dav.avagnano@gmail.com</a
+        ><span class="sep">|</span> +39 331 4699097<span class="sep">|</span>
+        Naples, Italy · open to relocation / remote<span class="sep">|</span>
+        <a href="https://www.linkedin.com/in/davide-avagnano/"
+          >linkedin.com/in/davide-avagnano</a
+        ><span class="sep">|</span>
+        <a href="https://github.com/DavideAvagnano">github.com/DavideAvagnano</a
+        ><span class="sep">|</span>
+        <a href="https://portfolio-website-blond-phi.vercel.app/">portfolio</a>
+      </div>
+    </header>
+
+    <section>
+      <h2>Summary</h2>
+      <p class="summary">
+        Software Engineer with cross-functional full-stack skills and a
+        <strong>solid backend &amp; architecture foundation</strong>, in the
+        <strong>TypeScript / Node.js / React</strong> ecosystem on PostgreSQL. I
+        plan and model before writing code, apply common design patterns and
+        best practices, and treat living documentation and scheduled refactoring
+        as part of the definition of done. At home in the UNIX-like world
+        (Linux, Bash, Docker), with hands-on SecOps and applied-AI work.
+        Engineer by training and self-taught developer; I recently designed and
+        shipped an entire SaaS <strong>end-to-end</strong>, from architecture to
+        production.
+      </p>
+    </section>
+
+    <section>
+      <h2>Skills</h2>
+      <div class="skill-row">
+        <span class="skill-cat">Languages:</span> TypeScript (advanced),
+        JavaScript, SQL, Bash; Python (basics)
+      </div>
+      <div class="skill-row">
+        <span class="skill-cat">Frontend:</span> React, Next.js (App Router /
+        RSC), TypeScript, Tailwind CSS, shadcn/ui, state management (TanStack
+        Query, Zustand), i18n
+      </div>
+      <div class="skill-row">
+        <span class="skill-cat">Backend &amp; architecture:</span> Node.js,
+        Express, tRPC (type-safe APIs), REST, Zod; service-oriented &amp;
+        event-driven design, distributed workers (BullMQ, PostgreSQL
+        LISTEN/NOTIFY), design patterns, domain modeling
+      </div>
+      <div class="skill-row">
+        <span class="skill-cat">Data &amp; persistence:</span> PostgreSQL
+        (advanced), MySQL, Redis, Elasticsearch, Drizzle ORM; config-driven ETL
+        &amp; cross-platform data reconciliation
+      </div>
+      <div class="skill-row">
+        <span class="skill-cat">DevOps &amp; UNIX:</span> Linux (Ubuntu), Bash
+        scripting, Docker, Nginx, PM2, CI/CD (GitHub Actions), Git/GitHub;
+        SecOps (Suricata IDS, ELK, UFW, SSH)
+      </div>
+      <div class="skill-row">
+        <span class="skill-cat">Security &amp; AI:</span> PII encryption
+        (AES-256-GCM), granular RBAC; OpenAI API, RAG (hybrid BM25 + kNN),
+        applied LLM with cost governance
+      </div>
+    </section>
+
+    <section>
+      <h2>Experience</h2>
+
+      <div class="job">
+        <div class="job-head">
+          <span class="job-title"
+            >Software Engineer — Freelance / Consultant</span
+          >
+          <span class="job-meta">2026 – Present</span>
+        </div>
+        <div class="job-sub">
+          Baaarber — multi-tenant SaaS platform, end-to-end product ownership
+          for a client
+        </div>
+        <ul>
+          <li>
+            Designed and built <strong>almost single-handedly</strong> a
+            multi-tenant SaaS (Next.js, React, tRPC, Drizzle ORM, PostgreSQL,
+            Redis): ~57k LOC TypeScript, 31 tables, ~145 type-safe procedures —
+            planning and modeling before coding, applying design patterns across
+            the whole stack.
+          </li>
+          <li>
+            Worked cross-functionally: PostgreSQL data modeling and type-safe
+            backend logic through to the React UI;
+            <strong>event-driven workers</strong> (BullMQ/PM2) with an outbox
+            pattern, idempotent retries and distributed locking.
+          </li>
+          <li>
+            Kept a <strong>living-documentation approach</strong> (50+ technical
+            &amp; functional docs, high-level comments) and scheduled refactors;
+            enforced boundaries in CI (PII encryption AES-256-GCM, granular
+            RBAC).
+          </li>
+          <li>
+            Shipped an <strong>applied-AI layer</strong> (LLM assistant +
+            translations) with cost governance; deployed on Linux (Nginx,
+            Docker-ready, CI/CD via GitHub Actions).
+          </li>
+        </ul>
+      </div>
+
+      <div class="job">
+        <div class="job-head">
+          <span class="job-title"
+            >Software Engineer — Freelance / Consultant</span
+          >
+          <span class="job-meta">2025 – 2026</span>
+        </div>
+        <div class="job-sub">
+          High-volume production platforms (ixily, Scalability, Hypefill) &amp;
+          SecOps tooling
+        </div>
+        <ul>
+          <li>
+            <strong>Analysed and improved complex production code</strong> on
+            marketing-intelligence platforms (Node.js/TypeScript, PostgreSQL,
+            Redis, Elasticsearch): config-driven ETL, cross-platform data
+            reconciliation and distributed workers (15+ PM2 processes).
+          </li>
+          <li>
+            Built a service-oriented backend with
+            <strong>20+ external API integrations</strong> (Meta Graph, Shopify
+            GraphQL, analytics, call tracking) via reusable connectors and clean
+            abstractions.
+          </li>
+          <li>
+            Contributed to a <strong>SecOps automation tool</strong> (TypeScript
+            + Bash): Suricata IDS + Elasticsearch + UFW firewall, remote rule
+            lifecycle over SSH, ELK stack — hands-on UNIX / DevOps and security.
+          </li>
+          <li>
+            Collaborated in <strong>small teams</strong> (3–5 devs) with CTO,
+            design and marketing, in requirements calls, supporting colleagues
+            on technical problems.
+          </li>
+        </ul>
+      </div>
+
+      <div class="job">
+        <div class="job-head">
+          <span class="job-title"
+            >Software Development — Self-taught transition</span
+          >
+          <span class="job-meta">2021 – 2024</span>
+        </div>
+        <div class="job-sub">
+          Career switch from engineering into software: built web apps with
+          React/Next.js on public APIs and strengthened algorithms, data
+          structures and problem-solving, plus data analysis in Python.
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Education</h2>
+      <div class="line">
+        <span
+          ><strong>B.Sc. in Aerospace Engineering</strong> — University of
+          Naples Federico II</span
+        >
+        <span class="right">2020 · 105/110</span>
+      </div>
+    </section>
+
+    <section>
+      <h2>Languages</h2>
+      <div class="skill-row">
+        Italian (native) · English <strong>B2</strong> — professional working
+        proficiency; daily reading and writing across codebases and technical
+        documentation.
+      </div>
+    </section>
+  </body>
+</html>

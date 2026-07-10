@@ -161,7 +161,7 @@
           "An AI pipeline for content generation and translations into a headless CMS.",
           "In the dashboard, a reusable universal table and URL-driven state."
         ],
-        "role": "A multi-year ecosystem built by many hands: I contributed to it, I don't claim authorship of it."
+        "role": "A multi-year ecosystem built by many hands: I contributed to it."
       },
       "logManager": {
         "title": "log-manager",
@@ -173,7 +173,7 @@
           "Firewall rule lifecycle with metadata: every block stays traceable and reversible.",
           "Runtime-validated configuration, structured logging, execution as a system service."
         ],
-        "role": "Conception and development of the tool, integration with the logging stack and with production servers."
+        "role": "Contributed to the tool's development — parts of the system and its integration with the logging stack and production servers."
       }
     },
     "side": {

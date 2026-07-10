@@ -1,7 +1,7 @@
 {
   "metadata": {
     "title": "Davide Avagnano — Software Engineer",
-    "description": "Davide Avagnano, freelance software engineer. I build accessible, scalable, high-performance web applications with React and the Next.js ecosystem.",
+    "description": "Davide Avagnano, freelance software engineer. I build and maintain end-to-end production systems with TypeScript, Node.js and React on PostgreSQL.",
     "ogTagline": "End-to-end production systems. TypeScript, Node.js, PostgreSQL."
   },
   "nav": {
@@ -27,39 +27,44 @@
     "en": "English"
   },
   "hero": {
-    "eyebrow": "Fullstack Developer · Freelance",
+    "eyebrow": "Software Engineer · Freelance",
     "greeting": "Hi, I'm Davide.",
     "role": "I build and maintain end-to-end production systems with TypeScript, React, Next.js and Node.js on PostgreSQL.",
-    "intro": "I've contributed to high-volume platforms and built a complete SaaS on my own. My center of gravity is the backend: data modeling, type-safe APIs, async workers, security and deployment.",
+    "intro": "I've contributed to high-volume platforms and built a complete SaaS almost single-handedly. My center of gravity is the backend and architecture: data modeling, type-safe APIs, async workers and security.",
     "location": "Naples, Italy — working remotely, open to relocation."
   },
   "profile": {
-    "lead": "I come from aerospace engineering. Today I design and build systems that ship to production, from the database to the deploy.",
-    "p1": "I graduated in Aerospace Engineering at Federico II in 2020. I started a master's and dropped it after two exams: I had realised what I actually wanted to do was write software. From 2023 I taught myself, starting with frontend work in React, Next.js and TypeScript and growing into full-stack.",
-    "p2": "Since February 2025 I've been working full-time as a freelance fullstack developer for several clients. I've contributed to high-volume production platforms — marketing intelligence, e-commerce analytics, cross-platform data reconciliation — and, in parallel, single-handedly designed and built a booking SaaS, from architecture to deployment.",
-    "p3": "My center of gravity is the backend: data modeling, end-to-end type-safe APIs, idempotent async workers, fine-grained authorization, encryption of personal data, deployment and observability. I use AI where it brings real value, with an eye on cost — not as a party trick.",
-    "p4": "What engineering left me is the method: model the problem before writing the code, and treat documentation as part of the finished work."
+    "lead": "I come from aerospace engineering. Today I design and build systems that ship to production, from the data model to the interface.",
+    "p1": "I graduated in Aerospace Engineering at Federico II in 2020. I started a master's and dropped it after two exams: I had realised what I actually wanted to do was write software. From 2021 I taught myself: first the fundamentals — Python for data analysis and scripting, algorithms and data structures — then web development with React, Next.js and TypeScript, growing into full-stack.",
+    "p2": "Since February 2025 I've worked as a freelance software engineer for several clients. I've contributed to high-volume production platforms — marketing intelligence, e-commerce analytics, cross-platform data reconciliation — and, more recently, designed and built a complete multi-tenant SaaS almost single-handedly, from architecture to production.",
+    "p3": "My center of gravity is the backend and architecture: data modeling, end-to-end type-safe APIs, idempotent async workers, fine-grained authorization and encryption of personal data. I use AI where it brings real value, with an eye on cost — not as a party trick.",
+    "p4": "What engineering left me is the method: model the problem before writing the code, and treat living documentation and scheduled refactoring as part of the finished work."
   },
   "journey": {
+    "now": {
+      "period": "2026 — today",
+      "title": "Software Engineer, consulting",
+      "description": "Working full-time for several clients, in teams of 3 to 5 people, alongside CTOs, designers and marketing. In this phase I designed and built a complete multi-tenant SaaS almost on my own, from architecture to production."
+    },
+    "freelance": {
+      "period": "2025 — 2026",
+      "title": "First freelance engagement",
+      "description": "I start working as a software engineer on a consultancy basis. I contribute to high-volume performance marketing and data analytics platforms, and build security operations tooling."
+    },
+    "webDev": {
+      "period": "2022 — 2024",
+      "title": "Self-taught — web development",
+      "description": "From studying to the first real projects: frontend with React, Next.js and TypeScript, then the jump to full-stack. A technical foundation built from scratch, outside academia."
+    },
+    "foundations": {
+      "period": "2021 — 2022",
+      "title": "Self-taught — fundamentals and Python",
+      "description": "First year of the switch: Python for data analysis and scripting (NumPy, pandas, Matplotlib, Seaborn), plus algorithms, data structures and problem-solving."
+    },
     "degree": {
       "period": "2020",
       "title": "BSc in Aerospace Engineering",
       "description": "Federico II University, Naples — 105/110. Started a master's and dropped it after two exams, to move towards software."
-    },
-    "selfTaught": {
-      "period": "2023 — 2024",
-      "title": "Self-taught career switch",
-      "description": "From studying to the first real projects: frontend with React, Next.js and TypeScript, then the jump to full-stack. A technical foundation built from scratch, outside academia."
-    },
-    "freelance": {
-      "period": "February 2025",
-      "title": "First freelance engagement",
-      "description": "I start working as a fullstack developer on a consultancy basis. I contribute to performance marketing and data analytics ecosystems, and to security operations tooling."
-    },
-    "now": {
-      "period": "2025 — today",
-      "title": "Fullstack Developer, consulting",
-      "description": "Working full-time for several clients, in teams of 3 to 5 people, alongside CTOs, designers and marketing. In parallel, I design and build a booking SaaS on my own, from architecture to deployment."
     }
   },
   "skills": {
@@ -67,6 +72,7 @@
     "frontend": "Frontend",
     "backend": "Backend",
     "database": "Database",
+    "dataAnalysis": "Data analysis",
     "queues": "Cache & queues",
     "ai": "AI / LLM",
     "infra": "Infra & DevOps",
@@ -207,7 +213,7 @@
     }
   },
   "footer": {
-    "tagline": "Freelance fullstack developer. End-to-end production systems.",
+    "tagline": "Freelance software engineer. End-to-end production systems.",
     "backToTop": "Back to top"
   },
   "notFound": {

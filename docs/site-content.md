@@ -301,19 +301,24 @@ Tailwind 4).
 ## 6. Esperienza / Percorso (timeline)
 
 > **Framing del percorso software (vedi §10, regola 10).** Il percorso di sviluppo
-> si presenta come iniziato **~2023** (autodidatta → **frontend base** con
-> React/Next → poi full-stack), **professionalizzato come freelance da feb 2025**.
-> Questo dà **~2+ anni di software** ed è **onesto**: i progetti-esercizio (§5.6)
-> sono la prova reale di quel periodo. **Non si inventa** un impiego retribuito
-> anteriore al 2025 — si valorizza il vero percorso da autodidatta. Il periodo da
-> **bagnino è ridimensionato** (fuori dalla timeline tech del sito; resta solo per
-> il binario non-tech nel `cv-system`).
+> si presenta come iniziato **2021** (autodidatta: prima **Python / data analysis**
+> e fondamenti — algoritmi, strutture dati — poi **web/full-stack** con React/Next),
+> **professionalizzato come freelance da feb 2025**. Questo dà **~3 anni di software**
+> ed è **onesto**. **Non si inventa** un impiego retribuito anteriore al 2025 — si
+> valorizza il vero percorso da autodidatta. Il periodo da **bagnino è ridimensionato**
+> (fuori dalla timeline tech del sito; resta solo per il binario non-tech nel `cv-system`).
+>
+> ⚠️ **Aggiornato:**:
+> journey è spezzato in **2021-2022** (fondamenti/Python) e **2022-2024** (web), la
+> fase freelance in **2025-2026** (piattaforme + SecOps) e **2026-oggi** (SaaS
+> Baaarber). Il journey del sito è in ordine **discendente** (più recente prima).
 
 - **2020 — Laurea triennale in Ingegneria Aerospaziale**, Federico II (105/110).
-- **~2023 → 2024 — Percorso di sviluppo software (autodidatta).** ✅ _Anno di inizio
-  confermato da Davide._ Dallo studio ai primi **progetti frontend** (React, Next,
-  TypeScript), fino al full-stack. Base tecnica costruita da zero, poi validata in
-  produzione dal 2025. _(Evidenza: i progetti personali in §5.6.)_
+- **2021 → 2022 — Fondamenti (autodidatta).** Python per data analysis e scripting
+  (NumPy, pandas, Matplotlib, Seaborn), algoritmi, strutture dati, problem solving.
+- **2022 → 2024 — Sviluppo web (autodidatta).** Dallo studio ai primi **progetti
+  frontend** (React, Next, TypeScript), fino al full-stack. Base tecnica costruita da
+  zero, poi validata in produzione dal 2025. _(Evidenza: i progetti personali in §5.6.)_
 - **Feb 2025 → oggi — Fullstack Developer, freelance / a consulenza.**
   Lavoro full-time a consulenza per più clienti. Primo ingaggio mediato da **Fyonda
   Tech** (intermediario, oggi cessato) → contributo agli ecosistemi di performance
@@ -390,9 +395,10 @@ conseguito e da rinnovare, non attivo.)_
 9. **Doppio binario:** taglio **tech** (backend/architettura/dati/AI) per ruoli
    tecnici; taglio **non-tech** (team, stakeholder, requisiti, documentazione,
    transizione di carriera, bagnino) per ruoli a contatto col cliente / product.
-10. **Percorso software / anni:** presentare l'inizio del percorso software a **~2023**
-    (autodidatta → **frontend base** → full-stack) → **~2+ anni di software**,
-    professionale come freelance da feb 2025. È **onesto**: i progetti-esercizio
+10. **Percorso software / anni:** presentare l'inizio del percorso software a **2021**
+    (autodidatta → **fondamenti/Python** → **web/full-stack**) → **~3 anni di software**,
+    professionale come freelance da feb 2025. Allineato al CV (`output/moveax/`,
+    self-taught 2021-2024). È **onesto**: i progetti-esercizio
     (§5.6) provano quel periodo. **Non** dichiarare impieghi retribuiti anteriori al
     2025 né date lavorative false. Il **bagnino** esce dalla narrazione tech del sito
     (resta nel `cv-system` per i ruoli non-tech).

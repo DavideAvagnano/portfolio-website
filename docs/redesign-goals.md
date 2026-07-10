@@ -315,5 +315,7 @@ accessibilità e SEO impostate in Fase 7.
 
 - **Font**: coppia **A (Fraunces + Inter)**, attiva in `src/lib/fonts.ts`.
 - **PDF CV** IT/EN presenti in `public/`.
-- **Timeline/framing anni**: risolto in Fase 4 (percorso software da ~2023,
-  freelance da feb 2025; bagnino fuori dalla narrazione tech).
+- **Timeline/framing anni**: percorso software dal **2021** (autodidatta: prima
+  Python/data analysis, poi web/full-stack), freelance da feb 2025;
+  Journey in ordine discendente. Bagnino fuori dalla narrazione tech.
+  _(In Fase 4 era ~2023; ridatato al 2021 nell'allineamento al CV Moveax.)_

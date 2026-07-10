@@ -88,8 +88,9 @@ Leggere **`docs/site-content.md` §10** prima di scrivere copy pubblico. In brev
   a più mani → no authorship). **Fyonda** = intermediario, non datore di lavoro.
 - **Progetti cliente**: niente link a repo/demo/produzione (es. Baaarber). No
   dettagli sensibili o tecniche controverse dai report.
-- **Percorso software**: presentato da ~2023 (autodidatta → frontend → full-stack),
-  professionale da feb 2025. Non dichiarare impieghi retribuiti anteriori al 2025.
+- **Percorso software**: presentato dal 2021 (autodidatta → prima Python/data
+  analysis e fondamenti, poi web/full-stack), professionale da feb 2025.
+  Non dichiarare impieghi retribuiti anteriori al 2025.
 - Il **bagnino** resta fuori dalla narrazione tech del sito.
 
 ## 6. Segreti, ambiente & deploy

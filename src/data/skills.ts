@@ -9,7 +9,7 @@
 export const SKILL_GROUPS = [
   {
     id: "languages",
-    items: ["TypeScript", "JavaScript", "SQL", "Bash"],
+    items: ["TypeScript", "JavaScript", "SQL", "Bash", "Python"],
   },
   {
     id: "frontend",
@@ -42,6 +42,10 @@ export const SKILL_GROUPS = [
   {
     id: "database",
     items: ["PostgreSQL", "MySQL", "Drizzle ORM", "Knex.js", "Elasticsearch"],
+  },
+  {
+    id: "dataAnalysis",
+    items: ["NumPy", "pandas", "Matplotlib", "Seaborn", "Jupyter Notebook"],
   },
   {
     id: "queues",

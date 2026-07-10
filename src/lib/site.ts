@@ -10,6 +10,7 @@ export const siteConfig = {
   locale: "en_US",
   author: {
     name: "Davide Avagnano",
+    email: "dav.avagnano@gmail.com",
     github: "https://github.com/DavideAvagnano",
     linkedin: "https://www.linkedin.com/in/davide-avagnano/",
   },

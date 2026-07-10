@@ -1,43 +1,65 @@
 # Davide Avagnano — Portfolio Website
 
-My personal portfolio: projects, skills, and experience as a software engineer.
+My personal portfolio: profile, career path, skills, and project case studies.
 A single-page site built with a modern React/Next.js stack, focused on
 performance, accessibility, and SEO.
 
 **Live:** [portfolio-website-blond-phi.vercel.app](https://portfolio-website-blond-phi.vercel.app/)
 
+Editorial, minimal, typography-first design: a monochrome neutral palette, a single
+narrow reading column, and no color accent — hierarchy comes from type weight and
+whitespace. Light and dark themes, Italian and English.
+
 ## Tech stack
 
-| Area          | Stack                                              |
-| ------------- | -------------------------------------------------- |
-| Framework     | Next.js 16 (App Router, Turbopack), React 19       |
-| Language      | TypeScript (strict)                                |
-| Styling       | Tailwind CSS v4 (CSS-first config), tw-animate-css |
-| UI components | shadcn/ui + Radix UI                               |
-| Animations    | motion (ex framer-motion)                          |
-| Forms         | react-hook-form + Zod v4 validation                |
-| Email         | Resend (via Server Actions)                        |
-| Icons         | lucide-react, react-icons                          |
-| Tooling       | ESLint (flat config), Prettier                     |
-| Hosting       | Vercel                                             |
+| Area          | Stack                                                    |
+| ------------- | -------------------------------------------------------- |
+| Framework     | Next.js 16 (App Router, RSC, Turbopack), React 19        |
+| Language      | TypeScript (strict)                                      |
+| Styling       | Tailwind CSS v4 (CSS-first config), tw-animate-css       |
+| UI components | shadcn/ui on **Base UI** (`base-nova` style) — not Radix |
+| i18n          | next-intl (IT default on `/`, EN on `/en`)               |
+| Theming       | next-themes (follows system, dark fallback)              |
+| Fonts         | Fraunces (display) + Inter (text), via `next/font`       |
+| Forms         | react-hook-form + Zod v4 validation                      |
+| Email         | Resend (via Server Actions)                              |
+| Icons         | lucide-react + inline SVG (`components/icons.tsx`)       |
+| Tooling       | ESLint (flat config), Prettier                           |
+| Hosting       | Vercel                                                   |
+
+> **Base UI ≠ Radix:** there is no `asChild`/`Slot`. Use the `render` prop for
+> polymorphism. For a _link_ that looks like a button, apply `buttonVariants({…})` to
+> an `<a>`/`Link` — not `<Button render={<a/>}>`, which would force `role="button"`
+> and break link semantics.
 
 ## Project structure
 
 ```
 src/
-  app/          # App Router: layout, page, not-found, sitemap, robots, opengraph-image
-  components/   # UI e sezioni (intro, about, skills, projects, contact, footer, navbar)
-  actions/      # Server Actions (invio email)
-  lib/          # utils, config sito (site.ts), mail
-  data/         # dati statici (nav, progetti, skill)
-  schemas/      # schemi Zod
-  assets/       # immagini importate staticamente
-  types/        # tipi condivisi
-public/         # asset statici serviti via URL
-docs/           # documentazione (migration.md)
+  app/
+    layout.tsx            # <html>, <body>, ThemeProvider (stable across locale switches)
+    [locale]/             # localized routes: page, layout, not-found, opengraph-image
+    globals.css           # Tailwind v4 CSS-first config + design tokens (OKLCH)
+    sitemap.ts robots.ts
+  components/
+    sections/             # hero, profile, journey, skills, projects, contact
+    ui/                   # shadcn/ui primitives
+  i18n/                   # routing, request config, navigation helpers
+  actions/                # Server Actions (contact email)
+  data/                   # non-translatable data (projects, skills, journey)
+  lib/                    # site config, fonts, nav, mail, utils
+  schemas/                # Zod schemas
+  assets/fonts/           # static TTFs, read at build time by the OG image
+  hooks/  proxy.ts  global.d.ts
+messages/                 # it.json, en.json — all user-facing copy
+public/                   # CV PDFs, static files served by URL
+docs/                     # site content, redesign goals & plan
 ```
 
 Import alias: `@/*` → `src/*`.
+
+**Copy lives in `messages/`, not in components.** `data/` only holds what must _not_
+be translated (technology names, stable ids, metrics).
 
 ## Getting started
 
@@ -69,7 +91,8 @@ Requisiti: Node `22` (vedi `.nvmrc`).
    npm run dev
    ```
 
-   Apri [http://localhost:3000](http://localhost:3000).
+   Apri [http://localhost:3000](http://localhost:3000) (IT) o
+   [/en](http://localhost:3000/en) (EN).
 
 ## Scripts
 
@@ -82,7 +105,26 @@ Requisiti: Node `22` (vedi `.nvmrc`).
 | `npm run typecheck` | Type-check TypeScript (`tsc --noEmit`) |
 | `npm run format`    | Formatta il codice con Prettier        |
 
+> `next build` e `next dev` condividono la cartella `.next`: lanciarli insieme corrompe
+> la cache di Turbopack. Non lanciare `build` mentre il dev server è attivo.
+
+## Internationalization
+
+`localePrefix: "as-needed"` — l'italiano (default) vive sulla root senza prefisso, l'inglese
+su `/en`. Il middleware (`src/proxy.ts`, rinominato da `middleware` in Next 16) gestisce la
+detection del browser e il cookie `NEXT_LOCALE`. La SEO è per-locale: `hreflang`, `canonical`,
+sitemap con alternates e una **immagine OpenGraph per lingua**.
+
+## Accessibility
+
+Skip link, icone decorative marcate `aria-hidden`, e contrasto **AA verificato** su tutte
+le coppie testo/sfondo in entrambi i temi. Il focus è visibile ovunque: i componenti
+`ui/` hanno un `focus-visible:ring-*` dedicato, il resto usa l'indicatore nativo del
+browser. Nessuna animazione allo scroll; lo smooth-scroll delle ancore rispetta
+`prefers-reduced-motion`.
+
 ## Deployment
 
-Deploy su Vercel. Ricordati di impostare `RESEND_API_KEY` e `SITE_URL` tra le
-Environment Variables del progetto.
+Deploy su Vercel: **push su `main` → deploy in produzione**. Si lavora su `development`.
+Ricordati di impostare `RESEND_API_KEY` e `SITE_URL` tra le Environment Variables del
+progetto.

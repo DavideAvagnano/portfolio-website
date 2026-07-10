@@ -111,10 +111,10 @@
       "connectors": "ETL connectors"
     },
     "items": {
-      "baaarber": {
-        "title": "Baaarber",
-        "tagline": "A booking SaaS for barbershops and salons, built end-to-end.",
-        "context": "A platform covering the full operational cycle of a salon: the public site where customers book on their own, and the admin app for services, opening hours, staff, offers and notifications. At its heart is the availability engine, which computes free slots on the fly. Commissioned by a client in the beauty/booking space.",
+      "bookingSaas": {
+        "title": "Booking SaaS",
+        "tagline": "Bookings and online presence for appointment-based businesses, built end-to-end.",
+        "context": "A platform covering the full operational cycle of an appointment-based business: the public site where customers book on their own, and the admin app for services, opening hours, staff, offers and notifications. At its heart is the availability engine, which computes free slots on the fly. Built for a client in the appointment-booking space.",
         "highlights": [
           "The availability engine is the single source of truth: the same function draws the calendar and validates the booking. When two bookings race for the same slot, the database decides — with a partial unique index.",
           "Authorization on two orthogonal axes in AND: RBAC scopes (anti-escalation) and commercial plan features, cached and fail-closed.",
@@ -124,8 +124,8 @@
         ],
         "role": "Architecture, full-stack development, documentation and deployment — almost entirely on my own."
       },
-      "hypefill": {
-        "title": "Hypefill",
+      "ecommerceSaas": {
+        "title": "E-commerce analytics SaaS",
         "tagline": "A multi-tenant B2B SaaS for e-commerce analytics and operations.",
         "context": "It centralizes data from Shopify, couriers, Meta Ads, exchange rates and fuel prices to compute real-time multi-currency net margins. It includes a conversational assistant with a RAG architecture that answers by querying the data.",
         "highlights": [
@@ -137,10 +137,10 @@
         ],
         "role": "Full-stack development of the platform: architecture, AI/RAG system, background processing, RBAC, integrations."
       },
-      "scalability": {
-        "title": "Scalability ecosystem",
+      "marketingIntelligence": {
+        "title": "Marketing intelligence platform",
         "tagline": "Marketing intelligence and lead generation: three applications covering the whole funnel.",
-        "context": "Three interconnected applications covering campaign creation, landing pages, event collection, call tracking and data reconciliation across platforms. A multi-tenant marketing intelligence SaaS is the brain, a renderer of branded landing pages is the body, and a configuration-distribution daemon is the nervous system. Domain: healthcare and senior benefits, US market.",
+        "context": "Three interconnected applications covering campaign creation, landing pages, event collection, call tracking and data reconciliation across platforms. A multi-tenant marketing intelligence SaaS is the brain, a renderer of branded landing pages is the body, and a configuration-distribution daemon is the nervous system. Domain: lead generation in the US market.",
         "highlights": [
           "Cross-platform reconciliation: merging ad spend, web conversions and phone conversions into a single truth, with weighted averages and match scoring. It is the heart of the system and the hardest problem in it.",
           "Dashboards updated in real time via PostgreSQL LISTEN/NOTIFY, an automation rule engine and bulk campaign management.",
@@ -150,8 +150,8 @@
         ],
         "role": "Full-stack contribution: frontend, APIs, workers, database schema, integrations, deployment."
       },
-      "ixily": {
-        "title": "ixily ecosystem",
+      "adArbitrage": {
+        "title": "Ad arbitrage ecosystem",
         "tagline": "Ad arbitrage: traffic bought from seven ad networks, routed to twenty-seven vertical sites.",
         "context": "A closed loop of ad arbitrage: buying traffic, multi-language vertical sites, monetization through sponsored search feeds and server-to-server conversion tracking. Three projects: an ETL and analytics backend, a multi-site consumer frontend, and a management dashboard.",
         "highlights": [
@@ -164,7 +164,7 @@
         "role": "A multi-year ecosystem built by many hands: I contributed to it, I don't claim authorship of it."
       },
       "logManager": {
-        "title": "fy-log-manager",
+        "title": "log-manager",
         "tagline": "Security operations automation: from detection to response.",
         "context": "It automates the detection→response cycle across multi-server web infrastructure: it analyses IDS alerts through Elasticsearch, produces reports of malicious IPs and manages firewall rules on remote servers — blocking, ageing, pruning.",
         "highlights": [

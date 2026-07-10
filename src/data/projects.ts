@@ -4,11 +4,13 @@
 // numeri e link. Titolo, tagline, contesto, punti chiave e ruolo sono copy tradotto
 // (`messages/*.json`, namespace `projects`).
 //
-// ⚠️ Regole di framing (`site-content.md` §10), già applicate nel copy:
-// - progetti cliente → **nessun link pubblico** (Baaarber incluso);
-// - Scalability → solo livello architetturale, niente dettagli di infrastruttura né
-//   tecniche controverse;
-// - ixily → ecosistema pluriennale e a più mani: "ho contribuito", mai authorship;
+// ⚠️ Regole di framing (`docs/site-content.md` §10), già applicate nel copy:
+// - **progetti cliente ANONIMIZZATI**: gli `id` qui sotto e i testi nei messaggi non
+//   usano i nomi reali di prodotti/clienti (il repo e il sito sono pubblici). I nomi
+//   veri stanno solo in `docs/site-content.md`, fuori dal repo;
+// - nessun link pubblico ai progetti cliente;
+// - solo livello architetturale, niente settori o dettagli che identifichino il cliente;
+// - l'ecosistema di ad arbitrage è a più mani: "ho contribuito", mai authorship;
 // - i numeri descrivono la **scala del sistema**, non la produzione personale.
 
 /** Chiavi delle metriche: l'etichetta è tradotta (`projects.metrics.*`). */
@@ -30,9 +32,16 @@ export type Metric = {
   approx?: boolean
 }
 
-/** Union, non `string`: rende type-safe le chiavi `projects.items.<id>.*`. */
+/**
+ * Union, non `string`: rende type-safe le chiavi `projects.items.<id>.*`.
+ * Id **generici** di proposito (non i nomi reali dei clienti): repo e sito pubblici.
+ */
 export type ProjectId =
-  "baaarber" | "hypefill" | "scalability" | "ixily" | "logManager"
+  | "bookingSaas"
+  | "ecommerceSaas"
+  | "marketingIntelligence"
+  | "adArbitrage"
+  | "logManager"
 
 export type Project = {
   id: ProjectId
@@ -55,7 +64,7 @@ export const PROJECT_GROUPS: readonly ProjectGroup[] = [
     id: "saas",
     projects: [
       {
-        id: "baaarber",
+        id: "bookingSaas",
         stack: [
           "Next.js 16",
           "React 19",
@@ -84,7 +93,7 @@ export const PROJECT_GROUPS: readonly ProjectGroup[] = [
         ],
       },
       {
-        id: "hypefill",
+        id: "ecommerceSaas",
         stack: [
           "Bun",
           "Next.js",
@@ -115,7 +124,7 @@ export const PROJECT_GROUPS: readonly ProjectGroup[] = [
     id: "data",
     projects: [
       {
-        id: "scalability",
+        id: "marketingIntelligence",
         stack: [
           "Next.js",
           "React 19",
@@ -136,7 +145,7 @@ export const PROJECT_GROUPS: readonly ProjectGroup[] = [
         ],
       },
       {
-        id: "ixily",
+        id: "adArbitrage",
         stack: [
           "Next.js",
           "React",

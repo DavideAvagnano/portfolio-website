@@ -111,10 +111,10 @@
       "connectors": "connettori ETL"
     },
     "items": {
-      "baaarber": {
-        "title": "Baaarber",
-        "tagline": "SaaS di prenotazioni per barbershop e saloni, costruito end-to-end.",
-        "context": "Piattaforma che copre l'intero ciclo operativo di un salone: il sito pubblico dove i clienti prenotano in autonomia e il gestionale per servizi, orari, operatori, offerte e notifiche. Il cuore è il motore di disponibilità, che calcola gli slot liberi al volo. Committente: un cliente nel settore beauty/booking.",
+      "bookingSaas": {
+        "title": "SaaS di booking",
+        "tagline": "Prenotazioni e presenza online per attività su appuntamento, costruito end-to-end.",
+        "context": "Piattaforma che copre l'intero ciclo operativo di un'attività su appuntamento: il sito pubblico dove i clienti prenotano in autonomia e il gestionale per servizi, orari, operatori, offerte e notifiche. Il cuore è il motore di disponibilità, che calcola gli slot liberi al volo. Progetto per un cliente nel settore dei servizi su prenotazione.",
         "highlights": [
           "Il motore di disponibilità è l'unica fonte di verità: la stessa funzione disegna il calendario e valida la prenotazione. La corsa fra due prenotazioni sullo stesso slot la vince il database, con un indice unico parziale.",
           "Autorizzazione su due assi ortogonali in AND: gli scope RBAC (anti-escalation) e le funzionalità del piano commerciale, in cache e fail-closed.",
@@ -124,8 +124,8 @@
         ],
         "role": "Progettazione architetturale, sviluppo full-stack, documentazione e deploy, quasi interamente in autonomia."
       },
-      "hypefill": {
-        "title": "Hypefill",
+      "ecommerceSaas": {
+        "title": "SaaS di analytics e-commerce",
         "tagline": "SaaS B2B multi-tenant di analytics e gestione operativa per e-commerce.",
         "context": "Centralizza dati da Shopify, corrieri, Meta Ads, tassi di cambio e prezzi del carburante per calcolare margini netti multi-valuta in tempo reale. Include un assistente conversazionale con architettura RAG che risponde interrogando i dati.",
         "highlights": [
@@ -137,10 +137,10 @@
         ],
         "role": "Sviluppo full-stack della piattaforma: architettura, sistema AI/RAG, background processing, RBAC, integrazioni."
       },
-      "scalability": {
-        "title": "Ecosistema Scalability",
+      "marketingIntelligence": {
+        "title": "Piattaforma di marketing intelligence",
         "tagline": "Marketing intelligence e lead generation: tre applicazioni per l'intero funnel.",
-        "context": "Tre applicazioni interconnesse che coprono creazione delle campagne, landing page, raccolta eventi, call tracking e riconciliazione dei dati fra piattaforme diverse. Un SaaS multi-tenant di marketing intelligence fa da cervello, un renderer di landing page brandizzate da corpo, un demone di distribuzione delle configurazioni da sistema nervoso. Dominio: healthcare e senior benefits, mercato USA.",
+        "context": "Tre applicazioni interconnesse che coprono creazione delle campagne, landing page, raccolta eventi, call tracking e riconciliazione dei dati fra piattaforme diverse. Un SaaS multi-tenant di marketing intelligence fa da cervello, un renderer di landing page brandizzate da corpo, un demone di distribuzione delle configurazioni da sistema nervoso. Dominio: lead generation su mercato USA.",
         "highlights": [
           "Riconciliazione cross-platform: unire spesa pubblicitaria, conversioni web e conversioni telefoniche in un'unica verità, con media pesata e scoring di matching. È il cuore del sistema e il problema più difficile.",
           "Dashboard aggiornate in tempo reale via LISTEN/NOTIFY di PostgreSQL, rule engine di automazione e gestione delle campagne in bulk.",
@@ -150,8 +150,8 @@
         ],
         "role": "Contributo full-stack: frontend, API, worker, schema del database, integrazioni, deploy."
       },
-      "ixily": {
-        "title": "Ecosistema ixily",
+      "adArbitrage": {
+        "title": "Ecosistema di ad arbitrage",
         "tagline": "Ad arbitrage: traffico comprato da sette ad network verso ventisette siti verticali.",
         "context": "Un ciclo chiuso di arbitraggio pubblicitario: acquisto di traffico, siti verticali multi-lingua, monetizzazione tramite feed di ricerca sponsorizzati e conversion tracking server-to-server. Tre progetti: backend di ETL e analytics, frontend consumer multi-sito, dashboard di gestione.",
         "highlights": [
@@ -164,7 +164,7 @@
         "role": "Ecosistema pluriennale e a più mani: ho contribuito allo sviluppo, non ne rivendico l'authorship."
       },
       "logManager": {
-        "title": "fy-log-manager",
+        "title": "log-manager",
         "tagline": "Automazione di security operations: dal rilevamento alla risposta.",
         "context": "Automatizza il ciclo detection→response su infrastrutture web multi-server: analizza gli alert dell'IDS attraverso Elasticsearch, produce report degli IP malevoli e gestisce le regole del firewall sui server remoti — blocco, invecchiamento, pulizia.",
         "highlights": [

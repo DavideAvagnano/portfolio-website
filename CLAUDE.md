@@ -73,7 +73,7 @@ npm run format      # prettier (prima del commit)
 I documenti in `docs/` sono il riferimento; **aggiornali** quando cambiano decisioni:
 
 - **`docs/site-content.md`** — contenuti del sito (chi è Davide, progetti, skill).
-  Fonte: `~/cv-system`.
+  ⚠️ **`docs/` è fuori dal repo** (gitignored).
 - **`docs/redesign-goals.md`** — obiettivi e direzione di design del redesign.
 - **`docs/redesign-plan.md`** — piano di refactor a fasi (in corso).
 
@@ -83,11 +83,14 @@ Leggere **`docs/site-content.md` §10** prima di scrivere copy pubblico. In brev
 
 - **Niente si inventa** fuori dai contenuti verificati.
 - Status **freelance / a consulenza**; mai "dipendente", mai "in cerca di lavoro".
-- **Attribuzione onesta**: Baaarber = costruito in autonomia; ecosistemi di
-  performance marketing (ixily/Scalability/Hypefill) = "ho contribuito a" (ixily è
-  a più mani → no authorship). **Fyonda** = intermediario, non datore di lavoro.
-- **Progetti cliente**: niente link a repo/demo/produzione (es. Baaarber). No
-  dettagli sensibili o tecniche controverse dai report.
+- **Attribuzione onesta**: il SaaS flagship è costruito in autonomia; gli ecosistemi
+  di performance marketing sono lavoro cliente a cui ho "contribuito" (alcuni a più
+  mani → no authorship). L'eventuale intermediario non è un datore di lavoro.
+- **⚠️ Progetti cliente ANONIMIZZATI** (repo pubblico + sito pubblico): sul sito e nel
+  codice versionato **niente nomi reali** di prodotti/clienti, **niente settori o
+  dettagli che identifichino il cliente**, niente link a repo/demo/produzione. I nomi
+  reali stanno solo in `docs/site-content.md` (fuori repo). Anche gli **id** in
+  `data/projects.ts` sono generici, non i nomi reali.
 - **Percorso software**: presentato dal 2021 (autodidatta → prima Python/data
   analysis e fondamenti, poi web/full-stack), professionale da feb 2025.
   Non dichiarare impieghi retribuiti anteriori al 2025.

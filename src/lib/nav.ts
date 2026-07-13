@@ -6,6 +6,7 @@ export const NAV_ITEMS = [
   "path",
   "skills",
   "projects",
+  "education",
   "contact",
 ] as const
 

@@ -9,6 +9,7 @@
     "path": "Journey",
     "skills": "Skills",
     "projects": "Projects",
+    "education": "Education",
     "contact": "Contact",
     "menu": "Menu",
     "openMenu": "Open menu",
@@ -61,10 +62,15 @@
       "title": "Self-taught — fundamentals and Python",
       "description": "First year of the switch: Python for data analysis and scripting (NumPy, pandas, Matplotlib, Seaborn), plus algorithms, data structures and problem-solving."
     },
+    "masters": {
+      "period": "2020 — 2021",
+      "title": "Master's in Aerospace Engineering",
+      "description": "Federico II, Naples. I started the master's and left it after the first two exams — Advanced Aerospace Structures and Aircraft Aerodynamics — to move towards software. Their reports (FEM, aerodynamics, CFD) are in the Education section."
+    },
     "degree": {
-      "period": "2020",
+      "period": "2016 — 2020",
       "title": "BSc in Aerospace Engineering",
-      "description": "Federico II University, Naples — 105/110. Started a master's and dropped it after two exams, to move towards software."
+      "description": "Federico II University, Naples — 105/110."
     }
   },
   "skills": {
@@ -77,6 +83,7 @@
     "ai": "AI / LLM",
     "infra": "Infra & DevOps",
     "integrations": "Integrations",
+    "engineering": "Engineering & simulation",
     "patterns": "Patterns",
     "patternsList": "End-to-end type-safe architectures from database to client, multi-source ETL, event-driven systems and async jobs, fine-grained RBAC, encryption of personal data, multi-tenancy, multi-layer caching, internationalization."
   },
@@ -184,6 +191,60 @@
       "dashboard": {
         "title": "Dashboard Management",
         "tagline": "Inventory management app with dynamic charts, an Express API and deployment on AWS."
+      }
+    }
+  },
+  "education": {
+    "intro": "Before software there was engineering. A BSc in Aerospace Engineering at Federico II (105/110), then the first master's courses — Advanced Aerospace Structures and Aircraft Aerodynamics — before I moved towards development. The reports from those two exams are below: finite-element structural analysis, airfoil aerodynamics and CFD simulation. The method — model, simulate, verify against theory — is what I still bring to the code today.",
+    "groups": {
+      "structures": "Advanced aerospace structures",
+      "aerodynamics": "Aircraft aerodynamics"
+    },
+    "labels": {
+      "context": "Context",
+      "tools": "Tools",
+      "highlights": "What I did",
+      "details": "Details",
+      "download": "Download the report (PDF)",
+      "documentNote": "Original report in Italian (PDF), downloadable below.",
+      "close": "Close"
+    },
+    "items": {
+      "saaFem": {
+        "title": "FEM structural analysis",
+        "tagline": "Static and dynamic finite-element analysis of aircraft components, with Nastran and Femap.",
+        "context": "Report for the Advanced Aerospace Structures exam. Finite-element modeling of structural components — from a wing beam to skin panels — with results verified against the theoretical solutions of De Saint-Venant and Roark's formulas.",
+        "highlights": [
+          "Static analysis of a cantilever beam (a wing idealized at the fuselage): BAR and solid CHEXA elements (about 2,000 nodes), with deflection and stresses matching De Saint-Venant theory and a linearity check across two load cases.",
+          "Sensitivity analysis on material, section geometry and constraint compliance, replacing the ideal clamp with elastic springs to estimate its limiting stiffness.",
+          "Modal analysis of a wing skin panel (CQUAD4 elements): extraction of the first ten natural frequencies (from 27 Hz up), validated against Roark with a 2% error at the central node.",
+          "Frequency response (FRF) under distributed load, verifying that the panel does not resonate on the nodal line of the second mode.",
+          "Sizing of a tuned dynamic vibration absorber for an ATR 42 turboprop: an auxiliary mass equal to 10% of the fuselage frame cancels the response at the propeller blade-passing frequency."
+        ]
+      },
+      "adaXfoil": {
+        "title": "Airfoil aerodynamics (Xfoil)",
+        "tagline": "Full characterization of an airfoil: lift, compressibility, boundary layer, stall and control surfaces.",
+        "context": "First exercise of the Aircraft Aerodynamics exam. Analysis of the Boeing 103 airfoil with Xfoil, from the inviscid incompressible field through viscous and compressibility effects.",
+        "highlights": [
+          "Inviscid field: lift curve slope (Cl_α ≈ 6.94 rad⁻¹), zero-lift angle, aerodynamic center and center-of-pressure behavior.",
+          "Compressibility effects: lower critical Mach number estimated with the Von Kármán–Tsien correction and Prandtl–Glauert similarity.",
+          "Boundary-layer analysis across Reynolds numbers — shape factor, friction, thicknesses, leading-edge laminar bubble and forced transition.",
+          "Viscous stall: Cl_max ≈ 1.82 at 18.4° angle of attack, with pre- and post-stall curves.",
+          "Effect of flaps and ailerons on the lift curves and stall angles."
+        ]
+      },
+      "adaAnsys": {
+        "title": "Airfoil CFD simulation (Ansys Fluent)",
+        "tagline": "Airfoil CFD from incompressible to supersonic flow: shock waves, shock/boundary-layer interaction and buffet.",
+        "context": "Second exercise of the Aircraft Aerodynamics exam. 2D CFD simulation of the same airfoil with Ansys Fluent — meshing, solver and k-ω turbulence model — across the full speed range, comparing results against Xfoil.",
+        "highlights": [
+          "Euler (inviscid) simulations from incompressible to transonic and supersonic flow up to Mach 2, with a near-perfect match to Xfoil in the incompressible field.",
+          "Viscous RANS simulations with the k-ω turbulence model, from subsonic to supersonic.",
+          "Formation and advance of the normal shock wave on the airfoil's upper and lower surfaces, up to the compressibility crisis — the drag spiking in transonic flow.",
+          "In transonic flow at high angle of attack: a lambda shock wave with boundary-layer separation downstream and the onset of buffet, an unsteady phenomenon visible in the oscillation of the aerodynamic coefficients.",
+          "Unsteady analysis with vortex shedding, and a systematic comparison with the limits of Xfoil's panel method."
+        ]
       }
     }
   },

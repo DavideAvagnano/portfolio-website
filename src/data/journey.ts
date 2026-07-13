@@ -11,6 +11,7 @@ export const JOURNEY_ITEMS = [
   "freelance",
   "webDev",
   "foundations",
+  "masters",
   "degree",
 ] as const
 

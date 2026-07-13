@@ -8,6 +8,7 @@ import { Profile } from "@/components/sections/profile"
 import { Journey } from "@/components/sections/journey"
 import { Skills } from "@/components/sections/skills"
 import { Projects } from "@/components/sections/projects"
+import { Education } from "@/components/sections/education"
 import { Contact } from "@/components/sections/contact"
 
 // Home one-page. Ogni sezione è un componente in `components/sections/` e ricava
@@ -48,6 +49,7 @@ export default async function Home({
           <Journey />
           <Skills />
           <Projects />
+          <Education />
           <Contact />
         </Container>
       </main>

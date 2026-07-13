@@ -80,6 +80,11 @@ export const SKILL_GROUPS = [
       "MaxMind GeoIP",
     ],
   },
+  // Strumenti dal background di ingegneria aerospaziale (vedi sezione Formazione).
+  {
+    id: "engineering",
+    items: ["Nastran", "Femap", "Ansys Fluent", "Xfoil", "Matlab", "AutoCAD"],
+  },
 ] as const
 
 export type SkillGroup = (typeof SKILL_GROUPS)[number]

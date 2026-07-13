@@ -9,6 +9,7 @@
     "path": "Percorso",
     "skills": "Competenze",
     "projects": "Progetti",
+    "education": "Formazione",
     "contact": "Contatti",
     "menu": "Menu",
     "openMenu": "Apri il menu",
@@ -61,10 +62,15 @@
       "title": "Autodidatta — fondamenti e Python",
       "description": "Primo anno di riconversione: Python per data analysis e scripting (NumPy, pandas, Matplotlib, Seaborn), più algoritmi, strutture dati e problem solving."
     },
+    "masters": {
+      "period": "2020 — 2021",
+      "title": "Magistrale in Ingegneria Aerospaziale",
+      "description": "Federico II, Napoli. Ho iniziato la magistrale e l'ho lasciata dopo i primi due esami — Strutture Aerospaziali Avanzate e Aerodinamica degli Aeromobili — per riorientarmi verso il software. I relativi elaborati (FEM, aerodinamica, CFD) sono nella sezione Formazione."
+    },
     "degree": {
-      "period": "2020",
+      "period": "2016 — 2020",
       "title": "Laurea in Ingegneria Aerospaziale",
-      "description": "Università Federico II, Napoli — 105/110. Magistrale iniziata e interrotta dopo due esami, per riorientarmi verso il software."
+      "description": "Università degli Studi di Napoli Federico II — 105/110."
     }
   },
   "skills": {
@@ -77,6 +83,7 @@
     "ai": "AI / LLM",
     "infra": "Infra & DevOps",
     "integrations": "Integrazioni",
+    "engineering": "Ingegneria & simulazione",
     "patterns": "Pattern",
     "patternsList": "Architetture type-safe dal database al client, ETL multi-sorgente, sistemi event-driven e job asincroni, RBAC granulare, cifratura dei dati personali, multi-tenancy, caching multi-livello, internazionalizzazione."
   },
@@ -184,6 +191,60 @@
       "dashboard": {
         "title": "Dashboard Management",
         "tagline": "Gestionale di inventario con grafici dinamici, API Express e deploy su AWS."
+      }
+    }
+  },
+  "education": {
+    "intro": "Prima del software c'è stata l'ingegneria. Laurea triennale in Ingegneria Aerospaziale alla Federico II (105/110), poi i primi corsi della magistrale — Strutture Aerospaziali Avanzate e Aerodinamica degli Aeromobili — prima di riorientarmi verso lo sviluppo. Gli elaborati di quei due esami sono qui sotto: analisi strutturale agli elementi finiti, aerodinamica del profilo e simulazione CFD. Il metodo — modellare, simulare, verificare contro la teoria — è quello che porto ancora oggi nel codice.",
+    "groups": {
+      "structures": "Strutture aerospaziali avanzate",
+      "aerodynamics": "Aerodinamica degli aeromobili"
+    },
+    "labels": {
+      "context": "Contesto",
+      "tools": "Strumenti",
+      "highlights": "Cosa ho fatto",
+      "details": "Dettagli",
+      "download": "Scarica l'elaborato (PDF)",
+      "documentNote": "Elaborato originale in italiano (PDF), scaricabile qui sotto.",
+      "close": "Chiudi"
+    },
+    "items": {
+      "saaFem": {
+        "title": "Analisi strutturale FEM",
+        "tagline": "Statica e dinamica di componenti aeronautici agli elementi finiti, con Nastran e Femap.",
+        "context": "Elaborato dell'esame di Strutture Aerospaziali Avanzate. Modellazione agli elementi finiti di componenti strutturali — dalla trave alare ai pannelli di rivestimento — con i risultati verificati contro le soluzioni teoriche di De Saint-Venant e le formule di Roark.",
+        "highlights": [
+          "Analisi statica di una trave incastrata (ala schematizzata alla fusoliera): elementi BAR e solidi CHEXA (circa 2000 nodi), con freccia e tensioni coincidenti con la teoria di De Saint-Venant e verifica di linearità su due condizioni di carico.",
+          "Analisi di sensibilità su materiale, geometria della sezione e cedevolezza del vincolo, sostituendo l'incastro ideale con molle elastiche per stimarne la rigidezza limite.",
+          "Analisi modale di un pannello di rivestimento alare (elementi CQUAD4): estrazione delle prime dieci frequenze naturali (dai 27 Hz in su), validata contro Roark con un errore del 2% sul nodo centrale.",
+          "Risposta in frequenza (FRF) sotto carico distribuito, verificando che il pannello non entri in risonanza sulla linea nodale del secondo modo.",
+          "Dimensionamento di un assorbitore dinamico di vibrazioni per un turboelica ATR 42: una massa ausiliaria pari al 10% dell'ordinata di fusoliera annulla la risposta alla frequenza di passaggio delle pale dell'elica."
+        ]
+      },
+      "adaXfoil": {
+        "title": "Aerodinamica del profilo (Xfoil)",
+        "tagline": "Caratterizzazione completa di un profilo alare: portanza, comprimibilità, strato limite, stallo e superfici mobili.",
+        "context": "Primo esercizio dell'esame di Aerodinamica degli Aeromobili. Analisi del profilo Boeing 103 con Xfoil, dal campo non viscoso e incomprimibile fino agli effetti viscosi e di comprimibilità.",
+        "highlights": [
+          "Campo non viscoso: retta di portanza (Cl_α ≈ 6.94 rad⁻¹), angolo di portanza nulla, centro aerodinamico e andamento del centro di pressione.",
+          "Effetti di comprimibilità: numero di Mach critico inferiore stimato con la correzione di Von Kármán–Tsien e similitudine di Prandtl–Glauert.",
+          "Analisi dello strato limite al variare del numero di Reynolds — fattore di forma, attrito, spessori, bolla laminare al bordo d'attacco e transizione forzata.",
+          "Stallo in campo viscoso: Cl_max ≈ 1.82 a 18.4° di incidenza, con le curve di pre e post-stallo.",
+          "Effetto di flap e alettoni sulle curve di portanza e sugli angoli di stallo."
+        ]
+      },
+      "adaAnsys": {
+        "title": "Simulazione CFD del profilo (Ansys Fluent)",
+        "tagline": "CFD del profilo dal regime incomprimibile al supersonico: onde d'urto, interazione urto–strato limite e buffet.",
+        "context": "Secondo esercizio dell'esame di Aerodinamica degli Aeromobili. Simulazione CFD 2D dello stesso profilo con Ansys Fluent — meshing, solutore e modello di turbolenza k-ω — su tutto lo spettro di velocità, confrontando i risultati con Xfoil.",
+        "highlights": [
+          "Simulazioni euleriane (non viscose) dal regime incomprimibile al transonico e supersonico fino a Mach 2, con un accordo quasi perfetto con Xfoil in campo incomprimibile.",
+          "Simulazioni viscose RANS con modello di turbolenza k-ω, dal subsonico al supersonico.",
+          "Formazione e avanzamento dell'onda d'urto normale su dorso e ventre del profilo, fino alla crisi di comprimibilità — la resistenza che schizza in transonico.",
+          "In transonico ad alta incidenza: onda d'urto a lambda con separazione dello strato limite a valle e insorgenza del buffet, fenomeno instazionario visibile nell'oscillazione dei coefficienti aerodinamici.",
+          "Analisi instazionaria con distacco di vortici (vortex shedding) e confronto sistematico con i limiti del metodo a pannelli di Xfoil."
+        ]
       }
     }
   },

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <!-- Favicon FULL-BLEED: sfondo pieno fino ai bordi, angoli vivi (niente rx né
+       trasparenza). Le piattaforme mascherano l'icona da sé — Google la ritaglia a
+       cerchio, iOS ad angoli tondi: un box arrotondato/trasparente lascerebbe un
+       alone bianco nel loro contenitore. La D sta nella zona di sicurezza centrale
+       (~68%) così il ritaglio circolare non la taglia. Colori fissi (asset statico,
+       niente token di tema): ink #0a0a0a, bianco #ffffff. Il marchio arrotondato del
+       sito vive invece in `components/logo.tsx`. -->
+  <rect width="100" height="100" fill="#0a0a0a" />
+  <g transform="translate(50 50) scale(1.18) translate(-50 -50)">
+    <path
+      d="M26 22 H48 C64 22 74 33 74 50 C74 67 64 78 48 78 H26 Z M36 34 H48 C56 34 62 40 62 50 C62 60 56 66 48 66 H36 Z"
+      fill-rule="evenodd"
+      fill="#ffffff"
+    />
+  </g>
+</svg>

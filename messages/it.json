@@ -1,7 +1,7 @@
 {
   "metadata": {
     "title": "Davide Avagnano — Software Engineer",
-    "description": "Davide Avagnano, software engineer freelance. Costruisco e mantengo sistemi di produzione end-to-end con TypeScript, Node.js e React su PostgreSQL.",
+    "description": "Software engineer full-stack. Costruisco sistemi di produzione end-to-end: TypeScript, Node.js, PostgreSQL. AI applicata in produzione — RAG, assistenti LLM — con governance dei costi.",
     "ogTagline": "Sistemi di produzione end-to-end. TypeScript, Node.js, PostgreSQL."
   },
   "nav": {
@@ -30,8 +30,8 @@
   "hero": {
     "eyebrow": "Software Engineer · Freelance",
     "greeting": "Ciao, sono Davide.",
-    "role": "Costruisco e mantengo sistemi di produzione end-to-end con TypeScript, React, Next.js e Node.js su PostgreSQL.",
-    "intro": "Ho contribuito a piattaforme ad alto volume e ho costruito quasi da solo un SaaS completo. Il mio baricentro è il backend e l'architettura: modellazione dati, API type-safe, worker asincroni e sicurezza.",
+    "role": "Costruisco sistemi di produzione end-to-end. Architettura, modello dati, API type-safe, worker asincroni, sicurezza, deploy.",
+    "intro": "Ho progettato e realizzato quasi da solo un SaaS multi-tenant — 57k righe, 31 tabelle, dall'architettura al deploy — e ho contribuito a piattaforme dati ad alto volume. Porto AI applicata in produzione (RAG, assistenti in streaming) con usage log e cap di spesa.",
     "location": "Napoli, Italia — lavoro da remoto, disponibile a relocation."
   },
   "profile": {
@@ -274,7 +274,7 @@
     }
   },
   "footer": {
-    "tagline": "Software engineer freelance. Sistemi di produzione end-to-end.",
+    "tagline": "Software engineer freelance. Sistemi di produzione end-to-end, AI applicata inclusa.",
     "backToTop": "Torna su"
   },
   "notFound": {

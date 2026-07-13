@@ -5,7 +5,7 @@ export const siteConfig = {
   name: "Davide Avagnano",
   title: "Davide Avagnano — Software Engineer",
   description:
-    "Davide Avagnano is a software engineer specializing in building accessible, scalable, and high-performance web applications with React and the Next.js ecosystem.",
+    "Full-stack software engineer. I build production systems end-to-end — TypeScript, Node.js, PostgreSQL — and ship applied AI (RAG, LLM assistants) with cost governance.",
   url: process.env.SITE_URL ?? "https://portfolio-website-blond-phi.vercel.app",
   locale: "en_US",
   author: {
